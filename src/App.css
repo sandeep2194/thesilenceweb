@@ -40,6 +40,7 @@
 }
 .verified{
   margin-left: 3px;
+  font-size: 11px;
 }
 .title{
   font-size: 18px;
@@ -63,6 +64,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  margin-bottom: 0 !important;
+
 }
 .flip-horizontally{
   transform: scaleX(-1);
@@ -78,6 +81,51 @@
 .newslistitem{
   margin-bottom: 20px;
 }
+.reactionitem{
+  margin-right: 40px;
+}
+
+@media only screen and (max-width: 600px) {
+  .img-grad {
+        padding-top:60px !important ;
+  }
+  .newslistitem{
+    margin-bottom: 0px;
+  }
+  .metainforow{
+    padding-left: 24px;
+    padding-right: 18px;
+    font-size:10px;
+  }
+  .container {
+    width: 100% !important;
+}
+.mainnewslistrow{
+  margin-bottom: 0px !important;
+}
+.App-header{
+  margin-bottom: 10px;
+}
+.card .card-content{
+  padding: 12px 24px 12px 24px !important;
+}
+.row{
+  margin-bottom: 10px !important;
+}
+.reactionbar{
+  margin-bottom: 0 !important;
+
+}
+.title{
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.verified{
+  margin-left: 1px;
+  font-size: 10px;
+}
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -7,7 +7,7 @@ import ReactionBar from './reactionbar.js';
 function NewsListItem(props) {
     return (
         <li className='newslistitem' >
-            <div className="row">
+            <div className="row mainnewslistrow">
                 <div className="col s12 m7">
                     <div className="card">
                         <div className="card-image">
@@ -27,9 +27,10 @@ function NewsListItem(props) {
                         </div>
                         <div className='metainforow'>
                             <div className='row'>
-                                <p className='col s8'>
+                                <p className='col s7'>
                                     {props.newsitem.authorName}
-                                    <img className='verified' src={verified} alt='verified icon' />
+                                    <span class="material-icons verified">
+                                        verified</span>
                                     &nbsp;
                                     &nbsp;
 
@@ -38,7 +39,7 @@ function NewsListItem(props) {
                                     />
                                 </p>
 
-                                <p className='col s4'>{props.newsitem.shares} Shares &nbsp; {props.newsitem.comments} Comments</p>
+                                <p className='col s5'>{props.newsitem.shares} Shares &nbsp; {props.newsitem.comments} Comments</p>
                             </div>
                         </div>
                         <div className="card-action">

@@ -53,8 +53,9 @@
   pointer-events: none;
   content: '';
   padding-top:120px !important ;
+  width: 100%;
 }
-.material-icons{
+.material-icons, .material-icons-outlined{
   color: rgb(76, 81, 109, .85);
 }
 .reactionbar{
@@ -65,6 +66,17 @@
 }
 .flip-horizontally{
   transform: scaleX(-1);
+}
+.spinner{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  background-color: #fff;
+}
+.newslistitem{
+  margin-bottom: 20px;
 }
 @keyframes App-logo-spin {
   from {

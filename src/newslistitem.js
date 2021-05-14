@@ -11,7 +11,10 @@ function NewsListItem(props) {
                 <div className="col s12 m7">
                     <div className="card">
                         <div className="card-image">
-                            <img src={props.newsitem.imageUrl} alt={props.newsitem.title} />
+                            {(props.newsitem.imageUrl != '') ?
+                                <img src={props.newsitem.imageUrl} alt={props.newsitem.title} /> :
+                                <div></div>
+                            }
                             <div className='card-title img-grad'>
                                 <div className='row'>
                                     <img src={props.newsitem.authorImage} alt={props.newsitem.authorName} className="circle responsive-img authorimg col s2" />
@@ -39,7 +42,7 @@ function NewsListItem(props) {
                             </div>
                         </div>
                         <div className="card-action">
-                            <ReactionBar />
+                            <ReactionBar handlereaction={props.handlereaction} index={props.index} newsitem={props.newsitem} />
 
                         </div>
                     </div>

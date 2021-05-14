@@ -34,7 +34,7 @@ function NewsListItem(props) {
                                     &nbsp;
 
                                     <TimeAgo
-                                        datetime={props.newsitem.updatedAt}
+                                        datetime={props.newsitem.createdAt}
                                     />
                                 </p>
 

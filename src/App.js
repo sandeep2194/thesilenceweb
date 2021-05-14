@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   fetchnews = async () => {
-    const url = `http://13.233.129.14/parse/classes/NewsPost?skip=${this.state.skip}&limit=${this.state.limit}`
+    const url = `http://13.233.129.14/parse/classes/NewsPost?skip=${this.state.skip}&limit=${this.state.limit}&order=-createdAt`
     const response = await fetch(url, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
@@ -38,7 +38,7 @@ class App extends Component {
 
   updatenewsarray = () => {
     this.fetchnews().then((res) => {
-      const results = res.results.sort((a, b) => (new Date(a.date).getTime() > new Date(b.date).getTime() ? 1 : -1));
+      const results = res.results;
       this.setState((oldstate) => ({
         newsarray: [...oldstate.newsarray, ...results],
         dataloaded: true,
@@ -105,7 +105,7 @@ class App extends Component {
           <img src={logo} alt='logo' />
         </header>
         <div className='app-container'>
-          <BottomScrollListener onBottom={this.updatenewsarray} />;
+          <BottomScrollListener onBottom={this.updatenewsarray} />
           {(this.state.dataloaded) ?
             <NewsList newsarray={this.state.newsarray} handlereaction={this.handlereaction} />
             :

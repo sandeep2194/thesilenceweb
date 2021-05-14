@@ -37,6 +37,11 @@
   padding-left: 24px;
   padding-right: 24px;
   font-size:14px;
+  font-weight: 600;
+  color: rgb(76, 81, 109, .70);
+}
+.authorName{
+  color: #2F80ED
 }
 .verified{
   margin-left: 3px;
@@ -142,8 +147,8 @@ i.small {
   font-size: 10px;
 }
 .verified{
-  margin-left: 1px;
-  font-size: 10px;
+  margin-left: 3px;
+    font-size: 7px;
 }
 i.small {
   font-size: 1.5rem !important;

@@ -42,7 +42,9 @@ function NewsListItem(props) {
                         <div className='metainforow'>
                             <div className='row'>
                                 <p className='col s7'>
-                                    {props.newsitem.authorName}
+                                    <span className='authorName'>
+                                        {props.newsitem.authorName}
+                                    </span>
                                     <span className="material-icons verified">
                                         verified</span>
                                     &nbsp;

@@ -7,6 +7,7 @@ class NewsList extends Component {
             <ul className='newslist container'>
                 {this.props.newsarray.map((newsitem, index) => <NewListItem newsitem={newsitem} key={newsitem.objectId}
                     handlereaction={this.props.handlereaction} index={index}
+                    handlecontentopening={this.props.handlecontentopening}
                 />)}
             </ul>
         )

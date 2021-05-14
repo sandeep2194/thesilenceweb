@@ -84,7 +84,19 @@
 .reactionitem{
   margin-right: 40px;
 }
-
+#more {display: inline;}
+#less {display: none;}
+.contentopen{
+  margin-top: 1rem;
+}
+.para{
+  margin-top: 10px !important;
+  font-size: 16px;
+}
+i.small {
+  margin-top: 10px;
+  font-size: 3rem !important;
+}
 @media only screen and (max-width: 600px) {
   .img-grad {
         padding-top:60px !important ;
@@ -94,8 +106,10 @@
   }
   .metainforow{
     padding-left: 24px;
-    padding-right: 18px;
-    font-size:10px;
+    padding-right: 14px;
+    font-size:8px;
+    font-weight: 600;
+    color: rgb(76, 81, 109, .70);
   }
   .container {
     width: 100% !important;
@@ -107,10 +121,10 @@
   margin-bottom: 10px;
 }
 .card .card-content{
-  padding: 12px 24px 12px 24px !important;
+  padding: 12px 0px 12px 24px !important;
 }
 .row{
-  margin-bottom: 10px !important;
+  margin-bottom: 0px !important;
 }
 .reactionbar{
   margin-bottom: 0 !important;
@@ -120,12 +134,19 @@
   margin-right: 30px !important;
 }
 .title{
-  font-size: 14px;
+  font-size: 10px;
   margin-bottom: 10px;
+}
+.para{
+  margin-top: 10px !important;
+  font-size: 10px;
 }
 .verified{
   margin-left: 1px;
   font-size: 10px;
+}
+i.small {
+  font-size: 1.5rem !important;
 }
 }
 

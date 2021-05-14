@@ -97,7 +97,13 @@ class App extends Component {
       );
     }
   }
-
+  handlecontentopening = (index) => {
+    let newnewsarray = this.state.newsarray;
+    newnewsarray[index].contentopen = !newnewsarray[index].contentopen
+    this.setState(() => ({
+      newsarray: newnewsarray,
+    }))
+  }
   render() {
     return (
       <div>
@@ -107,7 +113,7 @@ class App extends Component {
         <div className='app-container'>
           <BottomScrollListener onBottom={this.updatenewsarray} />
           {(this.state.dataloaded) ?
-            <NewsList newsarray={this.state.newsarray} handlereaction={this.handlereaction} />
+            <NewsList newsarray={this.state.newsarray} handlereaction={this.handlereaction} handlecontentopening={this.handlecontentopening} />
             :
             <div className='spinner'>
               <Loader

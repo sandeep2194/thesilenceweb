@@ -1,13 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-import './materialize.css';
+import './css/App.css';
+import './css/materialize.css';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
+import Home from './pages/home';
+import Login from './pages/login';
 import React, { Component } from 'react';
-import NewsList from './newslist.js';
-import Loader from "react-loader-spinner";
-import { BottomScrollListener } from 'react-bottom-scroll-listener';
 
+import { Route } from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -107,27 +105,26 @@ class App extends Component {
   render() {
     return (
       <div>
-        <header className='App-header' >
-          <img src={logo} alt='logo' />
-        </header>
         <div className='app-container'>
-          <BottomScrollListener onBottom={this.updatenewsarray} />
-          {(this.state.dataloaded) ?
-            <NewsList newsarray={this.state.newsarray} handlereaction={this.handlereaction} handlecontentopening={this.handlecontentopening} />
-            :
-            <div className='spinner'>
-              <Loader
-                type="Oval"
-                color="#2F80ED"
-                height={50}
-                width={50}
-              //timeout={3000} //3 secs
+          <Route
+            exact
+            path='/'
+            render={() => (
+              <Home
+                updatenewsarray={this.updatenewsarray}
+                dataloaded={this.state.dataloaded}
+                newsarray={this.state.newsarray}
+                handlereaction={this.handlereaction}
+                handlecontentopening={this.handlecontentopening}
               />
-            </div>
-
-          }
-
-
+            )}
+          />
+          <Route
+            path='/login'
+            render={() => (
+              <Login />
+            )}
+          />
         </div>
       </div>
     )

@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-
-class ReactionBar extends Component {
-    render() {
-        const index = this.props.index;
-        const newsitem = this.props.newsitem;
-        return (
+function ReactionBar(props) {
+    const index = props.index;
+    const newsitem = props.newsitem;
+    return (
+        <div className="card-action">
             <div className='row reactionbar'>
                 <div className='reactionitem'>
                     <i className={(newsitem.likedbyuser) ? "material-icons small" : "material-icons-outlined small"}
-                        onClick={() => this.props.handlereaction('likes', index)}>
+                        onClick={() => props.handlereaction('likes', index)}>
                         thumb_up
                         </i>
                 </div>
@@ -31,14 +30,16 @@ class ReactionBar extends Component {
 
                 <div>
                     <i className="material-icons small"
-                        onClick={() => this.props.handlereaction('bookmarks', index)}>
+                        onClick={() => props.handlereaction('bookmarks', index)}>
                         {(newsitem.bookmarkedbyuser) ? "bookmark" : "bookmark_border"}
                     </i>
                 </div>
 
             </div>
-        )
-    }
+
+        </div>
+
+    )
 }
 
 export default ReactionBar

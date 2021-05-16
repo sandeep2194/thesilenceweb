@@ -16,14 +16,17 @@
 
 .App-header {
   background-color: #ffffff;
-  min-height: 10vh;
+  min-height: 7vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
   border-bottom: 1px solid #d0d0d0;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+
 }
 
 .App-link {
@@ -50,6 +53,8 @@
 .title{
   font-size: 18px;
   font-weight: 600;
+  margin-bottom: 20px;
+
 }
 .authorimg {
   max-width: 70px !important; 
@@ -87,7 +92,7 @@
   background-color: #fff;
 }
 .newslistitem{
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 .reactionitem{
   margin-right: 40px;
@@ -95,17 +100,29 @@
 #more {display: inline;}
 #less {display: none;}
 .contentopen{
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 .para{
   margin-top: 10px !important;
   font-size: 16px;
 }
 i.small {
-  margin-top: 10px;
-  font-size: 3rem !important;
+  margin-top: 0;
+  font-size: 2rem !important;
 }
+i.medium {
+  font-size: 2.3rem !important;
+}
+.mainnewslistrow{
+  margin-bottom: 0 !important;
+}
+.nomargin{
+  margin-bottom: 0 !important;
 
+}
+.row{
+  margin-bottom: 0 !important;
+}
 
 @media only screen and (max-width: 600px) {
   .img-grad {
@@ -125,7 +142,7 @@ i.small {
     width: 100% !important;
 }
 .mainnewslistrow{
-  margin-bottom: 0px !important;
+  margin-bottom: 0 !important;
 }
 .App-header{
   margin-bottom: 10px;
@@ -133,8 +150,9 @@ i.small {
 .card .card-content{
   padding: 12px 0px 12px 24px !important;
 }
-.row{
-  margin-bottom: 0px !important;
+.row .nomargin{
+  margin-bottom: 0 !important;
+
 }
 .reactionbar{
   margin-bottom: 0 !important;
@@ -145,7 +163,7 @@ i.small {
 }
 .title{
   font-size: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .para{
   margin-top: 10px !important;
@@ -157,6 +175,9 @@ i.small {
 }
 i.small {
   font-size: 1.5rem !important;
+}
+.contentopen{
+  margin-top: 1rem;
 }
 }
 

@@ -14,6 +14,9 @@ class App extends Component {
     skip: 0,
     limit: 10,
   }
+  componentDidMount() {
+    this.updatenewsarray();
+  }
 
   fetchnews = async () => {
     const url = `http://13.233.129.14/parse/classes/NewsPost?skip=${this.state.skip}&limit=${this.state.limit}&order=-createdAt`
@@ -29,10 +32,6 @@ class App extends Component {
     return response.json(); // parses JSON response into native JavaScript objects
   }
 
-
-  componentDidMount() {
-    this.updatenewsarray();
-  }
 
   updatenewsarray = () => {
     this.fetchnews().then((res) => {
@@ -95,6 +94,7 @@ class App extends Component {
       );
     }
   }
+
   handlecontentopening = (index) => {
     let newnewsarray = this.state.newsarray;
     newnewsarray[index].contentopen = !newnewsarray[index].contentopen
@@ -102,6 +102,7 @@ class App extends Component {
       newsarray: newnewsarray,
     }))
   }
+
   render() {
     return (
       <div>

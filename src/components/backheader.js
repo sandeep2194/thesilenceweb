@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../images/logo.svg';
 import { Link } from 'react-router-dom';
 
 function BackHeader(props) {

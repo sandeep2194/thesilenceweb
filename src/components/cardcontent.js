@@ -9,7 +9,7 @@ function CardContent(props) {
                         <span id={(props.newsitem.contentopen) ? 'less' : 'more'}>...</span>
                     </p>
                     <span id={(props.newsitem.contentopen) ? 'more' : 'less'}>
-                        {props.newsitem.content.map((para, i) => (<p key={`${props.id}${i}`} className='para'>{para}</p>))}
+                        {props.newsitem.content.map((para, i) => ((para !== "undefined") && <p key={`${props.id}${i}`} className='para'>{para}</p>))}
                     </span>
                 </div>
             </div>

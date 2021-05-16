@@ -124,7 +124,51 @@ i.medium {
   margin-bottom: 0 !important;
 }
 
+.loginForm{
+  display: flex;
+  flex-direction: column;
+  max-width: 40%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+  /* label color */
+  .input-field label {
+    color: #2F80ED;
+  }
+  /* label focus color */
+  .input-field input[type=tel]:focus + label {
+    color: #2F80ED;
+  }
+  /* label underline focus color */
+  .input-field input[type=tel]:focus {
+    border-bottom: 1px solid #2F80ED;
+    box-shadow: 0 1px 0 0 #2F80ED;
+  }
+  /* valid color */
+  .input-field input[type=tel].valid {
+    border-bottom: 1px solid #2F80ED;
+    box-shadow: 0 1px 0 0 #2F80ED;
+  }
+  /* invalid color */
+  .input-field input[type=tel].invalid {
+    border-bottom: 1px solid #2F80ED;
+    box-shadow: 0 1px 0 0 #2F80ED;
+  }
+  /* icon prefix focus color */
+  .input-field .prefix.active {
+    color: #2F80ED;
+  }
+
 @media only screen and (max-width: 600px) {
+  .loginForm{
+    max-width: 90%;
+    margin: auto;
+  }
+  .loginContainer{
+    padding-top: 1rem;
+    background-color: #fff;
+  }
   .img-grad {
         padding-top:60px !important ;
   }
@@ -145,7 +189,7 @@ i.medium {
   margin-bottom: 0 !important;
 }
 .App-header{
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 .card .card-content{
   padding: 12px 0px 12px 24px !important;

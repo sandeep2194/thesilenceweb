@@ -1,14 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 function ReactionBar(props) {
-    const index = props.index;
-    const newsitem = props.newsitem;
+    const { likedByUser, bookmarkedByUser } = props.newsItem;
     return (
         <div className="card-action">
             <div className='row reactionbar'>
                 <div className='reactionitem'>
-                    <i className={(newsitem.likedbyuser) ? "material-icons small" : "material-icons-outlined small"}
-                        onClick={() => props.handlereaction('likes', index)}>
+                    <i className={(likedByUser) ? "material-icons small" : "material-icons-outlined small"}
+                        onClick={() => null}>
                         thumb_up
                         </i>
                 </div>
@@ -30,8 +30,8 @@ function ReactionBar(props) {
 
                 <div>
                     <i className="material-icons small"
-                        onClick={() => props.handlereaction('bookmarks', index)}>
-                        {(newsitem.bookmarkedbyuser) ? "bookmark" : "bookmark_border"}
+                        onClick={() => null}>
+                        {(bookmarkedByUser) ? "bookmark" : "bookmark_border"}
                     </i>
                 </div>
 
@@ -41,5 +41,4 @@ function ReactionBar(props) {
 
     )
 }
-
-export default ReactionBar
+export default connect()(ReactionBar)

@@ -1,25 +1,33 @@
-import React from 'react';
-
-function CardContent(props) {
-    return (
-        <div className='row'>
+import React, { Component } from 'react';
+class CardContent extends Component {
+    state = { contentOpen: false }
+    toggleContentOpen = () => {
+        this.setState((oldState) => ({
+            contentOpen: !oldState.contentOpen
+        }))
+    }
+    render() {
+        const { contentOpen } = this.state
+        const { synopsis, content, objectId } = this.props.newsItem
+        return (<div className='row'>
             <div className='col s10'>
                 <div className="card-content">
-                    <p className='para' onClick={() => (props.handlecontentopening(props.index))}> {props.newsitem.synopsis}
-                        <span id={(props.newsitem.contentopen) ? 'less' : 'more'}>...</span>
+                    <p className='para' onClick={this.toggleContentOpen}> {synopsis}
+                        <span id={(contentOpen) ? 'less' : 'more'}>...</span>
                     </p>
-                    <span id={(props.newsitem.contentopen) ? 'more' : 'less'}>
-                        {props.newsitem.content.map((para, i) => ((para !== "undefined") && <p key={`${props.id}${i}`} className='para'>{para}</p>))}
+                    <span id={(contentOpen) ? 'more' : 'less'}>
+                        {content.map((para, i) => ((para !== "undefined") && <p key={`${objectId}${i}`} className='para'>{para}</p>))}
                     </span>
                 </div>
             </div>
             <div className='col s2 contentopen'>
                 <i className="material-icons small"
-                    onClick={() => (props.handlecontentopening(props.index))}
-                >{(props.newsitem.contentopen) ? "keyboard_arrow_up" : "keyboard_arrow_down"}</i>
+                    onClick={this.toggleContentOpen}
+                >{(contentOpen) ? "keyboard_arrow_up" : "keyboard_arrow_down"}</i>
             </div>
-        </div>
-    );
+        </div >);
+    }
 }
 
-export default CardContent
+export default CardContent;
+

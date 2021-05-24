@@ -7,18 +7,17 @@ import CardMetaInfo from './cardmetainfo';
 
 function NewsListItem(props) {
     return (
-        <li className='newslistitem' >
-            <div className="row mainnewslistrow">
-                <div className="col s12 m7">
-                    <div className="card">
-                        <CardImage newsitem={props.newsitem} />
-                        <CardContent newsitem={props.newsitem} handlecontentopening={props.handlecontentopening} index={props.index} />
-                        <CardMetaInfo newsitem={props.newsitem} />
-                        <ReactionBar handlereaction={props.handlereaction} index={props.index} newsitem={props.newsitem} />
-                    </div>
+
+        <div className="row mainnewslistrow">
+            <div className="col s12 m7">
+                <div className="card">
+                    <CardImage newsItem={props.item} />
+                    <CardContent newsItem={props.item} />
+                    <CardMetaInfo newsItem={props.item} />
+                    <ReactionBar index={props.index} newsItem={props.item} />
                 </div>
             </div>
-        </li>
+        </div>
     )
 }
 

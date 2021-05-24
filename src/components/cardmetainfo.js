@@ -1,14 +1,13 @@
 import React from 'react';
 import TimeAgo from 'timeago-react';
 
-
 function CardMetaInfo(props) {
     return (
         <div className='metainforow'>
             <div className='row'>
                 <p className='col s7'>
                     <span className='authorName'>
-                        {props.newsitem.authorName}
+                        {props.newsItem.authorName}
                     </span>
                     <span className="material-icons verified">
                         verified</span>
@@ -16,10 +15,10 @@ function CardMetaInfo(props) {
                 &nbsp;
 
                 <TimeAgo
-                        datetime={props.newsitem.createdAt} />
+                        datetime={props.newsItem.createdAt} />
                 </p>
 
-                <p className='col s5'>{props.newsitem.shares} Shares &nbsp; {props.newsitem.comments} Comments</p>
+                <p className='col s5'>{props.newsItem.shares} Shares &nbsp; {props.newsItem.comments} Comments</p>
             </div>
         </div>
     );

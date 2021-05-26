@@ -21,41 +21,46 @@ class ReactionBar extends Component {
         const { likedByUser, bookmarkedByUser } = this.props.newsItem;
         return (<div className="card-action">
             <div className='row reactionbar'>
-                <div className='reactionitem'>
+                <button className='reactionitem' onClick={(e) => this.handleLike(e)}>
                     {likedByUser === true
-                        ? <i className="material-icons small"
-                            onClick={(e) => this.handleLike(e)}>
+                        ? <span className="material-icons small"
+                        >
                             thumb_up
-                </i> :
-                        <i className="material-icons-outlined small"
-                            onClick={(e) => this.handleLike(e)}>
+                </span> :
+                        <span className="material-icons-outlined small"
+                        >
                             thumb_up
-                </i>
+                </span>
                     }
 
-                </div>
+                </button>
 
-                <div className='reactionitem'>
-                    <i className="material-icons small">repeat</i>
+                <button className='reactionitem'>
+                    <span className="material-icons small">repeat</span>
 
-                </div>
+                </button>
 
-                <div className='reactionitem'>
-                    <i className="material-icons small">mode_comment</i>
+                <button className='reactionitem'>
+                    <span className="material-icons small">mode_comment</span>
 
-                </div>
+                </button>
 
-                <div className='reactionitem'>
-                    <i className="material-icons flip-horizontally small">reply</i>
+                <button className='reactionitem'>
+                    <span className="material-icons flip-horizontally small">reply</span>
 
-                </div>
+                </button>
 
-                <div>
-                    <i className="material-icons small"
-                        onClick={(e) => this.handleBookmark(e)}>
+                <button onClick={(e) => this.handleBookmark(e)} style={{
+                    backgroundColor: 'inherit',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                }}>
+                    <span className="material-icons small"
+                    >
                         {(bookmarkedByUser) ? "bookmark" : "bookmark_border"}
-                    </i>
-                </div>
+                    </span>
+                </button>
 
             </div>
 

@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <LoadingBar />
+          <LoadingBar style={{ backgroundColor: '#2F80ED', height: '5px' }} />
           <div className='app-container'>
             <Route
               exact

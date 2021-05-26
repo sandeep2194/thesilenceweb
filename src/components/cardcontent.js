@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
 class CardContent extends Component {
     state = { contentOpen: false }
     toggleContentOpen = () => {
@@ -29,5 +31,10 @@ class CardContent extends Component {
     }
 }
 
-export default CardContent;
+function mapStateToProps({ news }, props) {
+    return {
+        newsItem: news[props.index]
+    }
+}
+export default connect(mapStateToProps)(CardContent);
 

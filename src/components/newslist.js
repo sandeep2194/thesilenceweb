@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import NewListItem from './newslistitem.js';
 import { connect } from 'react-redux'
 
-function NewsList(props) {
-    return (
-        <ul className='newslist container'>
-            {props.news.map((item, index) =>
+class NewsList extends Component {
+    render() {
+        return (<ul className='newslist container'>
+            {this.props.news.map((item, index) =>
                 <li
                     key={item.objectId}
                     className='newslistitem' >
                     <NewListItem
                         index={index}
-                        item={item}
                     />
                 </li>
             )}
-        </ul>
-    )
+        </ul>);
+    }
 }
+
+
 function mapStateToProps({ news }) {
     return {
         news,

@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleToggleLike } from '../actions/news'
 
-function ReactionBar(props) {
-    const { likedByUser, bookmarkedByUser } = props.newsItem;
-    return (
-        <div className="card-action">
+class ReactionBar extends Component {
+    handleLike = (e) => {
+        e.preventDefault()
+        const { dispatch, index, newsItem } = this.props
+
+        dispatch(handleToggleLike(index, newsItem))
+
+    }
+    render() {
+        const { likedByUser, bookmarkedByUser } = this.props.newsItem;
+        return (<div className="card-action">
             <div className='row reactionbar'>
                 <div className='reactionitem'>
-                    <i className={(likedByUser) ? "material-icons small" : "material-icons-outlined small"}
-                        onClick={() => null}>
-                        thumb_up
-                        </i>
+                    {likedByUser === true
+                        ? <i className="material-icons small"
+                            onClick={(e) => this.handleLike(e)}>
+                            thumb_up
+                </i> :
+                        <i className="material-icons-outlined small"
+                            onClick={(e) => this.handleLike(e)}>
+                            thumb_up
+                </i>
+                    }
+
                 </div>
 
                 <div className='reactionitem'>
@@ -38,7 +53,14 @@ function ReactionBar(props) {
             </div>
 
         </div>
-
-    )
+        );
+    }
 }
-export default connect()(ReactionBar)
+
+function mapStateToProps({ news }, props) {
+    return {
+        newsItem: news[props.index]
+    }
+}
+
+export default connect(mapStateToProps)(ReactionBar)

@@ -1,27 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TimeAgo from 'timeago-react';
+import { connect } from 'react-redux'
 
-function CardMetaInfo(props) {
-    return (
-        <div className='metainforow'>
+class CardMetaInfo extends Component {
+    state = {}
+    render() {
+        return (<div className='metainforow'>
             <div className='row'>
                 <p className='col s7'>
                     <span className='authorName'>
-                        {props.newsItem.authorName}
+                        {this.props.newsItem.authorName}
                     </span>
                     <span className="material-icons verified">
                         verified</span>
-                &nbsp;
-                &nbsp;
+            &nbsp;
+            &nbsp;
 
-                <TimeAgo
-                        datetime={props.newsItem.createdAt} />
+            <TimeAgo
+                        datetime={this.props.newsItem.createdAt} />
                 </p>
 
-                <p className='col s5'>{props.newsItem.shares} Shares &nbsp; {props.newsItem.comments} Comments</p>
+                <p className='col s5'>{this.props.newsItem.shares} Shares &nbsp; {this.props.newsItem.comments} Comments</p>
             </div>
-        </div>
-    );
+        </div>);
+    }
 }
 
-export default CardMetaInfo
+function mapStateToProps({ news }, props) {
+    return {
+        newsItem: news[props.index]
+    }
+}
+export default connect(mapStateToProps)(CardMetaInfo)

@@ -10,10 +10,10 @@ export async function fetchNews(skip, limit) {
     });
     return response.json();
 }
-export async function updateReaction(reaction, value, id) {
+export async function updateReaction(fieldName, value, id) {
     const url = 'http://13.233.129.14/parse/classes/NewsPost/' + id;
     const body = {};
-    body[reaction] = value;
+    body[fieldName] = value;
     const response = await fetch(url, {
         method: 'PUT',
         mode: 'cors',

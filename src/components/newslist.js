@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
 import NewListItem from './newslistitem.js';
 import { connect } from 'react-redux'
+import { handleGetNews } from '../actions/news'
+import { BottomScrollListener } from 'react-bottom-scroll-listener';
 
 class NewsList extends Component {
+
+    handleBottomScroll = () => {
+        const { dispatch, skip, limit } = this.props
+        dispatch(handleGetNews(skip, limit))
+    }
     render() {
-        return (<ul className='newslist container'>
-            {this.props.news.map((item, index) =>
-                <li
-                    key={item.objectId}
-                    className='newslistitem' >
-                    <NewListItem
-                        index={index}
-                    />
-                </li>
-            )}
-        </ul>);
+        return (
+            <div>
+                <BottomScrollListener onBottom={this.handleBottomScroll} />;
+                <ul className='newslist container'>
+                    {this.props.news.map((item, index) =>
+                    (<li
+                        key={item.objectId}
+                        className='newslistitem' >
+                        <NewListItem
+                            index={index}
+                        />
+                    </li>)
+                    )}
+                </ul>
+            </div>
+        )
+
     }
 }
 
@@ -22,6 +35,8 @@ class NewsList extends Component {
 function mapStateToProps({ news }) {
     return {
         news,
+        skip: news.length,
+        limit: 10
     }
 }
 

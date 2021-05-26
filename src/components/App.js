@@ -1,15 +1,17 @@
 import '../assets/css/App.css';
 import '../assets/css/materialize.css';
 
-import Home from './home';
 import Login from './login';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { handleGetNews } from '../actions/news'
 import LoadingBar from 'react-redux-loading'
+import NewsList from './newslist';
+import LogoHeader from './logoheader';
+import { handleGetNews } from '../actions/news'
 
 class App extends Component {
+
   componentDidMount() {
     this.props.dispatch(handleGetNews(0, 10))
   }
@@ -24,7 +26,11 @@ class App extends Component {
               exact
               path='/'
               render={() => (
-                this.props.loading === true ? null : <Home />
+                this.props.loading === true ? null
+                  : <Fragment>
+                    <LogoHeader />
+                    <NewsList />
+                  </Fragment>
               )}
             />
             <Route
@@ -42,7 +48,7 @@ class App extends Component {
 }
 function mapStateToProps({ news }) {
   return {
-    loading: news.length === 0
+    loading: news.length === 0,
   }
 }
 export default connect(mapStateToProps)(App);

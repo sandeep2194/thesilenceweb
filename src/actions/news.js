@@ -3,7 +3,7 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
-export const ADD_BOOKMARK = 'ADD_BOOKMARK'
+export const TOGGLE_BOOKMARK = 'TOGGLE_BOOKMARK'
 
 function receiveNews(news) {
     return {
@@ -16,6 +16,26 @@ function toggleLike(newsItem, index) {
         type: TOGGLE_LIKE,
         newsItem,
         index,
+    }
+}
+function toggleBookmark(newsItem, index) {
+    return {
+        type: TOGGLE_BOOKMARK,
+        newsItem,
+        index,
+    }
+}
+
+export function handleToggleBookmark(newsItem, index) {
+    return (dispatch) => {
+        dispatch(showLoading())
+
+        const value = (newsItem.bookmarkedByUser) ? newsItem.bookmarkCount - 1 : newsItem.bookmarkCount + 1
+        updateReaction('bookmarksCount', value, newsItem.objectId)
+            .then(() => {
+                dispatch(toggleBookmark(newsItem, index))
+                dispatch(hideLoading())
+            }).catch((e) => console.warn("There was error in updating reaction", e))
     }
 }
 

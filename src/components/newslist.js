@@ -13,7 +13,7 @@ class NewsList extends Component {
     render() {
         return (
             <div>
-                <BottomScrollListener onBottom={this.handleBottomScroll} />;
+                <BottomScrollListener onBottom={this.handleBottomScroll} />
                 <ul className='newslist container'>
                     {this.props.news.map((item, index) =>
                     (<li

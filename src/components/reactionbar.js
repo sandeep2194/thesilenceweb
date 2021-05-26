@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleToggleLike } from '../actions/news'
+import { handleToggleLike, handleToggleBookmark } from '../actions/news'
 
 class ReactionBar extends Component {
     handleLike = (e) => {
@@ -8,6 +8,13 @@ class ReactionBar extends Component {
         const { dispatch, index, newsItem } = this.props
 
         dispatch(handleToggleLike(index, newsItem))
+
+    }
+    handleBookmark = (e) => {
+        e.preventDefault()
+        const { dispatch, index, newsItem } = this.props
+
+        dispatch(handleToggleBookmark(newsItem, index))
 
     }
     render() {
@@ -45,7 +52,7 @@ class ReactionBar extends Component {
 
                 <div>
                     <i className="material-icons small"
-                        onClick={() => null}>
+                        onClick={(e) => this.handleBookmark(e)}>
                         {(bookmarkedByUser) ? "bookmark" : "bookmark_border"}
                     </i>
                 </div>

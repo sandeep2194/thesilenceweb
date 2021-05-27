@@ -27,7 +27,7 @@ class CardImage extends Component {
 
 function mapStateToProps({ news }, props) {
     return {
-        newsItem: news[props.index]
+        newsItem: news[props.id]
     }
 }
 

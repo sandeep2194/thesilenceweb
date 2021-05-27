@@ -11,42 +11,42 @@ function receiveNews(news) {
         news,
     }
 }
-function toggleLike(newsItem, index) {
+function toggleLike(id) {
     return {
         type: TOGGLE_LIKE,
-        newsItem,
-        index,
+        id,
     }
 }
-function toggleBookmark(newsItem, index) {
+function toggleBookmark(id) {
     return {
         type: TOGGLE_BOOKMARK,
-        newsItem,
-        index,
+        id,
     }
 }
 
-export function handleToggleBookmark(newsItem, index) {
-    return (dispatch) => {
+export function handleToggleBookmark(id) {
+    return (dispatch, getState) => {
         dispatch(showLoading())
-
+        const { news } = getState()
+        const newsItem = news[id]
         const value = (newsItem.bookmarkedByUser) ? newsItem.bookmarkCount - 1 : newsItem.bookmarkCount + 1
         updateReaction('bookmarksCount', value, newsItem.objectId)
             .then(() => {
-                dispatch(toggleBookmark(newsItem, index))
+                dispatch(toggleBookmark(id))
                 dispatch(hideLoading())
             }).catch((e) => console.warn("There was error in updating reaction", e))
     }
 }
 
-export function handleToggleLike(index, newsItem) {
-    return (dispatch) => {
+export function handleToggleLike(id) {
+    return (dispatch, getState) => {
         dispatch(showLoading())
-
+        const { news } = getState()
+        const newsItem = news[id]
         const value = (newsItem.likedByUser) ? newsItem.likes - 1 : newsItem.likes + 1
-        updateReaction('likes', value, newsItem.objectId)
+        updateReaction('likes', value, id)
             .then(() => {
-                dispatch(toggleLike(newsItem, index))
+                dispatch(toggleLike(id))
                 dispatch(hideLoading())
             }).catch((e) => console.warn("There was error in updating reaction", e))
     }

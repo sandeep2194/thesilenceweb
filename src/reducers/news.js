@@ -1,31 +1,41 @@
 import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK } from '../actions/news'
 
-export default function news(state = [], action) {
-    const news = [...state]
-    const newItem = { ...action.newsItem }
+export default function news(state = {}, action) {
+    let item = { ...state[action.id] }
+    let oldNews = { ...state }
     switch (action.type) {
         case RECEIVE_NEWS:
-            return [...state, ...action.news]
+            let newNews = {}
+            action.news.forEach((n) => {
+                return newNews[n.objectId] = n
+            })
+            return {
+                ...state, ...newNews
+            }
         case TOGGLE_LIKE:
-            if (newItem.likedByUser === true) {
-                newItem.likes -= 1
-                newItem.likedByUser = false
+            if (item.likedByUser) {
+                item.likes -= 1
+                item.likedByUser = false
             } else {
-                newItem.likes += 1
-                newItem.likedByUser = true
+                item.likes += 1
+                item.likedByUser = true
             }
-            news[action.index] = newItem
-            return [...news]
+            oldNews[action.id] = item
+            return {
+                ...oldNews
+            }
         case TOGGLE_BOOKMARK:
-            if (newItem.bookmarkedByUser === true) {
-                newItem.bookmarkCount -= 1
-                newItem.bookmarkedByUser = false
+            if (item.bookmarkedByUser) {
+                item.bookmarksCount -= 1
+                item.bookmarkedByUser = false
             } else {
-                newItem.bookmarkCount += 1
-                newItem.bookmarkedByUser = true
+                item.bookmarksCount += 1
+                item.bookmarkedByUser = true
             }
-            news[action.index] = newItem
-            return [...news]
+            oldNews[action.id] = item
+            return {
+                ...oldNews
+            }
         default:
             return state
     }

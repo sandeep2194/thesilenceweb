@@ -33,7 +33,7 @@ class CardContent extends Component {
 
 function mapStateToProps({ news }, props) {
     return {
-        newsItem: news[props.index]
+        newsItem: news[props.id]
     }
 }
 export default connect(mapStateToProps)(CardContent);

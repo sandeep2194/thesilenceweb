@@ -8,14 +8,14 @@ import { connect } from 'react-redux'
 
 class NewsListItem extends Component {
     render() {
-        const { index } = this.props
+        const { id } = this.props
         return (<div className="row mainnewslistrow">
             <div className="col s12 m7">
                 <div className="card">
-                    <CardImage index={index} />
-                    <CardContent index={index} />
-                    <CardMetaInfo index={index} />
-                    <ReactionBar index={index} />
+                    <CardImage id={id} />
+                    <CardContent id={id} />
+                    <CardMetaInfo id={id} />
+                    <ReactionBar id={id} />
                 </div>
             </div>
         </div>);

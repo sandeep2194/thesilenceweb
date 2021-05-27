@@ -5,7 +5,6 @@ import { handleGetNews } from '../actions/news'
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 
 class NewsList extends Component {
-
     handleBottomScroll = () => {
         const { dispatch, skip, limit } = this.props
         dispatch(handleGetNews(skip, limit))
@@ -15,12 +14,12 @@ class NewsList extends Component {
             <div>
                 <BottomScrollListener onBottom={this.handleBottomScroll} />
                 <ul className='newslist container'>
-                    {this.props.news.map((item, index) =>
+                    {Object.keys(this.props.news).map((id) =>
                     (<li
-                        key={item.objectId}
+                        key={id}
                         className='newslistitem' >
                         <NewListItem
-                            index={index}
+                            id={id}
                         />
                     </li>)
                     )}
@@ -35,7 +34,7 @@ class NewsList extends Component {
 function mapStateToProps({ news }) {
     return {
         news,
-        skip: news.length,
+        skip: Object.keys(news).length,
         limit: 10
     }
 }

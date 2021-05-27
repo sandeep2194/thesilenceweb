@@ -18,6 +18,7 @@ class App extends Component {
 
   render() {
     return (
+
       <Router>
         <Fragment>
           <LoadingBar style={{ backgroundColor: '#2F80ED', height: '5px' }} />

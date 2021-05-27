@@ -5,32 +5,22 @@ import { handleToggleLike, handleToggleBookmark } from '../actions/news'
 class ReactionBar extends Component {
     handleLike = (e) => {
         e.preventDefault()
-        const { dispatch, index, newsItem } = this.props
-
-        dispatch(handleToggleLike(index, newsItem))
-
+        const { dispatch, id } = this.props
+        dispatch(handleToggleLike(id))
     }
     handleBookmark = (e) => {
         e.preventDefault()
-        const { dispatch, index, newsItem } = this.props
-
-        dispatch(handleToggleBookmark(newsItem, index))
-
+        const { dispatch, id } = this.props
+        dispatch(handleToggleBookmark(id))
     }
     render() {
         const { likedByUser, bookmarkedByUser } = this.props.newsItem;
         return (<div className="card-action">
             <div className='row reactionbar'>
                 <button className='reactionitem' onClick={(e) => this.handleLike(e)}>
-                    {likedByUser === true
-                        ? <span className="material-icons small"
-                        >
-                            thumb_up
-                </span> :
-                        <span className="material-icons-outlined small"
-                        >
-                            thumb_up
-                </span>
+                    {likedByUser
+                        ? <span className="material-icons small">thumb_up</span>
+                        : <span className="material-icons-outlined small">thumb_up</span>
                     }
 
                 </button>
@@ -71,7 +61,7 @@ class ReactionBar extends Component {
 
 function mapStateToProps({ news }, props) {
     return {
-        newsItem: news[props.index]
+        newsItem: news[props.id]
     }
 }
 

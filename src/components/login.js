@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import BackHeader from '../components/backheader';
+import LoginWithGoogle from './googleLogin'
 
 class Login extends Component {
     state = {
         mobileNumber: '',
     }
     updateMobileNum = (e) => {
-        this.setState((oldstate) => ({
+        this.setState(() => ({
             mobileNumber: e.target.value,
         }))
     }
@@ -16,21 +17,19 @@ class Login extends Component {
     }
     render() {
         return (
-            <div>
+            <Fragment>
                 <BackHeader />
-                <div className='container loginContainer'>
-                    <form className='loginForm' onSubmit={this.handleGetOTP}>
-                        <input
-                            type='tel'
-                            placeholder='Enter your mobile number'
-                            value={this.state.mobileNumber}
-                            onChange={(e) => this.updateMobileNum(e)}
-                            className="validate"
-                        />
-                        <button className='waves-effect waves-light btn  blue accent-2'>Get OTP</button>
-                    </form>
+                <div style={{
+                    margin: '20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '60vh'
+                }}>
+                    <LoginWithGoogle />
                 </div>
-            </div>
+            </Fragment>
         )
     }
 }

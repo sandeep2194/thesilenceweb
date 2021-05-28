@@ -57,7 +57,6 @@ export function handleGetNews(skip, limit) {
         dispatch(showLoading())
         fetchNews(skip, limit)
             .then((res) => {
-
                 dispatch(receiveNews(res.results))
                 dispatch(hideLoading())
             })

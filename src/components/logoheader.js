@@ -12,9 +12,17 @@ function LogoHeader(props) {
                     </div>
                     <div className='col s2'>
                         <Link
-                            to='/login'
+                            to={props.googleUser ? '/login' : '/login'}
                         >
-                            <i className="material-icons medium">account_circle</i>
+                            {props.googleUser.profileObj
+                                ? <img className='circle'
+                                    alt='user profile'
+                                    src={props.googleUser.profileObj.imageUrl}
+                                    style={{
+                                        maxWidth: '40px'
+                                    }}
+                                />
+                                : <i className="material-icons medium">account_circle</i>}
                         </Link>
                     </div>
                 </div>
@@ -23,5 +31,6 @@ function LogoHeader(props) {
         </header>
     )
 }
+
 
 export default LogoHeader

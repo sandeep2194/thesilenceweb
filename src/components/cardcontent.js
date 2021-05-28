@@ -14,7 +14,7 @@ class CardContent extends Component {
         return (<div className='row'>
             <div className='col s10'>
                 <div className="card-content">
-                    <p className='para' onClick={this.toggleContentOpen}> {synopsis}
+                    <p className='para' onClick={this.toggleContentOpen} style={{ cursor: 'pointer', }}> {synopsis}
                         <span id={(contentOpen) ? 'less' : 'more'}>...</span>
                     </p>
                     <span id={(contentOpen) ? 'more' : 'less'}>
@@ -23,9 +23,14 @@ class CardContent extends Component {
                 </div>
             </div>
             <div className='col s2 contentopen'>
-                <i className="material-icons small"
-                    onClick={this.toggleContentOpen}
+                <button onClick={this.toggleContentOpen} style={{
+                    backgroundColor: 'inherit',
+                    border: 'none',
+                    cursor: 'pointer'
+                }}>                    <i className="material-icons small"
                 >{(contentOpen) ? "keyboard_arrow_up" : "keyboard_arrow_down"}</i>
+                </button>
+
             </div>
         </div >);
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Container, Row, Col, Image } from 'react-bootstrap'
 
 class CardImage extends Component {
     state = {
@@ -10,15 +11,14 @@ class CardImage extends Component {
     }
     render() {
         return (
-            <div className="card-image" style={{ display: this.state.loaded ? "block" : "none" }}>
-                <img src={this.props.newsItem.imageUrl} alt={this.props.newsItem.title} onLoad={() => this.handleOnLoad()} />
-                <div className='card-title img-grad'>
-                    <div className='row'>
-                        <img src={this.props.newsItem.authorImage} alt={this.props.newsItem.authorName} className="circle responsive-img authorimg col s2" />
-                        <span className='col s10 title'>{this.props.newsItem.title}</span>
-                    </div>
-                </div>
-            </div>);
+            <div className={(this.state.loaded ? 'd-block' : 'd-none')} >
+                <img className='card-img'
+                    src={this.props.newsItem.imageUrl} alt={this.props.newsItem.title} onLoad={() => this.handleOnLoad()}
+                    style={{ borderRadius: 0 }}
+                />
+            </div >
+
+        )
     }
 }
 

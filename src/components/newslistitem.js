@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Card, Button } from 'react-bootstrap';
 
 import ReactionBar from './reactionbar.js';
 import CardImage from './cardimage';
@@ -9,16 +10,17 @@ import { connect } from 'react-redux'
 class NewsListItem extends Component {
     render() {
         const { id } = this.props
-        return (<div className="row mainnewslistrow">
-            <div className="col s12 m7">
-                <div className="card">
-                    <CardImage id={id} />
+        return (
+            <Card className='mb-3'>
+                <CardImage id={id} />
+                <Card.Body>
                     <CardContent id={id} />
+                    {/* <Button variant="primary">Go somewhere</Button> */}
                     <CardMetaInfo id={id} />
-                    <ReactionBar id={id} />
-                </div>
-            </div>
-        </div>);
+                </Card.Body>
+                <ReactionBar id={id} />
+            </Card>
+        );
     }
 }
 export default connect()(NewsListItem)

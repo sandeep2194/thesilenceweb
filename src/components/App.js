@@ -1,6 +1,3 @@
-import '../assets/css/App.css';
-import '../assets/css/materialize.css';
-
 import Login from './login';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
@@ -10,7 +7,6 @@ import NewsList from './newslist';
 import LogoHeader from './logoheader';
 import { handleGetNews } from '../actions/news'
 import FourZeroFour from './404';
-
 class App extends Component {
 
   componentDidMount() {
@@ -22,29 +18,26 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar style={{ backgroundColor: '#2F80ED', height: '5px' }} />
-          <div className='app-container'>
-            <Switch>
-              <Route
-                exact
-                path='/'
-                render={() => (
-                  this.props.loading === true ? null
-                    : <Fragment>
-                      <LogoHeader googleUser={this.props.googleUser} />
-                      <NewsList />
-                    </Fragment>
-                )}
-              />
-              <Route
-                path='/login'
-                render={() => (
-                  <Login />
-                )}
-              />
-              <Route component={FourZeroFour} />
-            </Switch>
-
-          </div>
+          <Switch>
+            <Route
+              exact
+              path='/'
+              render={() => (
+                this.props.loading === true ? null
+                  : <Fragment>
+                    <LogoHeader googleUser={this.props.googleUser} />
+                    <NewsList />
+                  </Fragment>
+              )}
+            />
+            <Route
+              path='/login'
+              render={() => (
+                <Login />
+              )}
+            />
+            <Route component={FourZeroFour} />
+          </Switch>
         </Fragment>
       </Router>
 

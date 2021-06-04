@@ -1,34 +1,29 @@
 import React from 'react';
 import logo from '../assets/images/logo.svg';
 import { Link } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
+import { PersonCircle } from 'react-bootstrap-icons'
+import { Container } from 'react-bootstrap'
 
 function LogoHeader(props) {
     return (
-        <header className='App-header' >
-            <div className='container'>
-                <div className='row nomargin'>
-                    <div className='col s10'>
-                        <img src={logo} alt='logo' />
-                    </div>
-                    <div className='col s2'>
-                        <Link
-                            to={props.googleUser ? '/login' : '/login'}
-                        >
-                            {props.googleUser.profileObj
-                                ? <img className='circle'
-                                    alt='user profile'
-                                    src={props.googleUser.profileObj.imageUrl}
-                                    style={{
-                                        maxWidth: '40px'
-                                    }}
-                                />
-                                : <i className="material-icons medium">account_circle</i>}
+        <div className="border-bottom border-light sticky-top bg-white">
+            <Container >
+                <Navbar bg="none" >
+                    <Navbar.Brand>
+                        <Link to="/">
+                            <img src={logo} alt="Logo" />
                         </Link>
-                    </div>
-                </div>
-            </div>
+                    </Navbar.Brand>
+                    <Navbar.Collapse className="justify-content-end">
+                        <Link to="/login">
+                            <PersonCircle size={32}></PersonCircle>
+                        </Link>
+                    </Navbar.Collapse>
+                </Navbar>
+            </Container>
+        </div>
 
-        </header>
     )
 }
 

@@ -8,8 +8,8 @@ import { Container } from 'react-bootstrap'
 function LogoHeader(props) {
     return (
         <div className="border-bottom border-light sticky-top bg-white">
-            <Container >
-                <Navbar bg="none" >
+            <Container>
+                <Navbar bg="none pl-0" >
                     <Navbar.Brand>
                         <Link to="/">
                             <img src={logo} alt="Logo" />
@@ -17,7 +17,7 @@ function LogoHeader(props) {
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
                         <Link to="/login">
-                            <PersonCircle size={32}></PersonCircle>
+                            <PersonCircle size={32} className="control-icons"></PersonCircle>
                         </Link>
                     </Navbar.Collapse>
                 </Navbar>

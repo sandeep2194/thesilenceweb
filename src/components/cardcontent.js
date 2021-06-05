@@ -14,28 +14,16 @@ class CardContent extends Component {
         const { contentOpen } = this.state
         const { synopsis, content, objectId } = this.props.newsItem
         return (
-            <Container className="card-content">
-                <Row className="mt-n5 text-white">
-                    <Row className="mt-n5">
-                        <Col xs={1} className="mr-2">
-                            <Image src={this.props.newsItem.authorImage} roundedCircle width={32} height={32} mr-1 />
-                        </Col>
-                        <Col>
-                            <p className="card-text">
-                                {this.props.newsItem.title}
-                            </p>
-                        </Col>
-                    </Row>
-                </Row>
-                <Row className="mt-5">
+            <Container className="card-content pt-2">
+                <Row>
                     <Col>
-                        <p>{synopsis}</p>
+                        <p onClick={this.toggleContentOpen}>{synopsis}</p>
                         {content.map((para, i) => ((para !== "undefined") &&
                             <p className={(contentOpen ? 'd-block' : 'd-none')} key={`${objectId}${i}`}>{para}</p>
                         ))}
                     </Col>
                     <Col xs={1}>
-                        {(contentOpen) ? <CaretUpFill onClick={this.toggleContentOpen} size={26} /> : <CaretDownFill onClick={this.toggleContentOpen} size={26} />}
+                        {(contentOpen) ? <CaretUpFill onClick={this.toggleContentOpen} className="control-icons" /> : <CaretDownFill onClick={this.toggleContentOpen} className="control-icons" />}
                     </Col>
                 </Row>
             </Container>

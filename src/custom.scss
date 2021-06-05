@@ -1,11 +1,108 @@
 @import "~bootstrap/scss/bootstrap";
 
+$primary: #2F80ED;
+$enable-responsive-font-sizes: true;
+$secondary: rgba(76,81,109,.85);
 ul{
     list-style: none;
     padding:0;
 }
-#bottom-right {
-    position: absolute !important;
-    bottom: 8px !important;
-    right: 16px !important;
+
+@font-face {
+	font-family: "Montserrat-Regular";
+	src: url("./assets/fonts/Montserrat-Regular.ttf") format("truetype"),
+}
+@font-face {
+	font-family: "Montserrat-Medium";
+	src: url("./assets/fonts/Montserrat-Medium.ttf") format("truetype"),
+}
+@font-face {
+	font-family: "Montserrat-SemiBold";
+	src: url("./assets/fonts/Montserrat-SemiBold.ttf") format("truetype"),
+}
+body{
+    font-family: "Montserrat-Regular"
+}
+.control-icons{
+    color: $secondary;
+    font-size: 1.2rem;
+}
+.verified{
+    color: $primary;
+}
+.reaction-icons-clicked{
+    color: $primary;
+    font-size: 1rem;
+    .flip{
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    }
+}
+.reaction-icons-unClicked{
+    color: $secondary;
+    font-size: 1rem;
+    .flip{
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    }
+}
+.my-auto{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.regular{
+    font-family: "Montserrat-Regular";
+}
+.semiBold{
+    font-family: "Montserrat-SemiBold"
+}
+.medium{
+    font-family: "Montserrat-Medium"
+}
+p{
+    font-size: 1rem;
+}
+.meta{
+    color:$secondary;
+}
+@include media-breakpoint-up(xs) {
+    p{
+        font-size: 0.8rem;
+    }
+    .meta{
+        font-size: 0.6rem;
+    }
+  }
+  @include media-breakpoint-up(xxs) {
+    p{
+        font-size: 0.6rem;
+    }
+    .meta{
+        font-size: 0.5rem;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    p{
+        font-size: 1.1rem;
+    }
+    .meta{
+        font-size: 0.9rem;
+    }
+    .reaction-icons-clicked{
+        font-size: 1.3rem;
+    }
+    .reaction-icons-unClicked{
+        font-size: 1.3rem;
+    }
+    .control-icons{
+        font-size: 1.4rem;
+    }
   }

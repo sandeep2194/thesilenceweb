@@ -5,9 +5,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { PatchCheckFill } from 'react-bootstrap-icons'
 
 class CardMetaInfo extends Component {
-    state = {}
     render() {
-        const { authorName, createdAt, sharesArr, commentsArr } = this.props.newsItem
+        const { authorName, createdAt, sharesArr, commentsArr, likesArr, bookmarksArr } = this.props.newsItem
         return (
             <Container className='pr-2 pt-2 medium'>
                 <Row className='justify-content-start'>
@@ -22,7 +21,7 @@ class CardMetaInfo extends Component {
                             <TimeAgo
                                 datetime={createdAt} className='meta mr-2' />
                             <p className='meta mr-2'>{(sharesArr) ? sharesArr.length : 0} Shares .</p>
-                            {/* <p className='meta'>{(commentsArr) ? commentsArr.length : 0} Comments </p> */}
+                            <p className='meta'>{(commentsArr) ? commentsArr.length : 0} Comments </p>
                         </Row>
                     </Col>
                 </Row >

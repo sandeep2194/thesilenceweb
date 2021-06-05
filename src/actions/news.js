@@ -1,6 +1,6 @@
 import { fetchNews, updateReaction } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
-
+ 
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
 export const TOGGLE_BOOKMARK = 'TOGGLE_BOOKMARK'
@@ -57,7 +57,9 @@ export function handleGetNews(pageNo, pageSize) {
         dispatch(showLoading())
         fetchNews(pageNo, pageSize)
             .then((res) => {
-                dispatch(receiveNews(res.result))
+                if (res.result) {
+                    dispatch(receiveNews(res.result))
+                }
                 dispatch(hideLoading())
             })
     }

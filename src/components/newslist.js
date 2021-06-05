@@ -43,7 +43,7 @@ function mapStateToProps({ news }) {
     return {
         news,
         pageSize: size,
-        pageNo: (news.length / size) + 1
+        pageNo: (Object.keys(news).length / size) + 1
     }
 }
 

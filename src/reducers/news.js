@@ -7,7 +7,7 @@ export default function news(state = {}, action) {
         case RECEIVE_NEWS:
             let newNews = {}
             action.news.forEach((n) => {
-                return newNews[n.objectId] = n
+                return newNews[n._id] = n
             })
             return {
                 ...state, ...newNews

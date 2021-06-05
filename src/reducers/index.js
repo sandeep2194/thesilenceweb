@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import news from './news'
 import { loadingBarReducer } from 'react-redux-loading'
-import { googleReducer } from "./reducerGoogle"
+import authedUser from './authedUser'
+import alerts from './alerts'
 
 export default combineReducers({
     news,
-    googleReducer,
+    authedUser,
+    alerts,
     loadingBar: loadingBarReducer,
 })

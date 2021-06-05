@@ -1,14 +1,21 @@
-export async function fetchNews(skip, limit) {
-    const url = `http://13.233.129.14/parse/classes/NewsPost?skip=${skip}&limit=${limit}&order=-createdAt`
-    const response = await fetch(url, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Parse-Application-Id': 'myappID',
-        },
-    });
-    return response.json();
+const baseUrl = 'http://revivosocialjavabackend-env.eba-cpehram2.ap-south-1.elasticbeanstalk.com'
+
+
+export async function fetchNews(pageNo, pageSize) {
+    try {
+        const url = `${baseUrl}/news?pageNo=${pageNo}&pageSize=${pageSize}`
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const json = response.json()
+        console.log(response)
+        return json
+    } catch (error) {
+        console.warn(error)
+    }
 }
 export async function updateReaction(fieldName, value, id) {
     const url = 'http://13.233.129.14/parse/classes/NewsPost/' + id;

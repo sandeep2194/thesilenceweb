@@ -6,9 +6,10 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 
 class NewsList extends Component {
+
     handleBottomScroll = () => {
-        const { dispatch, skip, limit } = this.props
-        dispatch(handleGetNews(skip, limit))
+        const { dispatch, pageNo, pageSize, } = this.props
+        dispatch(handleGetNews(pageNo, pageSize))
     }
     render() {
         return (
@@ -38,10 +39,11 @@ class NewsList extends Component {
 
 
 function mapStateToProps({ news }) {
+    const size = 10
     return {
         news,
-        skip: Object.keys(news).length,
-        limit: 10
+        pageSize: size,
+        pageNo: (news.length / size) + 1
     }
 }
 

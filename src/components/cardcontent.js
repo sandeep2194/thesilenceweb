@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Col, Container, Row, Image } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import { CaretUpFill, CaretDownFill } from 'react-bootstrap-icons';
 
 class CardContent extends Component {

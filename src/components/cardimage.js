@@ -24,7 +24,7 @@ class CardImage extends Component {
                             <Col className='pb-2'>
                                 <Row>
                                     <Col xs={1} className="my-auto mr-2">
-                                        <Image src={this.props.newsItem.authorImage} roundedCircle width={32} height={32} mr-1 />
+                                        <Image src={this.props.newsItem.authorImage} roundedCircle width={32} height={32} />
                                     </Col>
                                     <Col className='my-auto'>
                                         <p className="card-text text-white semiBold">

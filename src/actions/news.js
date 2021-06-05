@@ -52,12 +52,12 @@ export function handleToggleLike(id) {
     }
 }
 
-export function handleGetNews(skip, limit) {
+export function handleGetNews(pageNo, pageSize) {
     return (dispatch) => {
         dispatch(showLoading())
-        fetchNews(skip, limit)
+        fetchNews(pageNo, pageSize)
             .then((res) => {
-                dispatch(receiveNews(res.results))
+                dispatch(receiveNews(res.result))
                 dispatch(hideLoading())
             })
     }

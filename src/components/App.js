@@ -10,7 +10,7 @@ import FourZeroFour from './404';
 class App extends Component {
 
   componentDidMount() {
-    this.props.dispatch(handleGetNews(0, 10))
+    this.props.dispatch(handleGetNews(1, 10))
   }
 
   render() {

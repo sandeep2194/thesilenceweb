@@ -8,7 +8,6 @@ class CardMetaInfo extends Component {
     state = {}
     render() {
         const { authorName, createdAt, sharesArr, commentsArr } = this.props.newsItem
-        console.log(this.props.newsItem)
         return (
             <Container className='pr-2 pt-2 medium'>
                 <Row className='justify-content-start'>

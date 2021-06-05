@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import ReactionBar from './reactionbar.js';
 import CardImage from './cardimage';

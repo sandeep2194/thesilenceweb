@@ -23,7 +23,7 @@ export function handleGetOtp(phoneNumber) {
         dispatch(showLoading())
         getOtp(phoneNumber)
             .then((res) => {
-                console.log('otp sent', res.status)
+                console.log('otp sent', res)
                 dispatch(hideLoading())
             })
             .catch((err) => {

@@ -8,7 +8,7 @@ import LogoHeader from './logoheader';
 import { handleGetNews } from '../actions/news'
 import FourZeroFour from './404';
 import history from '../utils/history'
-import { ToastController } from 'react-toastify-redux';
+import ReduxToastr from 'react-redux-toastr'
 
 class App extends Component {
   componentDidMount() {
@@ -19,7 +19,6 @@ class App extends Component {
       <Router history={history}>
         <Fragment>
           <LoadingBar style={{ backgroundColor: '#2F80ED', height: '5px' }} />
-          <ToastController />
           <Switch>
             <Route
               exact
@@ -40,6 +39,16 @@ class App extends Component {
             />
             <Route component={FourZeroFour} />
           </Switch>
+          <ReduxToastr
+            timeOut={6000}
+            newestOnTop={true}
+            preventDuplicates
+            position="bottom-right"
+            getState={(state) => state.toastr} // This is the default
+            transitionIn="fadeIn"
+            transitionOut="fadeOut"
+            progressBar
+            closeOnToastrClick />
         </Fragment>
       </Router>
 

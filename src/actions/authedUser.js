@@ -1,6 +1,7 @@
 import { getOtp, verifyOtp } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import history from '../utils/history'
+import { dismiss, update, error, message, warning, success, info } from 'react-toastify-redux';
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
@@ -22,11 +23,12 @@ export function handleGetOtp(phoneNumber) {
     return (dispatch) => {
         dispatch(showLoading())
         getOtp(phoneNumber)
-            .then((res) => {
-                console.log('otp sent', res.status)
+            .then(() => {
+                dispatch(info("OTP Sent"))
                 dispatch(hideLoading())
             })
             .catch((err) => {
+                dispatch(error("Error to send OTP"))
                 console.error(err)
             })
     }
@@ -43,6 +45,7 @@ export function handleVerifyOtp(phoneNumber, OTP, failCb) {
                 dispatch(hideLoading())
                 history.push('/')
             }).catch((err) => {
+                dispatch(error("Error to verify OTP"))
                 console.error(err)
             })
     }

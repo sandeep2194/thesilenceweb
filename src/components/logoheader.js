@@ -7,7 +7,7 @@ import { Container } from 'react-bootstrap'
 
 function LogoHeader(props) {
     return (
-        <div className="border-bottom border-light sticky-top bg-white">
+        <div className="border-bottom border-light sticky-top bg-white shadow-sm">
             <Container>
                 <Navbar bg="none pl-0" >
                     <Navbar.Brand>

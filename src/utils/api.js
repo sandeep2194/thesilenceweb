@@ -14,7 +14,10 @@ export async function fetchNews(pageNo, pageSize) {
 
 export async function getOtp(phoneNumber) {
     const url = `${baseUrl}/getOTP?phoneNumber=${phoneNumber}`
-    const res = await axios.get(url)
+    const headers = {
+        'Accept': '*/*'
+    }
+    const res = await axios.get(url, headers)
     return res.data
 }
 
@@ -36,6 +39,7 @@ export async function interaction(postId, interactionStr, body) {
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token.toString(),
+        'Accept': '*/*'
     }
     const res = await axios.post(url, body, headers)
     return res.data

@@ -8,9 +8,9 @@ import LogoHeader from './logoheader';
 import { handleGetNews } from '../actions/news'
 import FourZeroFour from './404';
 import history from '../utils/history'
+import { ToastController } from 'react-toastify-redux';
 
 class App extends Component {
-
   componentDidMount() {
     this.props.dispatch(handleGetNews(1, 10))
   }
@@ -19,6 +19,7 @@ class App extends Component {
       <Router history={history}>
         <Fragment>
           <LoadingBar style={{ backgroundColor: '#2F80ED', height: '5px' }} />
+          <ToastController />
           <Switch>
             <Route
               exact

@@ -25,12 +25,13 @@ class ReactionBar extends Component {
         dispatch(handleToggleBookmark(id))
     }
     render() {
-        const { likedByUser, booksArr, sharesArr } = this.props.newsItem;
+        const { likesArr, bookmarksArr = [], sharesArr, _id } = this.props.newsItem;
+        const { authedUser } = this.props
         return (
             <Container className='ml-3 mb-4 pr-4'>
                 <Row>
                     <Col>
-                        {(likedByUser) ? <HandThumbsUpFill onClick={this.handleLike} className='reaction-icons-clicked' /> : <HandThumbsUp onClick={this.handleLike} className='reaction-icons-unClicked' />}
+                        {(likesArr.includes(authedUser._id)) ? <HandThumbsUpFill onClick={this.handleLike} className='reaction-icons-clicked' /> : <HandThumbsUp onClick={this.handleLike} className='reaction-icons-unClicked' />}
                     </Col>
                     <Col>
                         <ArrowRepeat className='reaction-icons-unClicked' />
@@ -39,10 +40,10 @@ class ReactionBar extends Component {
                         <ChatRightFill className='reaction-icons-unClicked' />
                     </Col>
                     <Col>
-                        {(booksArr) ? <BookmarkFill className='reaction-icons-clicked' onClick={this.handleBookmark} /> : <Bookmark className='reaction-icons-unClicked' onClick={this.handleBookmark} />}
+                        {(bookmarksArr.includes(authedUser._id)) ? <BookmarkFill className='reaction-icons-clicked' onClick={this.handleBookmark} /> : <Bookmark className='reaction-icons-unClicked' onClick={this.handleBookmark} />}
                     </Col>
                     <Col>
-                        {(sharesArr) ? <ReplyFill className="reaction-icons-clicked flip" />
+                        {(sharesArr.includes(authedUser._id)) ? <ReplyFill className="reaction-icons-clicked flip" />
                             : <Reply className='reaction-icons-unClicked flip' />
 
                         }
@@ -53,9 +54,10 @@ class ReactionBar extends Component {
     }
 }
 
-function mapStateToProps({ news }, props) {
+function mapStateToProps({ news, authedUser }, props) {
     return {
-        newsItem: news[props.id]
+        newsItem: news[props.id],
+        authedUser,
     }
 }
 

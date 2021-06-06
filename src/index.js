@@ -8,16 +8,28 @@ import { createStore, compose } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import middleware from './middleware'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-const store = createStore(reducer, composeEnhancers(
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['news']
+}
+const persistedReducer = persistReducer(persistConfig, reducer)
+const store = createStore(persistedReducer, composeEnhancers(
   middleware
 ))
+const persister = persistStore(store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persister}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );

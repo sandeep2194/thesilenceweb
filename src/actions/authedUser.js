@@ -1,7 +1,6 @@
 import { getOtp, verifyOtp } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import history from '../utils/history'
-import { successAlert, failedAlert } from './alerts'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
@@ -24,7 +23,7 @@ export function handleGetOtp(phoneNumber) {
         dispatch(showLoading())
         getOtp(phoneNumber)
             .then((res) => {
-                console.log('otp sent')
+                console.log('otp sent', res.status)
                 dispatch(hideLoading())
             })
             .catch((err) => {
@@ -39,15 +38,10 @@ export function handleVerifyOtp(phoneNumber, OTP, failCb) {
         dispatch(showLoading())
         verifyOtp(phoneNumber, OTP)
             .then((res) => {
-                if (res.token) {
-                    localStorage.setItem('token', res.token);
-                    dispatch(login(res.userInfo))
-                    dispatch(hideLoading())
-                    history.push('/')
-                    dispatch(successAlert('Login Successful'))
-                } else {
-                    dispatch(failedAlert('Incorrect OTP'))
-                }
+                localStorage.setItem('token', res.token);
+                dispatch(login(res.userInfo))
+                dispatch(hideLoading())
+                history.push('/')
             }).catch((err) => {
                 console.error(err)
             })

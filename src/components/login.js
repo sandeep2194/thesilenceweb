@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import BackHeader from '../components/backheader';
-import { Form, Container, Button, Row, Col, Alert } from 'react-bootstrap'
+import { Form, Container, Button, Row, Col } from 'react-bootstrap'
 import { handleGetOtp, handleVerifyOtp, } from '../actions/authedUser'
 import { connect } from 'react-redux'
-import { failedAlert } from '../actions/alerts'
 
 class Login extends Component {
     state = {
@@ -12,7 +11,6 @@ class Login extends Component {
         phoneValidated: false,
         otpValidated: false,
         OTP: '',
-        invalidInput: false,
     }
 
     updateMobileNum = (e) => {
@@ -63,15 +61,10 @@ class Login extends Component {
             dispatch(handleGetOtp(mobileNumber))
             this.setState(() => ({
                 otpSent: true,
-                invalidInput: false,
-
-            }))
-        } else {
-            this.setState(() => ({
-                invalidInput: true,
             }))
         }
     }
+
     handleVerifyOtp = e => {
         e.preventDefault()
         const { dispatch } = this.props
@@ -81,13 +74,7 @@ class Login extends Component {
         }
     }
 
-    onClose = () => {
-        const { dispatch } = this.props
-        this.setState({
-            invalidInput: false,
-        })
-        dispatch(failedAlert(''))
-    }
+
     render() {
         const {
             mobileNumber,
@@ -95,15 +82,10 @@ class Login extends Component {
             phoneValidated,
             otpSent,
             OTP,
-            invalidInput,
-
         } = this.state
-        const { loginFailed } = this.props
         return (
             <Fragment>
                 <BackHeader />
-                {(invalidInput) ? <Alert dismissible variant='danger' onClose={this.onClose}>Incorrect Phone-Number/OTP</Alert> : null}
-                {(loginFailed) ? <Alert dismissible variant='danger' onClose={this.onClose}>Login Failed Incorrect OTP</Alert> : null}
                 <Container className='pt-5'>
                     <Row className='justify-content-center'>
                         <Col lg={3}></Col>
@@ -147,13 +129,5 @@ class Login extends Component {
         )
     }
 }
-function mapState({ alerts }) {
-    if (alerts === 'Incorrect OTP') {
-        return {
-            loginFailed: true,
-        }
-    } else return {
-        loginFailed: false,
-    }
-}
-export default connect(mapState)(Login)
+
+export default connect()(Login)

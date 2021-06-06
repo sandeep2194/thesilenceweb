@@ -1,29 +1,27 @@
 import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK } from '../actions/news'
 
 export default function news(state = {}, action) {
-    let item = { ...state[action.id] }
+    let item = { ...state[action.itemId] }
     let oldNews = { ...state }
     switch (action.type) {
         case RECEIVE_NEWS:
             let newNews = {}
             action.news.forEach((n) => {
-                return newNews[n._id] = n
+                newNews[n._id] = n
             })
             return {
                 ...state, ...newNews
             }
         case TOGGLE_LIKE:
-            if (item.likedByUser) {
-                item.likes -= 1
-                item.likedByUser = false
+            let newLikesArr = [...item.likesArr]
+            if (newLikesArr.includes(action.userId)) {
+                newLikesArr = newLikesArr.filter((id) => id !== action.userId)
             } else {
-                item.likes += 1
-                item.likedByUser = true
+                newLikesArr.push(action.userId)
             }
-            oldNews[action.id] = item
-            return {
-                ...oldNews
-            }
+            item.likesArr = [...newLikesArr]
+            oldNews[action.itemId] = item
+            return { ...oldNews }
         case TOGGLE_BOOKMARK:
             if (item.bookmarkedByUser) {
                 item.bookmarksCount -= 1

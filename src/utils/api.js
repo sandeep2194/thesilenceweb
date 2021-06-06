@@ -1,31 +1,21 @@
+import axios from 'axios';
+
 const baseUrl = 'http://revivosocialjavabackend-env.eba-cpehram2.ap-south-1.elasticbeanstalk.com'
 
 export async function fetchNews(pageNo, pageSize) {
     try {
         const url = `${baseUrl}/news?pageNo=${pageNo}&pageSize=${pageSize}`
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const json = response.json()
-        return json
+        const res = await axios.get(url)
+        return res.data
     } catch (error) {
-        console.warn(error)
+        console.warn('laal' + error)
     }
 }
 
 export async function getOtp(phoneNumber) {
     const url = `${baseUrl}/getOTP?phoneNumber=${phoneNumber}`
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-    const json = response.json()
-    return json
+    const res = await axios.get(url)
+    return res.data
 }
 
 export async function verifyOtp(phoneNumber, OTP) {
@@ -34,29 +24,19 @@ export async function verifyOtp(phoneNumber, OTP) {
         "userName": phoneNumber,
         "password": OTP,
     }
-    const response = await fetch(url, {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body)
-    });
-    const json = response.json()
-    return json
+    const res = await axios.post(url, body)
+
+    return res.data
 }
 
-export async function updateReaction(fieldName, value, id) {
-    const url = 'http://13.233.129.14/parse/classes/NewsPost/' + id;
-    const body = {};
-    body[fieldName] = value;
-    const response = await fetch(url, {
-        method: 'PUT',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Parse-Application-Id': 'myappID',
-        },
-        body: JSON.stringify(body)
-    });
-    return response.json();
+export async function interaction(postId, interactionStr, body) {
+    const token = localStorage.getItem('token')
+    console.log(token)
+    const url = `${baseUrl}/posts/${postId}/${interactionStr}`
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token.toString(),
+    }
+    const res = await axios.post(url, body, headers)
+    return res.data
 }

@@ -38,4 +38,4 @@ function mapStateToProps({ news, relatedNews }, props) {
     }
 }
 
-export default connect(SingleNews)()
+export default connect()(SingleNews)

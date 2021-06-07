@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../assets/images/logo.svg';
 import { Link } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
-import { PersonCircle } from 'react-bootstrap-icons'
+import { PersonCircle, Search } from 'react-bootstrap-icons'
 import { Container } from 'react-bootstrap'
 
 function LogoHeader(props) {
@@ -17,7 +17,10 @@ function LogoHeader(props) {
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
                         <Link to="/send-otp">
-                            <PersonCircle size={32} className="control-icons"></PersonCircle>
+                            <PersonCircle size={28} className="control-icons"></PersonCircle>
+                        </Link>
+                        <Link to="/search">
+                            <Search size={26} className="control-icons ml-4"></Search>
                         </Link>
                     </Navbar.Collapse>
                 </Navbar>

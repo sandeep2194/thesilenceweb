@@ -11,6 +11,10 @@ import { handleGetNews } from '../actions/news'
 import FourZeroFour from './404';
 import history from '../utils/history'
 import ReduxToastr from 'react-redux-toastr'
+import GettingStarted from './gettingStarted'
+import UploadProfilePic from './uploadProfilePic'
+import Search from './search'
+import SingleNews from './singleNews';
 
 class App extends Component {
   componentDidMount() {
@@ -44,6 +48,22 @@ class App extends Component {
               render={() => (
                 <VerifyOtp />
               )}
+            />
+            <Route
+              path='/getting-started'
+              component={GettingStarted}
+            />
+            <Route
+              path='/upload-profile-pic'
+              component={UploadProfilePic}
+            />
+            <Route
+              path='/search'
+              component={Search}
+            />
+            <Route
+              path='/news/:newsId'
+              component={SingleNews}
             />
             <Route component={FourZeroFour} />
           </Switch>

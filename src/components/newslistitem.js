@@ -15,7 +15,6 @@ class NewsListItem extends Component {
                 <CardImage id={id} />
                 <Card.Body>
                     <CardContent id={id} />
-                    {/* <Button variant="primary">Go somewhere</Button> */}
                     <CardMetaInfo id={id} />
                 </Card.Body>
                 <ReactionBar id={id} />

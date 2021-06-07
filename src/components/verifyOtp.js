@@ -47,11 +47,11 @@ class VerifyOtp extends Component {
         } = this.state
         return (
             <Fragment>
-                <BackHeader />
+                <BackHeader pageName='Verify OTP' />
                 <Container className='pt-5'>
                     <Row className='justify-content-center'>
                         <Col lg={3}></Col>
-                        <Col>
+                        <Col className='mx-3'>
                             <Form onSubmit={this.handleVerifyOtp}>
                                 <Form.Group className="mb-3" controlId="otp">
                                     <Form.Control type='text' placeholder='Enter OTP'
@@ -61,7 +61,9 @@ class VerifyOtp extends Component {
                                     />
                                 </Form.Group>
                                 <Row className='justify-content-center'>
-                                    <Button variant="primary" type="submit">
+                                    <Button variant="primary" type="submit"
+                                        size='md' className='btn-block mx-3 mt-1'
+                                    >
                                         Login
                                     </Button>
                                 </Row>

@@ -16,7 +16,7 @@ function LogoHeader(props) {
                         </Link>
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
-                        <Link to="/login">
+                        <Link to="/send-otp">
                             <PersonCircle size={32} className="control-icons"></PersonCircle>
                         </Link>
                     </Navbar.Collapse>

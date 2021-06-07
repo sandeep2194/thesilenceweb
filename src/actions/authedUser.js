@@ -25,7 +25,10 @@ export function handleGetOtp(phoneNumber) {
         getOtp(phoneNumber)
             .then(() => {
                 dispatch(hideLoading())
-                toastr.success('OTP Sent', 'you shall receive it shortly')
+                history.push({
+                    path: '/verify',
+                    mobileNumber: phoneNumber
+                })
             })
             .catch((err) => {
                 toastr.error('Error sending OTP', 'please try again later.')

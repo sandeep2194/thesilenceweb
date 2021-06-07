@@ -25,7 +25,7 @@ class ReactionBar extends Component {
         dispatch(handleToggleBookmark(id))
     }
     render() {
-        const { likesArr, bookmarksArr = [], sharesArr, _id } = this.props.newsItem;
+        const { likesArr, bookmarksArr, sharesArr } = this.props.newsItem;
         const { authedUser } = this.props
         return (
             <Container className='ml-3 mb-4 pr-4'>

@@ -19,19 +19,32 @@ function toggleLike(itemId, userId) {
         userId,
     }
 }
-function toggleBookmark(id) {
+function toggleBookmark(itemId, userId) {
     return {
         type: TOGGLE_BOOKMARK,
-        id,
+        itemId,
+        userId,
     }
 }
 
 export function handleToggleBookmark(id) {
     return (dispatch, getState) => {
         dispatch(showLoading())
-        const { news } = getState()
-        const newsItem = news[id]
-        const value = (newsItem.bookmarkedByUser) ? newsItem.bookmarkCount - 1 : newsItem.bookmarkCount + 1
+        const { authedUser } = getState()
+        const token = localStorage.getItem('token')
+        if (authedUser._id && token) {
+            dispatch(toggleBookmark(id, authedUser._id))
+            interaction(id, 'bookmark', {}).then(() => {
+                dispatch(hideLoading())
+            }).catch((e) => {
+                dispatch(hideLoading())
+                dispatch(toggleBookmark(id, authedUser._id))
+                console.warn(e)
+            })
+        } else {
+            history.push('/send-otp')
+        }
+
     }
 }
 
@@ -50,7 +63,7 @@ export function handleToggleLike(id) {
                 console.warn(e)
             })
         } else {
-            history.push('/login')
+            history.push('/send-otp')
         }
 
     }

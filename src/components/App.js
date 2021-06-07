@@ -1,4 +1,6 @@
-import Login from './login';
+import SendOtp from './sendOtp';
+import VerifyOtp from './verifyOtp';
+
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Router, Route, Switch } from 'react-router-dom';
@@ -32,9 +34,15 @@ class App extends Component {
               )}
             />
             <Route
-              path='/login'
+              path='/send-otp'
               render={() => (
-                <Login />
+                <SendOtp />
+              )}
+            />
+            <Route
+              path='/verify'
+              render={() => (
+                <VerifyOtp />
               )}
             />
             <Route component={FourZeroFour} />

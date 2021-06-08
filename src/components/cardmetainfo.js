@@ -20,8 +20,8 @@ class CardMetaInfo extends Component {
                         <Row className='justify-content-end'>
                             <TimeAgo
                                 datetime={_created_at} className='meta mr-2' />
-                            <p className='meta mr-2'>{(sharesArr) ? sharesArr.length : 0} Shares .</p>
-                            <p className='meta'>{(commentsArr) ? commentsArr.length : 0} Comments </p>
+                            <p className='meta mr-2'>{(sharesArr.length > 1) ? sharesArr.length + ' Shares ' : null} </p>
+                            <p className='meta'>{(commentsArr.length > 1) ? commentsArr.length + ' Comments' : null}  </p>
                         </Row>
                     </Col>
                 </Row >

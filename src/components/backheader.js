@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Navbar, Container } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons'
 import history from '../utils/history'

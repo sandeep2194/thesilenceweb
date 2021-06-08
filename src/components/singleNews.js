@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import NewsListItem from './newslistitem'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import BackHeader from './backheader'
 import { connect } from 'react-redux'
 
@@ -22,8 +22,8 @@ class SingleNews extends Component {
                     </Row>
                     <Row>
                         <ul>
-                            //todo map on related news items
-                    </ul>
+                            {/* todo map on related news items */}
+                        </ul>
                     </Row>
                 </Container>
             </Fragment>
@@ -38,4 +38,4 @@ function mapStateToProps({ news, relatedNews }, props) {
     }
 }
 
-export default connect()(SingleNews)
+export default connect(mapStateToProps)(SingleNews)

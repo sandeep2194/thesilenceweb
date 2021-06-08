@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import BackHeader from './backheader'
-import { Container, Row, Col, Form, InputGroup, FormGroup } from 'react-bootstrap'
+import { Container, Row, Col, Form, InputGroup } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
 
@@ -34,7 +34,7 @@ class Search extends Component {
                     <Row>
                         <Col>
                             <ul>
-                                //todo map over search results to show newList Item
+                                {/* todo map over search results to show newList Item */}
                             </ul>
                         </Col>
                     </Row>

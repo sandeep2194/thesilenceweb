@@ -26,7 +26,7 @@ export function handleGetOtp(phoneNumber) {
             .then(() => {
                 history.push({
                     pathname: '/verify',
-                    phoneNumber,
+                    state: phoneNumber.toString(),
                 })
                 dispatch(hideLoading())
             })

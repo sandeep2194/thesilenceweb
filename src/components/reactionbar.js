@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleToggleLike, handleToggleBookmark } from '../actions/news'
+import { handleToggleLike, handleToggleBookmark, handleToggleRetweet, handleToggleShare } from '../actions/news'
 import { Container, Row, Col } from 'react-bootstrap'
 import {
     HandThumbsUp,
@@ -24,8 +24,18 @@ class ReactionBar extends Component {
         const { dispatch, id } = this.props
         dispatch(handleToggleBookmark(id))
     }
+    handleRetweet = (e) => {
+        e.preventDefault()
+        const { dispatch, id } = this.props
+        dispatch(handleToggleRetweet(id))
+    }
+    handleShare = (e) => {
+        e.preventDefault()
+        const { dispatch, id } = this.props
+        dispatch(handleToggleShare(id))
+    }
     render() {
-        const { likesArr, bookmarksArr, sharesArr } = this.props.newsItem;
+        const { likesArr, bookmarksArr, sharesArr, retweetsArr } = this.props.newsItem;
         const { authedUser } = this.props
         return (
             <Container className='ml-3 mb-4 pr-4'>
@@ -34,7 +44,12 @@ class ReactionBar extends Component {
                         {(likesArr.includes(authedUser._id)) ? <HandThumbsUpFill onClick={this.handleLike} className='reaction-icons-clicked' /> : <HandThumbsUp onClick={this.handleLike} className='reaction-icons-unClicked' />}
                     </Col>
                     <Col>
-                        <ArrowRepeat className='reaction-icons-unClicked' />
+                        {(retweetsArr.includes(authedUser._id))
+                            ? <ArrowRepeat className='reaction-icons-clicked' onClick={this.handleRetweet} />
+                            : <ArrowRepeat className='reaction-icons-unClicked'
+                                onClick={this.handleRetweet}
+                            />
+                        }
                     </Col>
                     <Col>
                         <ChatRightFill className='reaction-icons-unClicked' />
@@ -43,9 +58,8 @@ class ReactionBar extends Component {
                         {(bookmarksArr.includes(authedUser._id)) ? <BookmarkFill className='reaction-icons-clicked' onClick={this.handleBookmark} /> : <Bookmark className='reaction-icons-unClicked' onClick={this.handleBookmark} />}
                     </Col>
                     <Col>
-                        {(sharesArr.includes(authedUser._id)) ? <ReplyFill className="reaction-icons-clicked flip" />
-                            : <Reply className='reaction-icons-unClicked flip' />
-
+                        {(sharesArr.includes(authedUser._id)) ? <ReplyFill className="reaction-icons-clicked flip" onClick={this.handleShare} />
+                            : <Reply className='reaction-icons-unClicked flip' onClick={this.handleShare} />
                         }
                     </Col>
                 </Row>

@@ -1,4 +1,4 @@
-import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK } from '../actions/news'
+import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK, TOGGLE_RETWEET, TOGGLE_SHARE } from '../actions/news'
 
 export default function news(state = {}, action) {
     let item = { ...state[action.itemId] }
@@ -23,17 +23,35 @@ export default function news(state = {}, action) {
             oldNews[action.itemId] = item
             return { ...oldNews }
         case TOGGLE_BOOKMARK:
-            if (item.bookmarkedByUser) {
-                item.bookmarksCount -= 1
-                item.bookmarkedByUser = false
+            let newBookmarksArr = [...item.bookmarksArr]
+            if (newBookmarksArr.includes(action.userId)) {
+                newBookmarksArr = newBookmarksArr.filter((id) => id !== action.userId)
             } else {
-                item.bookmarksCount += 1
-                item.bookmarkedByUser = true
+                newBookmarksArr.push(action.userId)
             }
-            oldNews[action.id] = item
-            return {
-                ...oldNews
+            item.bookmarksArr = [...newBookmarksArr]
+            oldNews[action.itemId] = item
+            return { ...oldNews }
+        case TOGGLE_RETWEET:
+            let newRetweetsArr = [...item.retweetsArr]
+            if (newRetweetsArr.includes(action.userId)) {
+                newRetweetsArr = newRetweetsArr.filter((id) => id !== action.userId)
+            } else {
+                newRetweetsArr.push(action.userId)
             }
+            item.retweetsArr = [...newRetweetsArr]
+            oldNews[action.itemId] = item
+            return { ...oldNews }
+        case TOGGLE_SHARE:
+            let newSharingArr = [...item.sharesArr]
+            if (newSharingArr.includes(action.userId)) {
+                newSharingArr = newSharingArr.filter((id) => id !== action.userId)
+            } else {
+                newSharingArr.push(action.userId)
+            }
+            item.sharesArr = [...newSharingArr]
+            oldNews[action.itemId] = item
+            return { ...oldNews }
         default:
             return state
     }

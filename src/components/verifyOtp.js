@@ -32,8 +32,8 @@ class VerifyOtp extends Component {
     handleVerifyOtp = e => {
         e.preventDefault()
         const { dispatch } = this.props
-        const { phoneNumber } = this.props.location
         const { otpValidated, OTP } = this.state
+        const phoneNumber = this.props.location.state
         if (otpValidated) {
             dispatch(handleVerifyOtp(phoneNumber, OTP))
         }

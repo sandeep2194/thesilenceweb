@@ -45,9 +45,7 @@ class App extends Component {
             />
             <Route
               path='/verify'
-              render={() => (
-                <VerifyOtp />
-              )}
+              component={VerifyOtp}
             />
             <Route
               path='/getting-started'

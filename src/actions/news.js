@@ -5,6 +5,8 @@ import history from '../utils/history'
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
 export const TOGGLE_BOOKMARK = 'TOGGLE_BOOKMARK'
+export const TOGGLE_RETWEET = 'TOGGLE_RETWEET'
+export const TOGGLE_SHARE = 'TOGGLE_SHARE'
 
 function receiveNews(news) {
     return {
@@ -24,6 +26,60 @@ function toggleBookmark(itemId, userId) {
         type: TOGGLE_BOOKMARK,
         itemId,
         userId,
+    }
+}
+function toggleRetweet(itemId, userId) {
+    return {
+        type: TOGGLE_RETWEET,
+        itemId,
+        userId,
+    }
+}
+function toggleShare(itemId, userId) {
+    return {
+        type: TOGGLE_SHARE,
+        itemId,
+        userId,
+    }
+}
+
+export function handleToggleShare(id) {
+    return (dispatch, getState) => {
+        dispatch(showLoading())
+        const { authedUser } = getState()
+        const token = localStorage.getItem('token')
+        if (authedUser._id && token) {
+            dispatch(toggleShare(id, authedUser._id))
+            interaction(id, 'share', {}).then(() => {
+                dispatch(hideLoading())
+            }).catch((e) => {
+                dispatch(hideLoading())
+                dispatch(toggleShare(id, authedUser._id))
+                console.warn(e)
+            })
+        } else {
+            history.push('/send-otp')
+        }
+    }
+}
+
+export function handleToggleRetweet(id) {
+    return (dispatch, getState) => {
+        dispatch(showLoading())
+        const { authedUser } = getState()
+        const token = localStorage.getItem('token')
+        if (authedUser._id && token) {
+            dispatch(toggleRetweet(id, authedUser._id))
+            interaction(id, 'retweet', {}).then(() => {
+                dispatch(hideLoading())
+            }).catch((e) => {
+                dispatch(hideLoading())
+                dispatch(toggleRetweet(id, authedUser._id))
+                console.warn(e)
+            })
+        } else {
+            history.push('/send-otp')
+        }
     }
 }
 

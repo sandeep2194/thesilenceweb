@@ -1,5 +1,6 @@
 import SendOtp from './sendOtp';
 import VerifyOtp from './verifyOtp';
+import Comment from './comment'
 
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
@@ -63,12 +64,15 @@ class App extends Component {
               path='/news/:newsId'
               component={SingleNews}
             />
+            <Route
+              path='/comment/:itemId'
+              component={Comment}
+            />
             <Route component={FourZeroFour} />
           </Switch>
           <ReduxToastr
             timeOut={6000}
             newestOnTop={true}
-            preventDuplicates
             position="bottom-right"
             getState={(state) => state.toastr} // This is the default
             transitionIn="fadeIn"

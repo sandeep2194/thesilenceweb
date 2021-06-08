@@ -1,4 +1,4 @@
-import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK, TOGGLE_RETWEET, TOGGLE_SHARE } from '../actions/news'
+import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK, TOGGLE_RETWEET, TOGGLE_SHARE, ADD_COMMENT } from '../actions/news'
 
 export default function news(state = {}, action) {
     let item = { ...state[action.itemId] }
@@ -34,22 +34,23 @@ export default function news(state = {}, action) {
             return { ...oldNews }
         case TOGGLE_RETWEET:
             let newRetweetsArr = [...item.retweetsArr]
-            if (newRetweetsArr.includes(action.userId)) {
-                newRetweetsArr = newRetweetsArr.filter((id) => id !== action.userId)
-            } else {
-                newRetweetsArr.push(action.userId)
-            }
+            newRetweetsArr.push(action.userId)
             item.retweetsArr = [...newRetweetsArr]
             oldNews[action.itemId] = item
             return { ...oldNews }
         case TOGGLE_SHARE:
             let newSharingArr = [...item.sharesArr]
-            if (newSharingArr.includes(action.userId)) {
-                newSharingArr = newSharingArr.filter((id) => id !== action.userId)
-            } else {
-                newSharingArr.push(action.userId)
-            }
+            newSharingArr.push(action.userId)
             item.sharesArr = [...newSharingArr]
+            oldNews[action.itemId] = item
+            return { ...oldNews }
+        case ADD_COMMENT:
+            let newCommentArr = [...item.commentsArr]
+            newCommentArr.push({
+                content: action.content,
+                userId: action.userId,
+            })
+            item.commentsArr = [...newCommentArr]
             oldNews[action.itemId] = item
             return { ...oldNews }
         default:

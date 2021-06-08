@@ -12,6 +12,7 @@ import {
     Reply,
     ReplyFill
 } from 'react-bootstrap-icons'
+import { Link } from 'react-router-dom'
 
 class ReactionBar extends Component {
     handleLike = (e) => {
@@ -35,7 +36,7 @@ class ReactionBar extends Component {
         dispatch(handleToggleShare(id))
     }
     render() {
-        const { likesArr, bookmarksArr, sharesArr, retweetsArr } = this.props.newsItem;
+        const { likesArr, bookmarksArr, sharesArr, retweetsArr, _id } = this.props.newsItem;
         const { authedUser } = this.props
         return (
             <Container className='ml-3 mb-4 pr-4'>
@@ -52,7 +53,7 @@ class ReactionBar extends Component {
                         }
                     </Col>
                     <Col>
-                        <ChatRightFill className='reaction-icons-unClicked' />
+                        <Link to={`/comment/${_id}`}> <ChatRightFill className='reaction-icons-unClicked' /></Link>
                     </Col>
                     <Col>
                         {(bookmarksArr.includes(authedUser._id)) ? <BookmarkFill className='reaction-icons-clicked' onClick={this.handleBookmark} /> : <Bookmark className='reaction-icons-unClicked' onClick={this.handleBookmark} />}

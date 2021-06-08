@@ -24,13 +24,17 @@ export function handleGetOtp(phoneNumber) {
         dispatch(showLoading())
         getOtp(phoneNumber)
             .then(() => {
+                history.push({
+                    pathname: '/verify',
+                    phoneNumber,
+                })
                 dispatch(hideLoading())
-                history.push('/verify', phoneNumber)
             })
             .catch((err) => {
                 toastr.error('Error sending OTP', 'please try again later.')
                 console.error(err)
             })
+
     }
 }
 

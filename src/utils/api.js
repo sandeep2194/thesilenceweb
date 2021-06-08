@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://35.154.138.197:8080/api'
+const baseUrl = 'http://revivosocialjavabackend-env.eba-cpehram2.ap-south-1.elasticbeanstalk.com'
 
 export async function fetchNews(pageNo, pageSize) {
     try {

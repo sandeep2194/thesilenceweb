@@ -1,4 +1,7 @@
-import Login from './login';
+import SendOtp from './sendOtp';
+import VerifyOtp from './verifyOtp';
+import Comment from './comment'
+
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Router, Route, Switch } from 'react-router-dom';
@@ -8,9 +11,13 @@ import LogoHeader from './logoheader';
 import { handleGetNews } from '../actions/news'
 import FourZeroFour from './404';
 import history from '../utils/history'
+import ReduxToastr from 'react-redux-toastr'
+import GettingStarted from './gettingStarted'
+import UploadProfilePic from './uploadProfilePic'
+import Search from './search'
+import SingleNews from './singleNews';
 
 class App extends Component {
-
   componentDidMount() {
     this.props.dispatch(handleGetNews(1, 10))
   }
@@ -32,13 +39,46 @@ class App extends Component {
               )}
             />
             <Route
-              path='/login'
+              path='/send-otp'
               render={() => (
-                <Login />
+                <SendOtp />
               )}
+            />
+            <Route
+              path='/verify'
+              component={VerifyOtp}
+            />
+            <Route
+              path='/getting-started'
+              component={GettingStarted}
+            />
+            <Route
+              path='/upload-profile-pic'
+              component={UploadProfilePic}
+            />
+            <Route
+              path='/search'
+              component={Search}
+            />
+            <Route
+              path='/news/:newsId'
+              component={SingleNews}
+            />
+            <Route
+              path='/comment/:itemId'
+              component={Comment}
             />
             <Route component={FourZeroFour} />
           </Switch>
+          <ReduxToastr
+            timeOut={6000}
+            newestOnTop={true}
+            position="bottom-right"
+            getState={(state) => state.toastr} // This is the default
+            transitionIn="fadeIn"
+            transitionOut="fadeOut"
+            progressBar
+            closeOnToastrClick />
         </Fragment>
       </Router>
 

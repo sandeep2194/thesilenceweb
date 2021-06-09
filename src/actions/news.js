@@ -5,6 +5,9 @@ import history from '../utils/history'
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
 export const TOGGLE_BOOKMARK = 'TOGGLE_BOOKMARK'
+export const TOGGLE_RETWEET = 'TOGGLE_RETWEET'
+export const TOGGLE_SHARE = 'TOGGLE_SHARE'
+export const ADD_COMMENT = 'ADD_COMMENT'
 
 function receiveNews(news) {
     return {
@@ -19,19 +22,117 @@ function toggleLike(itemId, userId) {
         userId,
     }
 }
-function toggleBookmark(id) {
+function toggleBookmark(itemId, userId) {
     return {
         type: TOGGLE_BOOKMARK,
-        id,
+        itemId,
+        userId,
+    }
+}
+function toggleRetweet(itemId, userId) {
+    return {
+        type: TOGGLE_RETWEET,
+        itemId,
+        userId,
+    }
+}
+function toggleShare(itemId, userId) {
+    return {
+        type: TOGGLE_SHARE,
+        itemId,
+        userId,
+    }
+}
+
+function addComment(itemId, userId, content) {
+    return {
+        type: ADD_COMMENT,
+        itemId,
+        userId,
+        content,
+    }
+}
+
+export function handleAddComment(id, content) {
+    return (dispatch, getState) => {
+        dispatch(showLoading())
+        const { authedUser } = getState()
+        const token = localStorage.getItem('token')
+        if (authedUser._id && token) {
+            dispatch(addComment(id, authedUser._id, content))
+            interaction(id, 'comment', {
+                content: content
+            }).then(() => {
+                dispatch(hideLoading())
+            }).catch((e) => {
+                dispatch(hideLoading())
+                dispatch(addComment(id, authedUser._id, content))
+                console.warn(e)
+            })
+        } else {
+            history.push('/send-otp')
+        }
+    }
+}
+
+export function handleToggleShare(id) {
+    return (dispatch, getState) => {
+        dispatch(showLoading())
+        const { authedUser } = getState()
+        const token = localStorage.getItem('token')
+        if (authedUser._id && token) {
+            dispatch(toggleShare(id, authedUser._id))
+            interaction(id, 'share', {}).then(() => {
+                dispatch(hideLoading())
+            }).catch((e) => {
+                dispatch(hideLoading())
+                dispatch(toggleShare(id, authedUser._id))
+                console.warn(e)
+            })
+        } else {
+            history.push('/send-otp')
+        }
+    }
+}
+
+export function handleToggleRetweet(id) {
+    return (dispatch, getState) => {
+        dispatch(showLoading())
+        const { authedUser } = getState()
+        const token = localStorage.getItem('token')
+        if (authedUser._id && token) {
+            dispatch(toggleRetweet(id, authedUser._id))
+            interaction(id, 'retweet', {}).then(() => {
+                dispatch(hideLoading())
+            }).catch((e) => {
+                dispatch(hideLoading())
+                dispatch(toggleRetweet(id, authedUser._id))
+                console.warn(e)
+            })
+        } else {
+            history.push('/send-otp')
+        }
     }
 }
 
 export function handleToggleBookmark(id) {
     return (dispatch, getState) => {
         dispatch(showLoading())
-        const { news } = getState()
-        const newsItem = news[id]
-        const value = (newsItem.bookmarkedByUser) ? newsItem.bookmarkCount - 1 : newsItem.bookmarkCount + 1
+        const { authedUser } = getState()
+        const token = localStorage.getItem('token')
+        if (authedUser._id && token) {
+            dispatch(toggleBookmark(id, authedUser._id))
+            interaction(id, 'bookmark', {}).then(() => {
+                dispatch(hideLoading())
+            }).catch((e) => {
+                dispatch(hideLoading())
+                dispatch(toggleBookmark(id, authedUser._id))
+                console.warn(e)
+            })
+        } else {
+            history.push('/send-otp')
+        }
+
     }
 }
 
@@ -50,7 +151,7 @@ export function handleToggleLike(id) {
                 console.warn(e)
             })
         } else {
-            history.push('/login')
+            history.push('/send-otp')
         }
 
     }

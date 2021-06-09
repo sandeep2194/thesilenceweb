@@ -12,16 +12,13 @@ export async function fetchNews(pageNo, pageSize) {
         const res = await axios.get(url, headers)
         return res.data
     } catch (error) {
-        console.warn('laal' + error)
     }
 }
 
 export async function getOtp(phoneNumber) {
     const url = `${baseUrl}/getOTP?phoneNumber=${phoneNumber}`
-    const headers = {
-        'Content-Type': 'application/json',
-    }
-    const res = await axios.get(url, headers)
+
+    const res = await axios.get(url)
     return res.data
 }
 
@@ -35,19 +32,25 @@ export async function verifyOtp(phoneNumber, OTP) {
         "userName": phoneNumber,
         "password": OTP,
     }
-    const res = await axios.post(url, body, headers)
+    const res = await axios({
+        method: 'POST',
+        url: url,
+        data: { ...body },
+    })
 
     return res.data
 }
 
 export async function interaction(postId, interactionStr, body) {
     const token = localStorage.getItem('token')
-    console.log(token)
     const url = `${baseUrl}/posts/${postId}/${interactionStr}`
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token.toString(),
-    }
-    const res = await axios.post(url, body, headers)
+    const res = await axios({
+        method: 'POST',
+        url: url,
+        data: { ...body },
+        headers: {
+            'Authorization': 'Bearer ' + token.toString(),
+        }
+    })
     return res.data
 }

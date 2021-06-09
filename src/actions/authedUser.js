@@ -1,6 +1,7 @@
 import { getOtp, verifyOtp } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import history from '../utils/history'
+import { toastr } from 'react-redux-toastr'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
@@ -22,13 +23,18 @@ export function handleGetOtp(phoneNumber) {
     return (dispatch) => {
         dispatch(showLoading())
         getOtp(phoneNumber)
-            .then((res) => {
-                console.log('otp sent', res)
+            .then(() => {
+                history.push({
+                    pathname: '/verify',
+                    state: phoneNumber.toString(),
+                })
                 dispatch(hideLoading())
             })
             .catch((err) => {
+                toastr.error('Error sending OTP', 'please try again later.')
                 console.error(err)
             })
+
     }
 }
 
@@ -42,7 +48,9 @@ export function handleVerifyOtp(phoneNumber, OTP, failCb) {
                 dispatch(login(res.userInfo))
                 dispatch(hideLoading())
                 history.push('/')
+                toastr.info(`Login Success`)
             }).catch((err) => {
+                toastr.error('Error verifying OTP', 'please try again later.')
                 console.error(err)
             })
     }
@@ -54,5 +62,6 @@ export function handleLogout() {
         dispatch(logout())
         localStorage.removeItem('token');
         dispatch(hideLoading())
+        toastr.info(`you have logged out successfully`)
     }
 }

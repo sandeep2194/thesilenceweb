@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Image } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class CardImage extends Component {
     state = {
@@ -10,10 +11,11 @@ class CardImage extends Component {
         this.setState(() => ({ loaded: true, }))
     }
     render() {
+        const { imageUrl, authorId, title, authorImage } = this.props.newsItem
         return (
             <div className='card-img' >
                 <div style={{
-                    backgroundImage: `url(${this.props.newsItem.imageUrl})`,
+                    backgroundImage: `url(${imageUrl})`,
                     backgroundSize: 'cover',
                 }}>
                     <Container>
@@ -24,11 +26,13 @@ class CardImage extends Component {
                             <Col className='pb-2'>
                                 <Row>
                                     <Col xs={1} className="my-auto mr-2">
-                                        <Image src={this.props.newsItem.authorImage} roundedCircle width={32} height={32} />
+                                        <Link to={`/profile/${authorId}`}>
+                                            <Image src={authorImage} roundedCircle width={32} height={32} />
+                                        </Link>
                                     </Col>
                                     <Col className='my-auto'>
                                         <p className="card-text text-white semiBold">
-                                            {this.props.newsItem.title}
+                                            {title}
                                         </p>
                                     </Col>
                                 </Row>

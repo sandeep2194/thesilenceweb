@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const baseUrl = 'http://35.154.138.197:8080/api'
+// const mockApi = 'https://6a630fbc-dff3-41ea-9491-5b59538be693.mock.pstmn.io'
 
 export async function fetchNews(pageNo, pageSize) {
     try {
@@ -8,9 +9,25 @@ export async function fetchNews(pageNo, pageSize) {
         const res = await axios.get(url)
         return res.data
     } catch (error) {
+        console.error(error)
     }
 }
-
+export async function fetchNewsByAuthor(id, pageNo, pageSize) {
+    try {
+        const token = localStorage.getItem('token')
+        const url = `${baseUrl}/news/author/${id}?pageNo=${pageNo}&pageSize=${pageSize}`
+        const res = await axios({
+            method: 'GET',
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + token.toString(),
+            }
+        })
+        return res.data
+    } catch (error) {
+        console.error(error)
+    }
+}
 export async function getOtp(phoneNumber) {
     const url = `${baseUrl}/getOTP?phoneNumber=${phoneNumber}`
 
@@ -40,6 +57,20 @@ export async function interaction(postId, interactionStr, body) {
         method: 'POST',
         url: url,
         data: { ...body },
+        headers: {
+            'Authorization': 'Bearer ' + token.toString(),
+        }
+    })
+    return res.data
+}
+
+export async function fetchUser(id) {
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/userInfo?userIdOp=${id}`
+
+    const res = await axios({
+        method: 'get',
+        url: url,
         headers: {
             'Authorization': 'Bearer ' + token.toString(),
         }

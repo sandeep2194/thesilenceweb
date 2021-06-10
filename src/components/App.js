@@ -1,21 +1,22 @@
-import SendOtp from './sendOtp';
-import VerifyOtp from './verifyOtp';
-import Comment from './comment'
-
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Router, Route, Switch } from 'react-router-dom';
+import history from '../utils/history'
+import { handleGetNews } from '../actions/news'
+
 import LoadingBar from 'react-redux-loading'
+import ReduxToastr from 'react-redux-toastr'
 import NewsList from './newslist';
 import LogoHeader from './logoheader';
-import { handleGetNews } from '../actions/news'
 import FourZeroFour from './404';
-import history from '../utils/history'
-import ReduxToastr from 'react-redux-toastr'
 import GettingStarted from './gettingStarted'
 import UploadProfilePic from './uploadProfilePic'
 import Search from './search'
 import SingleNews from './singleNews';
+import SendOtp from './sendOtp';
+import VerifyOtp from './verifyOtp';
+import Comment from './comment'
+import Profile from './profile'
 
 class App extends Component {
   componentDidMount() {
@@ -68,6 +69,8 @@ class App extends Component {
               path='/comment/:itemId'
               component={Comment}
             />
+            <Route path='/profile/:userId'
+              component={Profile} />
             <Route component={FourZeroFour} />
           </Switch>
           <ReduxToastr

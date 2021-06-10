@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
 import { PersonCircle, Search } from 'react-bootstrap-icons'
 import { Container } from 'react-bootstrap'
+import { connect } from 'react-redux'
 
 function LogoHeader(props) {
+    const { isLoggedIn, userId } = props
     return (
         <div className="border-bottom border-light sticky-top bg-white shadow-sm">
             <Container>
@@ -16,7 +18,7 @@ function LogoHeader(props) {
                         </Link>
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
-                        <Link to="/send-otp">
+                        <Link to={(isLoggedIn) ? `/profile/${userId}` : '/send-otp'}>
                             <PersonCircle size={28} className="control-icons"></PersonCircle>
                         </Link>
                         <Link to="/search">
@@ -30,5 +32,13 @@ function LogoHeader(props) {
     )
 }
 
+function mapStateToProps({ authedUser }) {
+    const token = localStorage.getItem('token')
+    const userId = authedUser._id
+    return {
+        isLoggedIn: (token && userId) ? true : false,
+        userId,
+    }
+}
 
-export default LogoHeader
+export default connect(mapStateToProps)(LogoHeader)

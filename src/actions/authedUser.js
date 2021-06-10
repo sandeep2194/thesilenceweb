@@ -45,16 +45,17 @@ export function handleVerifyOtp(phoneNumber, OTP) {
         dispatch(showLoading())
         verifyOtp(phoneNumber, OTP)
             .then((res) => {
-                const firstTimeUser = res.userInfo.firstTimeUser
+                const username = res.userInfo.username;
                 localStorage.setItem('token', res.token);
                 dispatch(login(res.userInfo))
                 dispatch(addUser(res.userInfo))
-                dispatch(hideLoading())
-                if (firstTimeUser) {
+                if (!username) {
                     history.push('/getting-started')
-                } {
-                    history.push('/getting-started')
+                } else {
+                    history.push('/')
                 }
+                dispatch(hideLoading())
+
                 toastr.info(`Login Success`)
             }).catch((err) => {
                 toastr.error('Error verifying OTP', 'please try again later.')

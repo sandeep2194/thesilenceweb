@@ -30,7 +30,6 @@ class Profile extends Component {
                             <Row>
                                 <Col>
                                     <BottomScrollListener onBottom={this.handleBottomScroll2} />
-
                                     <UserPostList user={user} isCurrentUser={isCurrentUser} />
                                 </Col>
                             </Row>

@@ -1,10 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import BackHeader from './backheader'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import { PersonCircle } from 'react-bootstrap-icons'
 import { Link } from 'react-router-dom'
+import GettingStartedForm from './gettingStartedForm'
 
 class GettingStarted extends Component {
+
+
+
     render() {
         return (
             <Fragment>
@@ -17,21 +21,8 @@ class GettingStarted extends Component {
                     </Row>
                     <Row className='mt-2 justify-content-center'>
                         <Col className='mx-3' lg={6}>
-                            <Form>
-                                <Row>
-                                    <Col>
-                                        <Form.Control type='text' placeholder='First Name' className='mb-4' />
-                                    </Col>
-                                    <Col>
-                                        <Form.Control type='text' placeholder='Last Name' className='mb-4' />
-                                    </Col>
-                                </Row>
-                                <Form.Control type='email' placeholder='Enter Email' className='mb-4' />
-                                <Form.Control type='text' placeholder='Enter a username' className='mb-4' />
-                                <Row className='px-3'>
-                                    <Button type='submit' size='sm' className='btn-block'>Save</Button>
-                                </Row>
-                            </Form>
+                            <GettingStartedForm />
+                            {/*  */}
                         </Col>
                     </Row>
                 </Container>

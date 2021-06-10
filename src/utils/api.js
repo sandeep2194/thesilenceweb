@@ -41,10 +41,6 @@ export async function getOtp(phoneNumber) {
 
 export async function verifyOtp(phoneNumber, OTP) {
     const url = `${baseUrl}/authenticate`
-    const headers = {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-    }
     const body = {
         "userName": phoneNumber,
         "password": OTP,
@@ -85,11 +81,26 @@ export async function fetchUser(id) {
     })
     return res.data
 }
+export async function postUser(userObj) {
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/userInfo`
+
+    const res = await axios({
+        method: 'post',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+        data: { ...userObj }
+    })
+    return res.data
+}
+
 export const userNameValidation = async (username) => {
     // Res from backend will be flag at res.data.success, true for 
     // username good, false otherwise
     const token = localStorage.getItem('token')
-    const url = `${baseUrl}/validate-username/${username}`
+    const url = `${baseUrl}/checkUsernameAvailability?username=${username}`
     const res = await axios({
         method: 'get',
         url: url,

@@ -1,4 +1,4 @@
-import { getOtp, verifyOtp } from '../utils/api'
+import { getOtp, verifyOtp, postUser } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import history from '../utils/history'
 import { toastr } from 'react-redux-toastr'
@@ -6,6 +6,7 @@ import { addUser } from './user'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
+export const UPDATE_USER = 'UPDATE_USER'
 
 function login(user) {
     return {
@@ -16,6 +17,27 @@ function login(user) {
 function logout() {
     return {
         type: LOGOUT,
+    }
+}
+function updateUser(user) {
+    return {
+        type: UPDATE_USER,
+        user,
+    }
+}
+
+export function handleUpdateUser(userObj) {
+    return (dispatch) => {
+        dispatch(showLoading())
+        postUser(userObj).then(() => {
+            dispatch(updateUser(userObj))
+            dispatch(hideLoading)
+            toastr.info('Updated', 'Your info has been updated')
+            history.push('/')
+        }).catch((e) => {
+            console.error(e)
+            dispatch(hideLoading())
+        })
     }
 }
 

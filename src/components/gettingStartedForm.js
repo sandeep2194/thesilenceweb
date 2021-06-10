@@ -3,9 +3,10 @@ import { Formik, useField, Form } from 'formik';
 import { Row, Col, Button, Form as FormB } from 'react-bootstrap'
 import * as Yup from 'yup';
 import { userNameValidation } from '../utils/api'
+import { handleUpdateUser } from '../actions/authedUser'
+import { connect } from 'react-redux'
 
-
-const GettingStartedForm = () => {
+const GettingStartedForm = (props) => {
     const MyTextInput = ({ label, ...props }) => {
         const [field, meta] = useField(props);
         return (
@@ -19,6 +20,7 @@ const GettingStartedForm = () => {
             </Col>
         );
     };
+    const { dispatch } = props
     return (
         <Formik
             initialValues={{ firstName: '', lastName: '', email: '', username: '', }}
@@ -48,10 +50,12 @@ const GettingStartedForm = () => {
                     )
             })}
             onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
+                dispatch(handleUpdateUser({
+                    name: `${values.firstName} ${values.lastName}`,
+                    username: values.username,
+                    email: values.email,
+                }))
+                setSubmitting(false)
             }}
         >
 
@@ -83,11 +87,11 @@ const GettingStartedForm = () => {
                     />
                 </Row>
                 <Row className='mt-4 mx-1'>
-                    <Button type="submit" size='sm' className="btn-block">Save</Button>
+                    <Button type="submit" size='sm' className="btn-block" >Save</Button>
                 </Row>
             </Form>
         </Formik>
     )
 }
 
-export default GettingStartedForm
+export default connect()(GettingStartedForm)

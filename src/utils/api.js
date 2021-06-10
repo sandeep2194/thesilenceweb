@@ -20,7 +20,7 @@ export async function fetchNewsByAuthor(id, pageNo, pageSize) {
             method: 'GET',
             url: url,
             headers: {
-                'Authorization': 'Bearer ' + token.toString(),
+                'Authorization': 'Bearer ' + token,
             }
         })
         return res.data
@@ -58,7 +58,7 @@ export async function interaction(postId, interactionStr, body) {
         url: url,
         data: { ...body },
         headers: {
-            'Authorization': 'Bearer ' + token.toString(),
+            'Authorization': 'Bearer ' + token,
         }
     })
     return res.data
@@ -72,8 +72,23 @@ export async function fetchUser(id) {
         method: 'get',
         url: url,
         headers: {
-            'Authorization': 'Bearer ' + token.toString(),
+            'Authorization': 'Bearer ' + token,
         }
     })
+    return res.data
+}
+export const userNameValidation = async (username) => {
+    // Res from backend will be flag at res.data.success, true for 
+    // username good, false otherwise
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/validate-username/${username}`
+    const res = await axios({
+        method: 'get',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
+
     return res.data
 }

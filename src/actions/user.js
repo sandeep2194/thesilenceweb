@@ -33,9 +33,10 @@ export function handleReceiveNews(authorId, pageNo, pageSize) {
 
 export function handleAddUser(id) {
     return (dispatch, getState) => {
+        const token = localStorage.getItem('token')
         const { users } = getState()
         const check = (users === {}) ? null : (users[id]) ? true : false
-        if (!check) {
+        if (!check && token) {
             dispatch(showLoading())
             fetchUser(id)
                 .then((res) => {

@@ -3,7 +3,7 @@ import Avatar from 'react-avatar-edit'
 import { toastr } from 'react-redux-toastr'
 import { connect } from 'react-redux'
 import BackHeader from './backheader'
-import { Container, Row, Button } from 'react-bootstrap'
+import { Container, Row, Button, Col } from 'react-bootstrap'
 import { PersonBoundingBox } from 'react-bootstrap-icons'
 class UploadProfilePic extends Component {
 
@@ -48,11 +48,13 @@ class UploadProfilePic extends Component {
                             <PersonBoundingBox size={76} className='control-icons' />
                         }
                     </Row>
-                    <Row className='p-5'>
-                        <Button type='submit' size='sm'
-                            className='btn-block'
-                            onClick={this.onFileLoad}
-                        >Save</Button>
+                    <Row className='p-5 justify-content-center'>
+                        <Col lg={6} className='px-5'>
+                            <Button type='submit' size='sm'
+                                className='btn-block'
+                                onClick={this.onFileLoad}
+                            >Save</Button>
+                        </Col>
                     </Row>
                 </Container>
             </Fragment>

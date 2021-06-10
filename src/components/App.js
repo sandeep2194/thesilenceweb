@@ -17,10 +17,20 @@ import SendOtp from './sendOtp';
 import VerifyOtp from './verifyOtp';
 import Comment from './comment'
 import Profile from './profile'
+import LogRocket from 'logrocket';
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleGetNews(1, 10))
+    const token = localStorage.getItem('token')
+    const { authedUser } = this.props
+    if (token) {
+      LogRocket.identify(authedUser._id, {
+        name: authedUser.name,
+        email: authedUser.email,
+        // Add your own custom user variables here, ie:
+      });
+    }
   }
   render() {
     return (
@@ -88,9 +98,10 @@ class App extends Component {
     )
   }
 }
-function mapStateToProps({ news }) {
+function mapStateToProps({ news, authedUser }) {
   return {
     loading: news.length === 0,
+    authedUser,
   }
 }
 export default connect(mapStateToProps)(App);

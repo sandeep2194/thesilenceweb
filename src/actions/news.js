@@ -1,6 +1,5 @@
 import { fetchNews, interaction } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
-import history from '../utils/history'
 
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
@@ -57,21 +56,16 @@ export function handleAddComment(id, content) {
     return (dispatch, getState) => {
         dispatch(showLoading())
         const { authedUser } = getState()
-        const token = localStorage.getItem('token')
-        if (authedUser._id && token) {
+        dispatch(addComment(id, authedUser._id, content))
+        interaction(id, 'comment', {
+            content: content
+        }).then(() => {
+            dispatch(hideLoading())
+        }).catch((e) => {
+            dispatch(hideLoading())
             dispatch(addComment(id, authedUser._id, content))
-            interaction(id, 'comment', {
-                content: content
-            }).then(() => {
-                dispatch(hideLoading())
-            }).catch((e) => {
-                dispatch(hideLoading())
-                dispatch(addComment(id, authedUser._id, content))
-                console.warn(e)
-            })
-        } else {
-            history.push('/send-otp')
-        }
+            console.warn(e)
+        })
     }
 }
 
@@ -79,19 +73,14 @@ export function handleToggleShare(id) {
     return (dispatch, getState) => {
         dispatch(showLoading())
         const { authedUser } = getState()
-        const token = localStorage.getItem('token')
-        if (authedUser._id && token) {
+        dispatch(toggleShare(id, authedUser._id))
+        interaction(id, 'share', {}).then(() => {
+            dispatch(hideLoading())
+        }).catch((e) => {
+            dispatch(hideLoading())
             dispatch(toggleShare(id, authedUser._id))
-            interaction(id, 'share', {}).then(() => {
-                dispatch(hideLoading())
-            }).catch((e) => {
-                dispatch(hideLoading())
-                dispatch(toggleShare(id, authedUser._id))
-                console.warn(e)
-            })
-        } else {
-            history.push('/send-otp')
-        }
+            console.warn(e)
+        })
     }
 }
 
@@ -99,19 +88,14 @@ export function handleToggleRetweet(id) {
     return (dispatch, getState) => {
         dispatch(showLoading())
         const { authedUser } = getState()
-        const token = localStorage.getItem('token')
-        if (authedUser._id && token) {
+        dispatch(toggleRetweet(id, authedUser._id))
+        interaction(id, 'retweet', {}).then(() => {
+            dispatch(hideLoading())
+        }).catch((e) => {
+            dispatch(hideLoading())
             dispatch(toggleRetweet(id, authedUser._id))
-            interaction(id, 'retweet', {}).then(() => {
-                dispatch(hideLoading())
-            }).catch((e) => {
-                dispatch(hideLoading())
-                dispatch(toggleRetweet(id, authedUser._id))
-                console.warn(e)
-            })
-        } else {
-            history.push('/send-otp')
-        }
+            console.warn(e)
+        })
     }
 }
 
@@ -119,19 +103,14 @@ export function handleToggleBookmark(id) {
     return (dispatch, getState) => {
         dispatch(showLoading())
         const { authedUser } = getState()
-        const token = localStorage.getItem('token')
-        if (authedUser._id && token) {
+        dispatch(toggleBookmark(id, authedUser._id))
+        interaction(id, 'bookmark', {}).then(() => {
+            dispatch(hideLoading())
+        }).catch((e) => {
+            dispatch(hideLoading())
             dispatch(toggleBookmark(id, authedUser._id))
-            interaction(id, 'bookmark', {}).then(() => {
-                dispatch(hideLoading())
-            }).catch((e) => {
-                dispatch(hideLoading())
-                dispatch(toggleBookmark(id, authedUser._id))
-                console.warn(e)
-            })
-        } else {
-            history.push('/send-otp')
-        }
+            console.warn(e)
+        })
 
     }
 }
@@ -140,19 +119,14 @@ export function handleToggleLike(id) {
     return (dispatch, getState) => {
         dispatch(showLoading())
         const { authedUser } = getState()
-        const token = localStorage.getItem('token')
-        if (authedUser._id && token) {
+        dispatch(toggleLike(id, authedUser._id))
+        interaction(id, 'like', {}).then(() => {
+            dispatch(hideLoading())
+        }).catch((e) => {
+            dispatch(hideLoading())
             dispatch(toggleLike(id, authedUser._id))
-            interaction(id, 'like', {}).then(() => {
-                dispatch(hideLoading())
-            }).catch((e) => {
-                dispatch(hideLoading())
-                dispatch(toggleLike(id, authedUser._id))
-                console.warn(e)
-            })
-        } else {
-            history.push('/send-otp')
-        }
+            console.warn(e)
+        })
 
     }
 }

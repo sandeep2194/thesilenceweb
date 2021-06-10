@@ -15,8 +15,8 @@ class NewsList extends Component {
         return (
             <Container className='mt-3'>
                 <Row>
+                    <BottomScrollListener onBottom={this.handleBottomScroll} />
                     <Col>
-                        <BottomScrollListener onBottom={this.handleBottomScroll} />
                         <ul>
                             {Object.keys(this.props.news).map((id) =>
                             (<li

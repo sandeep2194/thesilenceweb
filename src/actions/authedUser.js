@@ -2,6 +2,7 @@ import { getOtp, verifyOtp } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import history from '../utils/history'
 import { toastr } from 'react-redux-toastr'
+import { addUser } from './user'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
@@ -39,15 +40,22 @@ export function handleGetOtp(phoneNumber) {
 }
 
 
-export function handleVerifyOtp(phoneNumber, OTP, failCb) {
+export function handleVerifyOtp(phoneNumber, OTP) {
     return (dispatch) => {
         dispatch(showLoading())
         verifyOtp(phoneNumber, OTP)
             .then((res) => {
+                const username = res.userInfo.username;
                 localStorage.setItem('token', res.token);
                 dispatch(login(res.userInfo))
+                dispatch(addUser(res.userInfo))
+                if (!username) {
+                    history.push('/getting-started')
+                } else {
+                    history.push('/')
+                }
                 dispatch(hideLoading())
-                history.push('/')
+
                 toastr.info(`Login Success`)
             }).catch((err) => {
                 toastr.error('Error verifying OTP', 'please try again later.')

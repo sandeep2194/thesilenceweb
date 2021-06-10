@@ -79,6 +79,7 @@ p{
     border-bottom-right-radius:0rem !important; 
 
 }
+
 @include media-breakpoint-up(xs) {
     p{
         font-size: 0.8rem;
@@ -86,6 +87,7 @@ p{
     .meta{
         font-size: 0.6rem;
     }
+
   }
   @include media-breakpoint-up(xxs) {
     p{
@@ -93,6 +95,10 @@ p{
     }
     .meta{
         font-size: 0.5rem;
+    }
+    .profile-meta{
+        font-size: 0.6rem; 
+        font-weight: bold;
     }
   }
   @include media-breakpoint-up(lg) {
@@ -110,5 +116,9 @@ p{
     }
     .control-icons{
         font-size: 1.4rem;
+    }
+    .profile-meta{
+        font-size: 0.8rem; 
+        font-weight: bold;
     }
   }

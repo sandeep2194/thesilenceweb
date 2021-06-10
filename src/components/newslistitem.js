@@ -6,8 +6,13 @@ import CardImage from './cardimage';
 import CardContent from './cardcontent';
 import CardMetaInfo from './cardmetainfo';
 import { connect } from 'react-redux'
+import { handleAddUser } from '../actions/user'
 
 class NewsListItem extends Component {
+    componentDidMount() {
+        const { dispatch, authorId } = this.props;
+        dispatch(handleAddUser(authorId))
+    }
     render() {
         const { id } = this.props
         return (
@@ -22,7 +27,13 @@ class NewsListItem extends Component {
         );
     }
 }
-export default connect()(NewsListItem)
+
+function mapStateToProps({ news }, props) {
+    return {
+        authorId: news[props.id].authorId
+    }
+}
+export default connect(mapStateToProps)(NewsListItem)
 
 
 

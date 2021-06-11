@@ -1,5 +1,6 @@
 import { fetchNews, interaction } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
+import { handleReceiveBookmarksData } from './authedUser'
 
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
@@ -106,6 +107,7 @@ export function handleToggleBookmark(id) {
         dispatch(toggleBookmark(id, authedUser._id))
         interaction(id, 'bookmark', {}).then(() => {
             dispatch(hideLoading())
+            dispatch(handleReceiveBookmarksData())
         }).catch((e) => {
             dispatch(hideLoading())
             dispatch(toggleBookmark(id, authedUser._id))

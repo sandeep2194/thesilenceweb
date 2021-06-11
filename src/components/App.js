@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import history from '../utils/history'
 import { handleGetNews } from '../actions/news'
+import LogRocket from 'logrocket';
+import { handleReceiveBookmarksData } from '../actions/authedUser'
 
 import LoadingBar from 'react-redux-loading'
 import ReduxToastr from 'react-redux-toastr'
@@ -17,11 +19,18 @@ import SendOtp from './sendOtp';
 import VerifyOtp from './verifyOtp';
 import Comment from './comment'
 import Profile from './profile'
-import LogRocket from 'logrocket';
+import VideoList from './videoList'
+import Bookmarks from './bookmarks'
+import AddPost from './addPost'
+import Notification from './notifications'
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleGetNews(1, 10))
+    const { dispatch } = this.props
+
+    dispatch(handleGetNews(1, 10))
+    dispatch(handleReceiveBookmarksData())
+
     const token = localStorage.getItem('token')
     const { authedUser } = this.props
     if (token) {
@@ -38,15 +47,44 @@ class App extends Component {
         <Fragment>
           <LoadingBar style={{ backgroundColor: '#2F80ED', height: '5px' }} />
           <Switch>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
             <Route
-              exact
-              path='/'
+              path='/home'
               render={() => (
                 this.props.loading === true ? null
                   : <Fragment>
                     <LogoHeader />
                     <NewsList />
                   </Fragment>
+              )}
+            />
+            <Route
+              path='/videos'
+              render={() => (
+                <Fragment>
+                  <LogoHeader />
+                  <VideoList />
+                </Fragment>
+              )}
+            />
+            <Route
+              path='/bookmarks'
+              render={() => (
+                <Bookmarks />
+              )}
+            />
+            <Route
+              path='/post'
+              render={() => (
+                <AddPost />
+              )}
+            />
+            <Route
+              path='/notifications'
+              render={() => (
+                <Notification />
               )}
             />
             <Route

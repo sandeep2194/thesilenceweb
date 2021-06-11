@@ -53,7 +53,7 @@ function mapStateToProps({ authedUser, users }, props) {
     return {
         isCurrentUser,
         userId,
-        user,
+        user: isCurrentUser ? authedUser : user,
         pageSize: 10,
         pageNo: pageNo
     }

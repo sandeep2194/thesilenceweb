@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import logo from '../assets/images/logo.svg';
-import { Link } from 'react-router-dom';
-import { Navbar, Image } from 'react-bootstrap';
-import { PersonCircle, Search } from 'react-bootstrap-icons'
+import { NavLink, Link } from 'react-router-dom';
+import { Navbar, Image, NavItem, Nav } from 'react-bootstrap';
+import { Person, Search, House, PlayBtn, PlusCircle, Bookmark, Bell } from 'react-bootstrap-icons'
 import { Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import BottomNav from './bottomNav'
 
 function LogoHeader(props) {
     const { isLoggedIn, userId, firstTimeUser, profilePic } = props
@@ -15,27 +16,63 @@ function LogoHeader(props) {
         to = `/profile/${userId}`
     }
     return (
-        <div className="border-bottom border-light sticky-top bg-white shadow-sm">
-            <Container>
-                <Navbar bg="none pl-0" >
-                    <Navbar.Brand>
-                        <Link to="/">
-                            <Image src={logo} alt="Logo" />
-                        </Link>
-                    </Navbar.Brand>
-                    <Navbar.Collapse className="justify-content-end">
-                        <Link to={to}>
-                            {profilePic ? <Image src={profilePic} alt='userProfile' />
-                                : <PersonCircle size={26} className="control-icons" />
-                            }
-                        </Link>
-                        <Link to="/search">
-                            <Search size={26} className="control-icons ml-4"></Search>
-                        </Link>
-                    </Navbar.Collapse>
-                </Navbar>
-            </Container>
-        </div>
+        <Fragment>
+            <div className="border-bottom border-light sticky-top bg-white shadow-sm">
+                <Container>
+                    <Navbar bg="none pl-0" >
+                        <Navbar.Brand>
+                            <Link to="/">
+                                <Image src={logo} alt="Logo" />
+                            </Link>
+                        </Navbar.Brand>
+
+                        <Navbar.Collapse className="justify-content-end">
+                            <div className='d-none d-lg-block'>
+                                <Nav className="ml-auto">
+                                    <NavItem>
+                                        <NavLink to="/home" className="nav-link" activeClassName="active">
+                                            <House className="ml-4" size={24} />
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink to="/videos" className="nav-link" activeClassName="active">
+                                            <PlayBtn className=" ml-4" size={24} />
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink to="/post" className="nav-link" activeClassName="active">
+                                            <PlusCircle className=" ml-4" size={24} />
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink to="/bookmarks" className="nav-link" activeClassName="active">
+                                            <Bookmark className=" ml-4" size={24} />
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink to="/notifications" className="nav-link" activeClassName="active">
+                                            <Bell className="ml-4" size={24} />
+                                        </NavLink>
+                                    </NavItem>
+                                </Nav>
+                            </div>
+
+                            <NavLink to={to}>
+                                {profilePic ? <Image src={profilePic} alt='userProfile' />
+                                    : <Person size={28} className="control-icons ml-4" />
+                                }
+                            </NavLink>
+                            <NavLink to="/search">
+                                <Search size={24} className="control-icons ml-4"></Search>
+                            </NavLink>
+                        </Navbar.Collapse>
+                    </Navbar>
+                </Container>
+            </div>
+            <div className="d-block d-lg-none">
+                <BottomNav />
+            </div>
+        </Fragment>
 
     )
 }

@@ -32,6 +32,24 @@ export async function fetchNewsByAuthor(id, pageNo, pageSize) {
         console.error(error)
     }
 }
+
+export async function fetchBookmarks() {
+    try {
+        const token = localStorage.getItem('token')
+        const url = `${baseUrl}/bookmarks`
+        const res = await axios({
+            method: 'GET',
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        })
+        return res.data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 export async function getOtp(phoneNumber) {
     const url = `${baseUrl}/getOTP?phoneNumber=${phoneNumber}`
 

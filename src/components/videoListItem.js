@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Row, Col, Card, Image } from 'react-bootstrap'
 import ReactPlayer from 'react-player/youtube'
 import TimeAgo from 'timeago-react';
+import { connect } from 'react-redux'
 
 class VideoListItem extends Component {
     render() {
@@ -41,4 +42,4 @@ function mapStateToProps({ news }, props) {
         videoItem: news[props.id]
     }
 }
-export default connect(VideoListItem)()
+export default connect(mapStateToProps)(VideoListItem)

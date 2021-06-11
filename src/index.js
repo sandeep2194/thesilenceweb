@@ -15,12 +15,15 @@ import { PersistGate } from 'redux-persist/integration/react'
 import LogRocket from 'logrocket';
 LogRocket.init('an21p3/thesilence');
 
+require('medium-editor/dist/css/medium-editor.css');
+require('medium-editor/dist/css/themes/default.css');
+
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: []
+  blacklist: ['news']
 }
 const persistedReducer = persistReducer(persistConfig, reducer)
 const store = createStore(persistedReducer, composeEnhancers(

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import logo from '../assets/images/logo.svg';
 import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Image, NavItem, Nav } from 'react-bootstrap';
-import { Person, Search, House, PlayBtn, PlusCircle, Bookmark, Bell } from 'react-bootstrap-icons'
+import FeatherIcon from 'feather-icons-react';
 import { Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import BottomNav from './bottomNav'
@@ -30,28 +30,28 @@ function LogoHeader(props) {
                             <div className='d-none d-lg-block'>
                                 <Nav className="ml-auto">
                                     <NavItem>
-                                        <NavLink to="/home" className="nav-link" activeClassName="active">
-                                            <House className="ml-4" size={24} />
+                                        <NavLink to="/home">
+                                            <FeatherIcon icon="home" className="menu-icons" />
                                         </NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink to="/videos" className="nav-link" activeClassName="active">
-                                            <PlayBtn className=" ml-4" size={24} />
+                                        <NavLink to="/videos" >
+                                            <FeatherIcon icon="youtube" className="menu-icons" />
                                         </NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink to="/post" className="nav-link" activeClassName="active">
-                                            <PlusCircle className=" ml-4" size={24} />
+                                        <NavLink to="/post">
+                                            <FeatherIcon icon="plus-square" className="menu-icons" />
                                         </NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink to="/bookmarks" className="nav-link" activeClassName="active">
-                                            <Bookmark className=" ml-4" size={24} />
+                                        <NavLink to="/bookmarks">
+                                            <FeatherIcon icon="bookmark" className="menu-icons" />
                                         </NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink to="/notifications" className="nav-link" activeClassName="active">
-                                            <Bell className="ml-4" size={24} />
+                                        <NavLink to="/notifications">
+                                            <FeatherIcon icon="bell" className="menu-icons" />
                                         </NavLink>
                                     </NavItem>
                                 </Nav>
@@ -59,11 +59,11 @@ function LogoHeader(props) {
 
                             <NavLink to={to}>
                                 {profilePic ? <Image src={profilePic} alt='userProfile' />
-                                    : <Person size={28} className="control-icons ml-4" />
+                                    : <FeatherIcon icon="user" className="menu-icons" />
                                 }
                             </NavLink>
                             <NavLink to="/search">
-                                <Search size={24} className="control-icons ml-4"></Search>
+                                <FeatherIcon icon="search" className="menu-icons" />
                             </NavLink>
                         </Navbar.Collapse>
                     </Navbar>

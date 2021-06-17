@@ -42,8 +42,8 @@ export function handleReceiveBookmarksData() {
                 dispatch(receiveBookmarksData(res.result))
                 dispatch(hideLoading())
             }).catch((err) => {
-                dispatch(hideLoading())
                 console.error(err)
+                dispatch(hideLoading())
             })
     }
 }

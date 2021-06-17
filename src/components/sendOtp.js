@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import BackHeader from '../components/backheader';
+import CloseHeader from './closeBtnHeader'
 import { Form, Container, Button, Row, Col } from 'react-bootstrap'
 import { handleGetOtp } from '../actions/authedUser'
 import { connect } from 'react-redux'
@@ -49,29 +49,34 @@ class SendOtp extends Component {
         } = this.state
         return (
             <Fragment>
-                <BackHeader pageName='Login with Mobile' />
-                <Container className='pt-5'>
+                <CloseHeader />
+                <Container className='pt-5 mt-5'>
+
                     <Row className='justify-content-center'>
-                        <Col lg={3}></Col>
-                        <Col className='mx-3'>
+                        <Col className='mx-3' lg={6}>
+                            <Row>
+                                <Col className='mb-5'>
+                                    <h3 className='font-weight-bold'>Sign Up / Login</h3>
+                                    <span className='my-2'>Enter your phone number to sign up/Login</span>
+                                </Col>
+                            </Row>
                             <Form onSubmit={this.handleGetOTP} >
                                 <Form.Group className="mb-3" controlId="phone">
                                     <Form.Control
                                         type='text'
-                                        placeholder='Enter Phone Number'
                                         value={mobileNumber}
                                         onChange={this.updateMobileNum}
                                         className={!phoneValidated ? '' : 'is-valid'}
+                                        placeholder='Enter phone number'
                                     />
                                 </Form.Group>
                                 <Row className='justify-content-center'>
-                                    <Button variant="primary" type="submit" size='md' className='btn-block mx-3 mt-1'>
-                                        Get Otp
-                                     </Button>
+                                    <Button variant="primary" type="submit" size='md' className='btn-block mx-3 mt-3'>
+                                        Continue
+                                    </Button>
                                 </Row>
                             </Form>
                         </Col>
-                        <Col lg={3}></Col>
                     </Row>
                 </Container>
             </Fragment>

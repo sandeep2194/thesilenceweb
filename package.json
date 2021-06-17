@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "bootstrap": "4.6.0",
+    "feather-icons-react": "^0.4.3",
     "fetch": "^1.1.0",
     "formik": "^2.2.9",
     "jquery": "1.9.1",

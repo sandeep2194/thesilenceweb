@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://35.154.138.197:8080/api'
+const baseUrl = 'http://13.232.209.83:8080/api'
 // const mockApi = 'https://6a630fbc-dff3-41ea-9491-5b59538be693.mock.pstmn.io'
 
 export async function fetchNews(pageNo, pageSize) {

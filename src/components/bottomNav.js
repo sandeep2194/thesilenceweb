@@ -1,23 +1,23 @@
 import React from 'react'
-import { House, PlayBtn, PlusCircle, Bookmark, Bell } from 'react-bootstrap-icons'
 import { Nav, NavItem } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
+import FeatherIcon from 'feather-icons-react';
 
 const tabs = [{
     route: "/home",
-    icon: <House size="24" />,
+    icon: "home",
 }, {
     route: "/videos",
-    icon: <PlayBtn size="24" />,
+    icon: "youtube",
 }, {
     route: "/post",
-    icon: <PlusCircle size="24" />,
+    icon: "plus-square",
 }, {
     route: "/bookmarks",
-    icon: <Bookmark size="24" />,
+    icon: "bookmark",
 }, {
     route: "/notifications",
-    icon: <Bell size="24" />,
+    icon: "bell",
 }
 ]
 
@@ -30,7 +30,7 @@ const BottomNav = (props) => {
                         <NavItem key={`tab-${index}`}>
                             <NavLink to={tab.route} className="nav-link" activeClassName="active">
                                 <div className="row d-flex flex-column justify-content-center align-items-center">
-                                    {tab.icon}
+                                    <FeatherIcon icon={tab.icon} className="bottom-menu-icons-color" />
                                     <div>{tab.label}</div>
                                 </div>
                             </NavLink>

@@ -18,7 +18,7 @@ class CardImage extends Component {
                     }}>
                         <Container>
                             <Row className='p-3 align-items-end' style={{
-                                height: '35vh',
+                                height: '30vh',
                                 background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.0), rgba(239, 239, 239, 0.0), rgba(199, 199, 199, 0.0), rgba(146, 146, 146, 0.0), rgba(93, 93, 93, 0.0), rgba(48, 48, 48, 0.8), rgba(18, 18, 18, 0.9), rgba(0, 0, 0, 1))',
                             }}>
                                 <Col className='pb-2'>

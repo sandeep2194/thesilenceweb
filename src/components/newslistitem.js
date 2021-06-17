@@ -16,7 +16,7 @@ class NewsListItem extends Component {
     render() {
         const { id } = this.props
         return (
-            <Card className='mb-3'>
+            <Card className='mb-2 border-0 rounded-0 shadow-sm'>
                 <CardImage id={id} />
                 <Card.Body>
                     <CardContent id={id} />

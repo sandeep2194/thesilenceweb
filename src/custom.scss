@@ -22,7 +22,8 @@ ul{
 	src: url("./assets/fonts/Montserrat-SemiBold.ttf") format("truetype"),
 }
 body{
-    font-family: "Montserrat-Regular"
+    font-family: "Montserrat-Regular";
+    background-color: #fff;
 }
 .control-icons{
     color: $secondary;
@@ -79,7 +80,20 @@ p{
     border-bottom-right-radius:0rem !important; 
 
 }
+.menu-icons{
+    margin-left: 2rem;
+    color: #7B8794; 
+}
+.bottom-menu-icons-color{
+    color: #7B8794; 
 
+}
+.resend{
+    font-size: 0.875rem;
+}
+.otp-input{
+    text-align: center;
+}
 @include media-breakpoint-up(xs) {
     p{
         font-size: 0.8rem;

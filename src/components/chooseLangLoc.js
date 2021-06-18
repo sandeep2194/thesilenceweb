@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import CloseHeader from './closeBtnHeader'
 import FeatherIcon from 'feather-icons-react';
+import ChooseLocation from './chooseLocation'
 
 class ChooseLangLoc extends Component {
     state = {
@@ -99,6 +100,11 @@ class ChooseLangLoc extends Component {
                             {
                                 this.languages.map((language, index) => this.langChip(language, index))
                             }
+                        </Col>
+                    </Row>
+                    <Row className='mt-5'>
+                        <Col lg={6}>
+                            <ChooseLocation />
                         </Col>
                     </Row>
                 </Container>

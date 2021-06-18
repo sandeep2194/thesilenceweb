@@ -105,6 +105,15 @@ p{
     padding: 0.5rem;
     margin-right: .4rem;
 }
+.btn-outline-primary:hover{
+    .lan-abbreviation{
+        background-color: white !important;
+        color: $primary !important;
+    }
+    svg{
+        color: $primary !important;
+    }
+}
 @include media-breakpoint-up(xs) {
     p{
         font-size: 0.8rem;

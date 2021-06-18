@@ -67,8 +67,8 @@ class ChooseLocation extends Component {
         return (
             <Fragment>
                 <h6 className="ml-3 mb-3 mt-5">Choose Location(s)</h6>
-                <Row >
-                    <Col lg={6}>
+                <Row className="justify-content-center">
+                    <Col>
                         {
                             this.locations.map((location, index) => this.locChip(location, index))
                         }

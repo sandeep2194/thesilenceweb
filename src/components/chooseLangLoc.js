@@ -93,18 +93,22 @@ class ChooseLangLoc extends Component {
     render() {
         return (
             <Fragment>
-                <CloseHeader heading='Choose Languages' />
                 <Container>
-                    <Row >
+                    <Row className='justify-content-center'>
                         <Col lg={6}>
-                            {
-                                this.languages.map((language, index) => this.langChip(language, index))
-                            }
-                        </Col>
-                    </Row>
-                    <Row className='mt-5'>
-                        <Col lg={6}>
-                            <ChooseLocation />
+                            <CloseHeader heading='Choose Languages' />
+                            <Row >
+                                <Col >
+                                    {
+                                        this.languages.map((language, index) => this.langChip(language, index))
+                                    }
+                                </Col>
+                            </Row>
+                            <Row className='mt-5'>
+                                <Col >
+                                    <ChooseLocation />
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
                 </Container>

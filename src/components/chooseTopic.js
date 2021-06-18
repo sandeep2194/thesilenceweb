@@ -66,10 +66,11 @@ class ChooseTopic extends Component {
     render() {
         return (
             <Fragment>
-                <CloseHeader heading='Choose Topics' />
                 <Container>
-                    <Row >
+                    <Row className="justify-content-center">
                         <Col lg={6}>
+                            <CloseHeader heading='Choose Topics' />
+
                             {
                                 this.topics.map((topic, index) => this.topicChip(topic, index))
                             }

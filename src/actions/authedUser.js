@@ -53,8 +53,7 @@ export function handleUpdateUser(userObj) {
         postUser(userObj).then(() => {
             dispatch(updateUser(userObj))
             dispatch(hideLoading)
-            toastr.info('Updated', 'Your info has been updated')
-            history.push('/')
+            history.push('/choose-language-location')
         }).catch((e) => {
             console.error(e)
             dispatch(hideLoading())

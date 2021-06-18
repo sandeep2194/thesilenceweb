@@ -24,6 +24,7 @@ import Bookmarks from './bookmarks'
 import AddPost from './addPost'
 import Notification from './notifications'
 import ChooseLangLoc from './chooseLangLoc'
+import ChooseTopic from './chooseTopic';
 
 class App extends Component {
   componentDidMount() {
@@ -122,6 +123,8 @@ class App extends Component {
               component={Profile} />
             <Route path='/choose-language-location'
               component={ChooseLangLoc} />
+            <Route path='/choose-topics'
+              component={ChooseTopic} />
             <Route component={FourZeroFour} />
           </Switch>
           <ReduxToastr

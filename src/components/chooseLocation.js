@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap'
-import CloseHeader from './closeBtnHeader'
+import { Row, Col, Button } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
 
 class ChooseLocation extends Component {

@@ -23,6 +23,7 @@ import VideoList from './videoList'
 import Bookmarks from './bookmarks'
 import AddPost from './addPost'
 import Notification from './notifications'
+import ChooseLangLoc from './chooseLangLoc'
 
 class App extends Component {
   componentDidMount() {
@@ -119,6 +120,8 @@ class App extends Component {
             />
             <Route path='/profile/:userId'
               component={Profile} />
+            <Route path='/choose-language-location'
+              component={ChooseLangLoc} />
             <Route component={FourZeroFour} />
           </Switch>
           <ReduxToastr

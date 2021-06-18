@@ -94,6 +94,17 @@ p{
 .otp-input{
     text-align: center;
 }
+.lang-loc-topic-chipBtn{
+    border-radius: 5rem;
+    padding-left: 1.4rem;
+    padding-right: 1.8rem
+}
+.lan-abbreviation{
+    color: white !important;
+    font-size: 12px;
+    padding: 0.5rem;
+    margin-right: .4rem;
+}
 @include media-breakpoint-up(xs) {
     p{
         font-size: 0.8rem;

@@ -9,9 +9,10 @@ function CloseHeader(props) {
     }
     return (
         <div className="ml-n4 bg-white">
-            <Container>
+            <Container className='py-2'>
                 <Navbar bg="none">
                     <Navbar.Brand>
+                        <h6 className="ml-3">{props.heading}</h6>
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
                         <FeatherIcon icon="x" className="menu-icons" onClick={close} />

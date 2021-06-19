@@ -5,17 +5,18 @@ class NotificationItem extends Component {
     render() {
         return (
             <Fragment>
-                <Card>
-                    <Card.Body>
-                        <Card.Title>{title}</Card.Title>
+                <Container>
+                    <Row>
+                        <Col lg={6}>
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>Test</Card.Title>
+                                </Card.Body>
 
-                        <Card.Text>
-                            {content}
-                        </Card.Text>
-                        {/* <Card.Link href="#">Card Link</Card.Link>
-                        <Card.Link href="#">Another Link</Card.Link> */}
-                    </Card.Body>
-                </Card>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
             </Fragment>
         )
     }

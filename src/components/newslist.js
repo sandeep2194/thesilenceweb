@@ -13,24 +13,22 @@ class NewsList extends Component {
     }
     render() {
         return (
-            <Container className='mt-3'>
-                <Row>
-                    <BottomScrollListener onBottom={this.handleBottomScroll} />
-                    <Col>
-                        <ul>
-                            {Object.keys(this.props.news).map((id) =>
-                            (<li
-                                key={id}
-                            >
-                                <NewListItem
-                                    id={id}
-                                />
-                            </li>)
-                            )}
-                        </ul>
-                    </Col>
-                    <Col lg={6}></Col>
-                </Row>
+            <Container className='mt-2 px-0'>
+                <BottomScrollListener onBottom={this.handleBottomScroll} />
+                <Col lg={6} className='px-0'>
+                    <ul>
+                        {Object.keys(this.props.news).map((id) =>
+                        (<li
+                            key={id}
+                        >
+                            <NewListItem
+                                id={id}
+                            />
+                        </li>)
+                        )}
+                    </ul>
+                </Col>
+
             </Container>
         )
 

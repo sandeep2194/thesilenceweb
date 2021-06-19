@@ -1,30 +1,35 @@
-import React, { Component, Fragment } from 'react'
-import { Container } from 'react-bootstrap'
+import React, { Component } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 import VideoListItem from './videoListItem'
-import LogoHeader from './logoheader'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 class VideoList extends Component {
     render() {
-        const { videoList } = this.props
+        const { videoList, isLoggedIn } = this.props
         return (
-            <Fragment>
-                <LogoHeader />
-                <Container>
-                    <ul>
-                        {videoList.map((id) => (
-                            <li key={id}>
-                                <VideoListItem id={id} />
-                            </li>
-                        ))}
-                    </ul>
-                </Container>
-            </Fragment>
+            <Container>
+                {!isLoggedIn && <Redirect to="/send-otp" />}
+                <Row className='justify-content-center mt-3'>
+                    <Col lg={6}>
+                        <ul>
+                            {videoList.map((id, index) => (
+                                <li key={index}>
+                                    <VideoListItem id={id} />
+                                </li>
+                            ))}
+                        </ul>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }
 
 function mapStateToProps({ news }) {
+    const token = localStorage.getItem('token')
     return {
+        isLoggedIn: token ? true : false,
         videoList: Object.keys(news).filter(item => item.isVideo === true)
     }
 }

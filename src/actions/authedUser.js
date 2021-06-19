@@ -1,4 +1,4 @@
-import { getOtp, verifyOtp, postUser } from '../utils/api'
+import { getOtp, verifyOtp, postUser, fetchBookmarks } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import history from '../utils/history'
 import { toastr } from 'react-redux-toastr'
@@ -7,6 +7,7 @@ import { addUser } from './user'
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 export const UPDATE_USER = 'UPDATE_USER'
+export const RECEIVE_BOOKMARKS_DATA = 'RECEIVE_BOOKMARKS_DATA'
 
 function login(user) {
     return {
@@ -26,14 +27,33 @@ function updateUser(user) {
     }
 }
 
+function receiveBookmarksData(data) {
+    return {
+        type: RECEIVE_BOOKMARKS_DATA,
+        data,
+    }
+}
+
+export function handleReceiveBookmarksData() {
+    return (dispatch) => {
+        dispatch(showLoading())
+        fetchBookmarks()
+            .then((res) => {
+                dispatch(receiveBookmarksData(res.result))
+                dispatch(hideLoading())
+            }).catch((err) => {
+                console.error(err)
+                dispatch(hideLoading())
+            })
+    }
+}
 export function handleUpdateUser(userObj) {
     return (dispatch) => {
         dispatch(showLoading())
         postUser(userObj).then(() => {
             dispatch(updateUser(userObj))
             dispatch(hideLoading)
-            toastr.info('Updated', 'Your info has been updated')
-            history.push('/')
+            history.push('/choose-language-location')
         }).catch((e) => {
             console.error(e)
             dispatch(hideLoading())

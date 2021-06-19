@@ -22,7 +22,8 @@ ul{
 	src: url("./assets/fonts/Montserrat-SemiBold.ttf") format("truetype"),
 }
 body{
-    font-family: "Montserrat-Regular"
+    font-family: "Montserrat-Regular";
+    background-color: #fff;
 }
 .control-icons{
     color: $secondary;
@@ -79,13 +80,50 @@ p{
     border-bottom-right-radius:0rem !important; 
 
 }
+.menu-icons{
+    margin-left: 2rem;
+    color: #7B8794; 
+}
+.bottom-menu-icons-color{
+    color: #7B8794; 
 
+}
+.resend{
+    font-size: 0.875rem;
+}
+.otp-input{
+    text-align: center;
+}
+.lang-loc-topic-chipBtn{
+    border-radius: 5rem;
+    padding-left: 1.4rem;
+    padding-right: 1.8rem
+}
+.lan-abbreviation{
+    color: white !important;
+    font-size: 12px;
+    padding: 0.5rem;
+    margin-right: .4rem;
+}
+.btn-outline-primary:hover{
+    .lan-abbreviation{
+        background-color: white !important;
+        color: $primary !important;
+    }
+    svg{
+        color: $primary !important;
+    }
+
+}
 @include media-breakpoint-up(xs) {
     p{
         font-size: 0.8rem;
     }
     .meta{
         font-size: 0.6rem;
+    }
+    h5{
+        font-size: 0.9rem; 
     }
 
   }
@@ -97,7 +135,7 @@ p{
         font-size: 0.5rem;
     }
     .profile-meta{
-        font-size: 0.6rem; 
+        font-size: 0.8rem; 
         font-weight: bold;
     }
   }
@@ -118,7 +156,10 @@ p{
         font-size: 1.4rem;
     }
     .profile-meta{
-        font-size: 0.8rem; 
+        font-size: 1rem; 
         font-weight: bold;
+    }
+    h5{
+        font-size: 1.2rem; 
     }
   }

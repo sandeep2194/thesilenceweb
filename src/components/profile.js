@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import BackHeader from './backheader'
-import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import { handleReceiveNews } from '../actions/user'
 import UserPostList from './userPostList'
 import UserInfoProfile from './userInfoProfile'
@@ -14,7 +13,7 @@ class Profile extends Component {
             dispatch(handleReceiveNews(userId, pageNo, pageSize))
         }
     }
-    handleBottomScroll2 = () => {
+    handleBottomScrollNewsPost = () => {
         const { dispatch, pageNo, pageSize, userId } = this.props
         dispatch(handleReceiveNews(userId, pageNo, pageSize))
     }
@@ -22,15 +21,16 @@ class Profile extends Component {
         const { isCurrentUser, user } = this.props
         return (
             <Fragment>
-                <BackHeader pageName={user.name} />
+                <BackHeader pageName='PROFILE'>
+                    <Button variant='outline-primary' size='sm' className=' border-0 back-header-btn'>Edit</Button>
+                </BackHeader>
                 <Container>
                     <UserInfoProfile user={user} isCurrentUser={isCurrentUser} />
                     <Row className="justify-content-center" >
                         <Col lg={6} >
                             <Row>
                                 <Col>
-                                    <BottomScrollListener onBottom={this.handleBottomScroll2} />
-                                    <UserPostList user={user} isCurrentUser={isCurrentUser} />
+                                    <UserPostList user={user} isCurrentUser={isCurrentUser} scrollCb={this.handleBottomScrollNewsPost} />
                                 </Col>
                             </Row>
                         </Col>
@@ -53,7 +53,7 @@ function mapStateToProps({ authedUser, users }, props) {
     return {
         isCurrentUser,
         userId,
-        user,
+        user: isCurrentUser ? authedUser : user,
         pageSize: 10,
         pageNo: pageNo
     }

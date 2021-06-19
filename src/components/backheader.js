@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Container } from 'react-bootstrap';
+import { Navbar, Container, Col, Row } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons'
 import history from '../utils/history'
 
@@ -14,12 +14,15 @@ function BackHeader(props) {
                     <Navbar.Brand>
                         <ArrowLeft className='control-icons' onClick={back} />
                     </Navbar.Brand>
-                    <Navbar.Collapse className="justify-content-center">
-                        <span className="ml-n3 font-weight-bold">{props.pageName}</span>
+                    <Col>
+                        <h6 className='pt-2'>{props.pageName}</h6>
+                    </Col>
+                    <Navbar.Collapse className="justify-content-end">
+                        {props.children}
                     </Navbar.Collapse>
                 </Navbar>
             </Container>
-        </div>
+        </div >
     );
 }
 

@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, UPDATE_USER } from '../actions/authedUser'
+import { LOGIN, LOGOUT, UPDATE_USER, RECEIVE_BOOKMARKS_DATA } from '../actions/authedUser'
 
 export default function authedUser(state = {}, action) {
     let oldState = { ...state }
@@ -13,6 +13,11 @@ export default function authedUser(state = {}, action) {
             oldState.name = action.user.name
             oldState.email = action.user.email
             oldState.username = action.user.username
+            return {
+                ...oldState
+            }
+        case RECEIVE_BOOKMARKS_DATA:
+            oldState.bookmarksData = [...action.data]
             return {
                 ...oldState
             }

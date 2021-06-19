@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleToggleLike, handleToggleBookmark, handleToggleRetweet, handleToggleShare } from '../actions/news'
 import { Container, Row, Col } from 'react-bootstrap'
-import {
-    HandThumbsUp,
-    HandThumbsUpFill,
-    ArrowRepeat,
-    ChatRightFill,
-    Bookmark,
-    BookmarkFill,
-    Reply,
-    ReplyFill
-} from 'react-bootstrap-icons'
+import FeatherIcon from 'feather-icons-react';
 import { Link } from 'react-router-dom'
 
 class ReactionBar extends Component {
@@ -42,27 +33,26 @@ class ReactionBar extends Component {
             <Container className='ml-3 mb-4 pr-4'>
                 <Row>
                     <Col>
-                        {(likesArr.includes(authedUser._id)) ? <HandThumbsUpFill onClick={this.handleLike} className='reaction-icons-clicked' /> : <HandThumbsUp onClick={this.handleLike} className='reaction-icons-unClicked' />}
+                        <Row className='justify-content-start '>
+                            {(likesArr.includes(authedUser._id)) ? <FeatherIcon icon='thumbs-up' onClick={this.handleLike} className='reaction-icons-clicked ml-3 mr-3' /> : <FeatherIcon icon='thumbs-up' onClick={this.handleLike} className='reaction-icons-unClicked ml-3 mr-3' />}
+                            {(retweetsArr.includes(authedUser._id))
+                                ? <FeatherIcon icon='repeat' className='reaction-icons-clicked mr-3' onClick={this.handleRetweet} />
+                                : <FeatherIcon icon='repeat' className='reaction-icons-unClicked mr-3'
+                                    onClick={this.handleRetweet}
+                                />
+                            }
+                            <Link to={`/comment/${_id}`}> <FeatherIcon icon='message-circle' className='reaction-icons-unClicked mr-3' /></Link>
+                        </Row>
                     </Col>
                     <Col>
-                        {(retweetsArr.includes(authedUser._id))
-                            ? <ArrowRepeat className='reaction-icons-clicked' onClick={this.handleRetweet} />
-                            : <ArrowRepeat className='reaction-icons-unClicked'
-                                onClick={this.handleRetweet}
-                            />
-                        }
+                        <Row className='justify-content-end'>
+                            {(bookmarksArr.includes(authedUser._id)) ? <FeatherIcon icon='bookmark' className='reaction-icons-clicked ml-3' onClick={this.handleBookmark} /> : <FeatherIcon icon='bookmark' className='reaction-icons-unClicked ml-3' onClick={this.handleBookmark} />}
+                            {(sharesArr.includes(authedUser._id)) ? <FeatherIcon icon='share-2' className="reaction-icons-clicked ml-3 mr-5" onClick={this.handleShare} />
+                                : <FeatherIcon icon='share-2' className='reaction-icons-unClicked  ml-3 mr-5' onClick={this.handleShare} />
+                            }
+                        </Row>
                     </Col>
-                    <Col>
-                        <Link to={`/comment/${_id}`}> <ChatRightFill className='reaction-icons-unClicked' /></Link>
-                    </Col>
-                    <Col>
-                        {(bookmarksArr.includes(authedUser._id)) ? <BookmarkFill className='reaction-icons-clicked' onClick={this.handleBookmark} /> : <Bookmark className='reaction-icons-unClicked' onClick={this.handleBookmark} />}
-                    </Col>
-                    <Col>
-                        {(sharesArr.includes(authedUser._id)) ? <ReplyFill className="reaction-icons-clicked flip" onClick={this.handleShare} />
-                            : <Reply className='reaction-icons-unClicked flip' onClick={this.handleShare} />
-                        }
-                    </Col>
+
                 </Row>
             </Container>
         );

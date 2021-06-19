@@ -1,80 +1,111 @@
-import React, { Component, Fragment } from 'react';
-import BackHeader from '../components/backheader';
-import { Form, Container, Button, Row, Col } from 'react-bootstrap'
-import { handleVerifyOtp, } from '../actions/authedUser'
+import React, { Fragment } from 'react';
+import { Formik, useField, Form } from 'formik';
+import { Row, Col, Button, Form as FormB, Container } from 'react-bootstrap'
+import * as Yup from 'yup';
+import { handleVerifyOtp } from '../actions/authedUser'
 import { connect } from 'react-redux'
+import CloseHeader from './closeBtnHeader'
 
-class VerifyOtp extends Component {
-    state = {
-        otpValidated: false,
-        OTP: '',
-    }
-
-    updateOTP = (e) => {
-        e.preventDefault()
-        e.target.className += " is-invalid"
-        const input = e.target.value
-        const check = /^\d{4}$/.test(input)
-        this.setState(() => ({
-            OTP: input,
-        }))
-        if (check) {
-            this.setState(() => ({
-                otpValidated: true,
-            }))
-        } else {
-            this.setState(() => ({
-                otpValidated: false,
-            }))
-        }
-    }
-
-    handleVerifyOtp = e => {
-        e.preventDefault()
-        const { dispatch } = this.props
-        const { otpValidated, OTP } = this.state
-        const phoneNumber = this.props.location.state
-        if (otpValidated) {
-            dispatch(handleVerifyOtp(phoneNumber, OTP))
-        }
-    }
-
-
-    render() {
-        const {
-            otpValidated,
-            OTP,
-        } = this.state
+const VerifyOtp = (props) => {
+    const OtpInput = ({ label, ...props }) => {
+        const [field, meta] = useField(props);
         return (
-            <Fragment>
-                <BackHeader pageName='Verify OTP' />
-                <Container className='pt-5'>
-                    <Row className='justify-content-center'>
-                        <Col lg={3}></Col>
-                        <Col className='mx-3'>
-                            <Form onSubmit={this.handleVerifyOtp}>
-                                <Form.Group className="mb-3" controlId="otp">
-                                    <Form.Control type='text' placeholder='Enter OTP'
-                                        value={OTP}
-                                        onChange={this.updateOTP}
-                                        className={!otpValidated ? '' : 'is-valid'}
+            <Col>
+                <FormB.Control name="first" type="text" placeholder='0' {...field} {...props} className={meta.touched && meta.error ? 'is-invalid otp-input' : 'otp-input'} />
+                {meta.touched && meta.error ? (
+                    <div className="invalid-feedback">
+                        {meta.error}
+                    </div>
+                ) : null}
+            </Col>
+        );
+    }
+    const focusNext = (e) => {
+        if (e.target.value.length == e.target.maxLength) {
+            e.target.parentElement.nextSibling.getElementsByClassName("form-control")[0].focus()
+        }
+    }
+
+    const { dispatch } = props
+    const phoneNumber = props.location.state
+    return (
+        <Fragment>
+            <CloseHeader />
+            <Formik
+                initialValues={{ first: '', second: '', third: '', fourth: '', }}
+                validationSchema={Yup.object({
+                    first: Yup.string()
+                        .max(1, '')
+                        .required('Required'),
+                    second: Yup.string()
+                        .max(1, '')
+                        .required('Required'),
+                    third: Yup.string()
+                        .max(1, '')
+                        .required('Required'),
+                    fourth: Yup.string()
+                        .max(1, '')
+                        .required('Required'),
+                })}
+
+                onSubmit={(values, { setSubmitting }) => {
+                    dispatch(handleVerifyOtp(phoneNumber, Object.values(values).join('')))
+                    setSubmitting(false)
+                }}
+
+            >
+                <Container>
+                    <Row className='justify-content-center pt-5'>
+                        <Col lg={5} xs={10}>
+                            <Row >
+                                <Col className='mb-5'>
+                                    <Row className='justify-content-center'>
+                                        <Col>
+                                            <h3 className='font-weight-bold'>Welcome Login</h3>
+                                            <span className='my-2'>Enter the 4-digit code to login</span>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
+                            <Form>
+                                <Row className='mt-2'>
+                                    <OtpInput
+                                        name="first"
+                                        onKeyUp={focusNext}
+                                        maxLength='1'
                                     />
-                                </Form.Group>
-                                <Row className='justify-content-center'>
-                                    <Button variant="primary" type="submit"
-                                        size='md' className='btn-block mx-3 mt-1'
-                                    >
-                                        Login
-                                    </Button>
+                                    <OtpInput
+                                        name="second"
+                                        onKeyUp={focusNext}
+                                        maxLength='1'
+
+                                    />
+                                    <OtpInput
+                                        name="third"
+                                        onKeyUp={focusNext}
+                                        maxLength='1'
+
+                                    />
+                                    <OtpInput
+                                        name="fourth"
+
+                                    />
+                                </Row>
+                                <Row className='mt-4 mx-1'>
+                                    <Button type="submit" size='sm' className="btn-block" >Login</Button>
+                                </Row>
+                                <Row className='mt-4 mx-1 justify-content-center'>
+                                    <p className="resend pt-1">Didn’t receive the code?</p>
+                                    <button type="button" className="btn btn-link btn-sm pb-5">Resend</button>
                                 </Row>
                             </Form>
                         </Col>
-                        <Col lg={3}></Col>
                     </Row>
                 </Container>
-            </Fragment>
-        )
-    }
+
+            </Formik>
+        </Fragment >
+    )
 }
 
 export default connect()(VerifyOtp)

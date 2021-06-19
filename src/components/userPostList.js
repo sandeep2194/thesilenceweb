@@ -1,7 +1,7 @@
 import React from 'react'
 import SmallNewsListCard from './smallNewsListCard'
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
-import { Col, Row, Nav, Tab } from 'react-bootstrap'
+import { Col, Nav, Tab } from 'react-bootstrap'
 
 function userPostList(props) {
     const { user, isCurrentUser, scrollCb } = props

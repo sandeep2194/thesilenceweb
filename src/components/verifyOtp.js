@@ -21,7 +21,7 @@ const VerifyOtp = (props) => {
         );
     }
     const focusNext = (e) => {
-        if (e.target.value.length == e.target.maxLength) {
+        if (e.target.value.length === e.target.maxLength) {
             e.target.parentElement.nextSibling.getElementsByClassName("form-control")[0].focus()
         }
     }

@@ -17,8 +17,9 @@ const SmallNewsListCard = (props) => {
                 </Col>
                 <Col className='p-0 ml-4 mr-2 mt-2'>
                     <Link to={`/news/${item._id}`}>
-                        <h5 className='text-decoration-none'>{item.title}</h5>
+                        <h5>{item.title}</h5>
                     </Link>
+                    <p>{item.authorName}</p>
                 </Col>
 
                 {isCurrentUser &&

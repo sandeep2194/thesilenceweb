@@ -5,6 +5,7 @@ import BackHeader from './backheader'
 import { handleReceiveNews } from '../actions/user'
 import UserPostList from './userPostList'
 import UserInfoProfile from './userInfoProfile'
+import { Link } from 'react-router-dom'
 
 class Profile extends Component {
     componentDidMount() {
@@ -22,7 +23,12 @@ class Profile extends Component {
         return (
             <Fragment>
                 <BackHeader pageName='PROFILE'>
-                    <Button variant='outline-primary' size='sm' className=' border-0 back-header-btn'>Edit</Button>
+                    {
+                        isCurrentUser &&
+                        <Link to='/settings'>
+                            <Button variant='outline-primary' size='sm' className=' border-0 back-header-btn'>Edit</Button>
+                        </Link>
+                    }
                 </BackHeader>
                 <Container>
                     <UserInfoProfile user={user} isCurrentUser={isCurrentUser} />

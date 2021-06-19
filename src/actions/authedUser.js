@@ -111,6 +111,7 @@ export function handleLogout() {
         dispatch(showLoading())
         dispatch(logout())
         localStorage.removeItem('token');
+        history.push('/')
         dispatch(hideLoading())
         toastr.info(`you have logged out successfully`)
     }

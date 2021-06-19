@@ -20,7 +20,7 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['news']
+  blacklist: ['news, users']
 }
 const persistedReducer = persistReducer(persistConfig, reducer)
 const store = createStore(persistedReducer, composeEnhancers(

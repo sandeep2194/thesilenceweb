@@ -5,7 +5,8 @@ import FeatherIcon from 'feather-icons-react';
 
 function CloseHeader(props) {
     const close = () => {
-        history.push('/')
+        history.go(-1);
+
     }
     return (
         <div className="ml-n4 bg-white">

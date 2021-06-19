@@ -23,7 +23,7 @@ function userInfoProfile(props) {
                                     <p className='m-0' style={{ fontSize: '12px' }}>@{user.username}</p>
                                 </Col>
                                 <Col xs={4} lg={2}>
-                                    {isCurrentUser &&
+                                    {!isCurrentUser &&
                                         <Button size='sm' variant="outline-primary" className='mt-1'>
                                             Follow
                                         </Button>
@@ -56,7 +56,7 @@ function userInfoProfile(props) {
                             <Row className=''>
                                 <Col className='p-0'>
                                     <Row className='justify-content-center'>
-                                        <h4>{user.storiesCount ? user.storiesCount : "0"}</h4>
+                                        <h4>{user.news && user.news.length ? user.news.length : "0"}</h4>
 
                                     </Row>
                                     <Row className='justify-content-center'>
@@ -66,7 +66,7 @@ function userInfoProfile(props) {
                                 </Col>
                                 <Col>
                                     <Row className='justify-content-center'>
-                                        <h4>{user.followCount ? user.followCount : "0"}</h4>
+                                        <h4>{user.followers ? user.followers : "0"}</h4>
 
                                     </Row>
                                     <Row className='justify-content-center'>
@@ -76,7 +76,7 @@ function userInfoProfile(props) {
                                 </Col>
                                 <Col>
                                     <Row className='justify-content-center'>
-                                        <h4>{user.followingCount ? user.followingCount : '0'}</h4>
+                                        <h4>{user.following ? user.following : '0'}</h4>
 
                                     </Row>
                                     <Row className='justify-content-center'>

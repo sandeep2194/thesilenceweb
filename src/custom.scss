@@ -128,6 +128,7 @@ a {
     text-decoration: none !important;
     background-color: transparent;
 }
+
 @include media-breakpoint-up(xs) {
     p{
         font-size: 0.8rem;

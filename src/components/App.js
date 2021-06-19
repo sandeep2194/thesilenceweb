@@ -8,23 +8,8 @@ import { handleReceiveBookmarksData } from '../actions/authedUser'
 
 import LoadingBar from 'react-redux-loading'
 import ReduxToastr from 'react-redux-toastr'
-import NewsList from './newslist';
-import LogoHeader from './logoheader';
-import FourZeroFour from './404';
-import GettingStarted from './gettingStarted'
-import UploadProfilePic from './uploadProfilePic'
-import Search from './search'
-import SingleNews from './singleNews';
-import SendOtp from './sendOtp';
-import VerifyOtp from './verifyOtp';
-import Comment from './comment'
-import Profile from './profile'
-import VideoList from './videoList'
-import Bookmarks from './bookmarks'
-import AddPost from './addPost'
-import Notification from './notifications'
-import ChooseLangLoc from './chooseLangLoc'
-import ChooseTopic from './chooseTopic';
+
+import AllRoutes from './routes'
 
 class App extends Component {
   componentDidMount() {
@@ -48,85 +33,7 @@ class App extends Component {
       <Router history={history}>
         <Fragment>
           <LoadingBar style={{ backgroundColor: '#2F80ED', height: '5px' }} />
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/home" />
-            </Route>
-            <Route
-              path='/home'
-              render={() => (
-                this.props.loading === true ? null
-                  : <Fragment>
-                    <LogoHeader />
-                    <NewsList />
-                  </Fragment>
-              )}
-            />
-            <Route
-              path='/videos'
-              render={() => (
-                <Fragment>
-                  <LogoHeader />
-                  <VideoList />
-                </Fragment>
-              )}
-            />
-            <Route
-              path='/bookmarks'
-              render={() => (
-                <Bookmarks />
-              )}
-            />
-            <Route
-              path='/post'
-              render={() => (
-                <AddPost />
-              )}
-            />
-            <Route
-              path='/notifications'
-              render={() => (
-                <Notification />
-              )}
-            />
-            <Route
-              path='/send-otp'
-              render={() => (
-                <SendOtp />
-              )}
-            />
-            <Route
-              path='/verify'
-              component={VerifyOtp}
-            />
-            <Route
-              path='/getting-started'
-              component={GettingStarted}
-            />
-            <Route
-              path='/upload-profile-pic'
-              component={UploadProfilePic}
-            />
-            <Route
-              path='/search'
-              component={Search}
-            />
-            <Route
-              path='/news/:newsId'
-              component={SingleNews}
-            />
-            <Route
-              path='/comment/:itemId'
-              component={Comment}
-            />
-            <Route path='/profile/:userId'
-              component={Profile} />
-            <Route path='/choose-language-location'
-              component={ChooseLangLoc} />
-            <Route path='/choose-topics'
-              component={ChooseTopic} />
-            <Route component={FourZeroFour} />
-          </Switch>
+          <AllRoutes />
           <ReduxToastr
             timeOut={6000}
             newestOnTop={true}
@@ -142,9 +49,8 @@ class App extends Component {
     )
   }
 }
-function mapStateToProps({ news, authedUser }) {
+function mapStateToProps({ authedUser }) {
   return {
-    loading: news.length === 0,
     authedUser,
   }
 }

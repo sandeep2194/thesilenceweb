@@ -113,6 +113,7 @@ p{
     svg{
         color: $primary !important;
     }
+
 }
 @include media-breakpoint-up(xs) {
     p{
@@ -120,6 +121,9 @@ p{
     }
     .meta{
         font-size: 0.6rem;
+    }
+    h5{
+        font-size: 0.9rem; 
     }
 
   }
@@ -131,7 +135,7 @@ p{
         font-size: 0.5rem;
     }
     .profile-meta{
-        font-size: 0.6rem; 
+        font-size: 0.8rem; 
         font-weight: bold;
     }
   }
@@ -152,7 +156,10 @@ p{
         font-size: 1.4rem;
     }
     .profile-meta{
-        font-size: 0.8rem; 
+        font-size: 1rem; 
         font-weight: bold;
+    }
+    h5{
+        font-size: 1.2rem; 
     }
   }

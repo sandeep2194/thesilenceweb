@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useMemo, useEffect, useCallback } from 'react'
+import React, { Fragment, useState, useMemo, useCallback } from 'react'
 import LogoHeader from './logoheader'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
@@ -97,6 +97,9 @@ const AddPost = (props) => {
                                             event.preventDefault()
                                             CustomEditor.toggleBoldMark(editor)
                                             break
+                                        }
+                                        default: {
+                                            event.preventDefault()
                                         }
                                     }
                                 }}

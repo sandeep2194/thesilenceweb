@@ -29,7 +29,7 @@ class Profile extends Component {
                     <Row className="justify-content-center" >
                         <Col lg={6} >
                             <Row>
-                                <Col>
+                                <Col className='mt-3'>
                                     <UserPostList user={user} isCurrentUser={isCurrentUser} scrollCb={this.handleBottomScrollNewsPost} />
                                 </Col>
                             </Row>

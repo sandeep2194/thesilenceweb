@@ -115,6 +115,19 @@ p{
     }
 
 }
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #212529;
+    background-color: #ffffff;
+    border-bottom: solid black;
+    border-radius: 0;
+    /* border: solid; */
+   
+}
+a {
+    color: #323F4B;
+    text-decoration: none !important;
+    background-color: transparent;
+}
 @include media-breakpoint-up(xs) {
     p{
         font-size: 0.8rem;

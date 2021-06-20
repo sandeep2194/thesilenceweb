@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import BackHeader from '../backheader'
-import { Row, Col, Container } from 'react-bootstrap'
+import { Row, Col, Container, Button } from 'react-bootstrap'
 
 class Stats extends Component {
     state = {
@@ -71,7 +71,13 @@ class Stats extends Component {
                                 this.statsTile(option, index)
                             ))}
                         </Col>
+                        <Col lg={6} className='mx-3 mt-5 pt-4'>
+                            <Button type='submit' size='md' className='btn-block  ' >
+                                TRANSFER TO BANK
+                            </Button>
+                        </Col>
                     </Row>
+
                 </Container>
             </Fragment>
         )

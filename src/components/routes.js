@@ -20,8 +20,11 @@ import ChooseLangLoc from './chooseLangLoc'
 import ChooseTopic from './chooseTopic';
 import Settings from './settings'
 import Account from './settings/account';
+import Stats from './settings/statsAndReward'
+import SupportForm from './settings/support';
 
 const AllRoutes = () => {
+    const token = localStorage.getItem('token')
     return (
         <Switch>
             <Route exact path="/">
@@ -99,7 +102,12 @@ const AllRoutes = () => {
                 component={ChooseLangLoc} />
             <Route path='/choose-topics'
                 component={ChooseTopic} />
-            <Route exact path='/settings' component={Settings} />
+            <Route exact path='/settings'
+                render={() => (
+                    token ? <Settings /> :
+                        <Redirect to="/send-otp" />
+                )}
+            />
             <Route exact path='/settings/Account' component={Account} />
             <Route path='/settings/ChooseLanguage'>
                 <Redirect to="/choose-language-location" />
@@ -113,6 +121,8 @@ const AllRoutes = () => {
             <Route path='/settings/AddBankDetails'>
                 <Redirect to="/settings/Account" />
             </Route>
+            <Route path='/stats' component={Stats} />
+            <Route path='/support' component={SupportForm} />
             <Route component={FourZeroFour} />
         </Switch>
     )

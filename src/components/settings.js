@@ -45,7 +45,9 @@ class Settings extends Component {
                                     <h6>Stats & Payments</h6>
                                 </Col>
                                 <Col xs={1}>
-                                    <FeatherIcon icon='chevron-right' size='18' color='#7B8794' />
+                                    <Link to={`/stats`}>
+                                        <FeatherIcon icon='chevron-right' size='18' color='#7B8794' />
+                                    </Link>
                                 </Col>
                             </Row>
                             <Row className='border-bottom pt-5 justify-content-start'>
@@ -53,7 +55,7 @@ class Settings extends Component {
                                     <h6 className='text-primary'>Support</h6>
                                 </Col>
                                 <Col xs={1}>
-                                    <Link to={`/settings/support`}>
+                                    <Link to={`/support`}>
                                         <FeatherIcon icon='chevron-right' size='18' color='#7B8794' />
                                     </Link>
 

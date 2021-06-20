@@ -10,7 +10,7 @@ import BottomNav from './bottomNav'
 function LogoHeader(props) {
     const { isLoggedIn, userId, firstTimeUser, profilePic } = props
     let to = '/send-otp';
-    if (firstTimeUser) {
+    if (isLoggedIn && firstTimeUser) {
         to = '/getting-started'
     } else if (isLoggedIn && !firstTimeUser) {
         to = `/profile/${userId}`

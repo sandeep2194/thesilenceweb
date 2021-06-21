@@ -50,9 +50,7 @@ const AllRoutes = () => {
             />
             <Route
                 path='/bookmarks'
-                render={() => (
-                    <Bookmarks />
-                )}
+                component={Bookmarks}
             />
             <Route
                 path='/post'

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Container, Card, Row, Button, Col } from 'react-bootstrap'
 import { TrashFill } from 'react-bootstrap-icons'
-
+import BookmarksCard from './bookmarksCard'
 class Bookmarks extends Component {
 
     render() {
@@ -13,24 +13,14 @@ class Bookmarks extends Component {
             <Fragment>
                 {!isLoggedIn && <Redirect to="/send-otp" />}
                 <LogoHeader />
-                <Container>
+                <Container className='bg-light'>
                     <Row className='justify-content-center'>
-                        <Col lg={6}>
+                        <Col lg={6} className='mt-3'>
                             <ul>
                                 {bookmarksData.map((bookmark, index) => (
-                                    <li key={index}>                <Card className='mt-3'>
-                                        <Card.Img src={bookmark.imageUrl} />
-                                        <Card.Body className='mb-2'>
-                                            <Card.Title className='mb-0'>{bookmark.title}</Card.Title>
-
-                                        </Card.Body>
-                                        <Row className='justify-content-start mx-3 mb-4'>
-                                            <Button type='button' size='sm' variant='outline-secondary'>
-                                                <TrashFill size={16} />
-                                                Delete
-                                            </Button>
-                                        </Row>
-                                    </Card></li>
+                                    <li key={index}>
+                                        <BookmarksCard item={bookmark} />
+                                    </li>
                                 ))}
                             </ul>
                         </Col>
@@ -41,7 +31,7 @@ class Bookmarks extends Component {
     }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser }, props) {
     const token = localStorage.getItem('token')
     const bookmarksData = authedUser.bookmarksData
     return {

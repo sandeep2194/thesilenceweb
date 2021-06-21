@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
 
 import ReactionBar from './reactionbar.js';
+
 import CardImage from './cardimage';
 import CardContent from './cardcontent';
 import CardMetaInfo from './cardmetainfo';

@@ -5,6 +5,7 @@ import history from '../utils/history'
 const authCheck = (store) => (next) => (action) => {
     const token = localStorage.getItem('token')
     if (action.type === TOGGLE_BOOKMARK || action.type === TOGGLE_LIKE || action.type === TOGGLE_SHARE || action.type === TOGGLE_RETWEET || action.type === ADD_COMMENT || action.type === UPDATE_USER) {
+
         if (token) {
             return next(action)
         } else {

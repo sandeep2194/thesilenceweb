@@ -2,8 +2,7 @@ import React, { Component, Fragment } from 'react'
 import LogoHeader from './logoheader'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { Container, Card, Row, Button, Col } from 'react-bootstrap'
-import { TrashFill } from 'react-bootstrap-icons'
+import { Container, Row, Col } from 'react-bootstrap'
 import BookmarksCard from './bookmarksCard'
 class Bookmarks extends Component {
 

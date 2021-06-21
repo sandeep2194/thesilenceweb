@@ -17,37 +17,29 @@ export async function fetchNews(pageNo, pageSize) {
     }
 }
 export async function fetchNewsByAuthor(id, pageNo, pageSize) {
-    try {
-        const token = localStorage.getItem('token')
-        const url = `${baseUrl}/news/author/${id}?pageNo=${pageNo}&pageSize=${pageSize}`
-        const res = await axios({
-            method: 'GET',
-            url: url,
-            headers: {
-                'Authorization': 'Bearer ' + token,
-            }
-        })
-        return res.data
-    } catch (error) {
-        console.error(error)
-    }
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/news/author/${id}?pageNo=${pageNo}&pageSize=${pageSize}`
+    const res = await axios({
+        method: 'GET',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    })
+    return res.data
 }
 
 export async function fetchBookmarks() {
-    try {
-        const token = localStorage.getItem('token')
-        const url = `${baseUrl}/bookmarks`
-        const res = await axios({
-            method: 'GET',
-            url: url,
-            headers: {
-                'Authorization': 'Bearer ' + token,
-            }
-        })
-        return res.data
-    } catch (error) {
-        console.error(error)
-    }
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/bookmarks`
+    const res = await axios({
+        method: 'GET',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    })
+    return res
 }
 
 export async function getOtp(phoneNumber) {

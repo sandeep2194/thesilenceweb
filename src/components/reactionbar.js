@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { handleToggleLike, handleToggleBookmark, handleToggleRetweet, handleToggleShare } from '../actions/news'
 import { Container, Row, Col } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
-import { Link } from 'react-router-dom'
+import history from '../utils/history';
 
 class ReactionBar extends Component {
     handleLike = (e) => {
@@ -42,7 +42,7 @@ class ReactionBar extends Component {
                                     onClick={this.handleRetweet}
                                 />
                             }
-                            <Link to={`/comment/${_id}`}> <FeatherIcon size='16' icon='message-circle' className='reaction-icons-unClicked mr-3' /></Link>
+                            <FeatherIcon size='16' icon='message-circle' className='reaction-icons-unClicked mr-3' onClick={() => history.push(`/comment/${_id}`)} />
                         </Row>
                     </Col>
                     <Col>

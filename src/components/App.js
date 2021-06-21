@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Router, } from 'react-router-dom';
 import history from '../utils/history'
 import { handleGetNews } from '../actions/news'
 import LogRocket from 'logrocket';

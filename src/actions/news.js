@@ -1,8 +1,7 @@
 import { fetchNews, interaction } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { handleReceiveBookmarksData } from './authedUser'
-import history from '../utils/history'
-import { toastr } from 'react-redux-toastr'
+import { CheckError } from '../utils/helper'
 
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
@@ -68,10 +67,7 @@ export function handleAddComment(id, content) {
             dispatch(hideLoading())
             dispatch(addComment(id, authedUser._id, content))
             console.warn(e)
-            if (e.message.includes('403')) {
-                history.push('/send-otp')
-                toastr.info('Please login again - Session Expired!')
-            }
+            CheckError(e)
         })
     }
 }
@@ -87,10 +83,8 @@ export function handleToggleShare(id) {
             dispatch(hideLoading())
             dispatch(toggleShare(id, authedUser._id))
             console.warn(e)
-            if (e.message.includes('403')) {
-                history.push('/send-otp')
-                toastr.info('Please login again - Session Expired!')
-            }
+
+            CheckError(e)
         })
     }
 }
@@ -106,10 +100,8 @@ export function handleToggleRetweet(id) {
             dispatch(hideLoading())
             dispatch(toggleRetweet(id, authedUser._id))
             console.warn(e)
-            if (e.message.includes('403')) {
-                history.push('/send-otp')
-                toastr.info('Please login again - Session Expired!')
-            }
+
+            CheckError(e)
         })
     }
 }
@@ -126,10 +118,8 @@ export function handleToggleBookmark(id) {
             dispatch(hideLoading())
             dispatch(toggleBookmark(id, authedUser._id))
             console.warn(e)
-            if (e.message.includes('403')) {
-                history.push('/send-otp')
-                toastr.info('Please login again - Session Expired!')
-            }
+
+            CheckError(e)
         })
 
     }
@@ -145,10 +135,8 @@ export function handleToggleLike(id) {
         }).catch((e) => {
             dispatch(hideLoading())
             dispatch(toggleLike(id, authedUser._id))
-            if (e.message.includes('403')) {
-                history.push('/send-otp')
-                toastr.info('Please login again - Session Expired!')
-            }
+
+            CheckError(e)
         })
 
     }

@@ -3,6 +3,7 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 import history from '../utils/history'
 import { toastr } from 'react-redux-toastr'
 import { addUser } from './user'
+import { CheckError } from '../utils/helper'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
@@ -39,11 +40,13 @@ export function handleReceiveBookmarksData() {
         dispatch(showLoading())
         fetchBookmarks()
             .then((res) => {
-                dispatch(receiveBookmarksData(res.result))
+                dispatch(receiveBookmarksData(res.data.result))
                 dispatch(hideLoading())
             }).catch((err) => {
                 console.error(err)
                 dispatch(hideLoading())
+                console.log(err)
+                CheckError(err)
             })
     }
 }
@@ -57,6 +60,8 @@ export function handleUpdateUser(userObj) {
         }).catch((e) => {
             console.error(e)
             dispatch(hideLoading())
+
+            CheckError(e)
         })
     }
 }

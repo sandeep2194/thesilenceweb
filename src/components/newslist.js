@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import NewListItem from './newslistitem.js';
 import { connect } from 'react-redux'
 import { handleGetNews } from '../actions/news'
-import { Container, Col } from 'react-bootstrap'
+import { Container, Col, } from 'react-bootstrap'
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
+import NewsCardHome2 from './newsCardItemHome2'
 
 class NewsList extends Component {
 
@@ -13,22 +13,19 @@ class NewsList extends Component {
     }
     render() {
         return (
-            <Container className='mt-2 px-0'>
+            <Container className='mt-2 '>
                 <BottomScrollListener onBottom={this.handleBottomScroll} />
                 <Col lg={6} className='px-0'>
                     <ul>
-                        {Object.keys(this.props.news).map((id) =>
+                        {Object.values(this.props.news).map((item, index) =>
                         (<li
-                            key={id}
+                            key={item._id}
                         >
-                            <NewListItem
-                                id={id}
-                            />
+                            <NewsCardHome2 item={item} />
                         </li>)
                         )}
                     </ul>
                 </Col>
-
             </Container>
         )
 

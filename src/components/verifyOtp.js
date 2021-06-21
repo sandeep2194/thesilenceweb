@@ -1,17 +1,34 @@
-import React, { Fragment } from 'react';
-import { Formik, useField, Form } from 'formik';
+import React, { Fragment, useEffect } from 'react';
+import { Formik, useField, Form, useFormikContext } from 'formik';
 import { Row, Col, Button, Form as FormB, Container } from 'react-bootstrap'
 import * as Yup from 'yup';
 import { handleVerifyOtp } from '../actions/authedUser'
 import { connect } from 'react-redux'
 import CloseHeader from './closeBtnHeader'
-
+import { handleGetOtp } from '../actions/authedUser'
+import { toastr } from 'react-redux-toastr'
 const VerifyOtp = (props) => {
+
+    useEffect(() => {
+        // Update the document title using the browser API
+        const el = document.getElementById('first')
+        el.focus()
+    }, []);
     const OtpInput = ({ label, ...props }) => {
         const [field, meta] = useField(props);
+        const { values, submitForm } = useFormikContext()
         return (
             <Col>
-                <FormB.Control name="first" type="text" placeholder='0' {...field} {...props} className={meta.touched && meta.error ? 'is-invalid otp-input' : 'otp-input'} />
+                <FormB.Control name="first" type="text" placeholder='' {...field} {...props} className={meta.touched && meta.error ? 'is-invalid otp-input' : 'otp-input'}
+                    onKeyUp={(e) => {
+                        if (values.fourth !== 1) {
+                            focusNext(e)
+                        }
+                        if (values.fourth.length === 1) {
+                            submitForm()
+                        }
+                    }}
+                />
                 {meta.touched && meta.error ? (
                     <div className="invalid-feedback">
                         {meta.error}
@@ -25,14 +42,15 @@ const VerifyOtp = (props) => {
             e.target.parentElement.nextSibling.getElementsByClassName("form-control")[0].focus()
         }
     }
-
     const { dispatch } = props
     const phoneNumber = props.location.state
+
+
     return (
         <Fragment>
             <CloseHeader />
             <Formik
-                initialValues={{ first: '', second: '', third: '', fourth: '', }}
+                initialValues={{ first: '', second: '', third: '', fourth: '' }}
                 validationSchema={Yup.object({
                     first: Yup.string()
                         .max(1, '')
@@ -71,32 +89,34 @@ const VerifyOtp = (props) => {
                                 <Row className='mt-2'>
                                     <OtpInput
                                         name="first"
-                                        onKeyUp={focusNext}
                                         maxLength='1'
+                                        id='first'
                                     />
                                     <OtpInput
                                         name="second"
-                                        onKeyUp={focusNext}
                                         maxLength='1'
 
                                     />
                                     <OtpInput
                                         name="third"
-                                        onKeyUp={focusNext}
                                         maxLength='1'
 
                                     />
                                     <OtpInput
                                         name="fourth"
-
                                     />
                                 </Row>
                                 <Row className='mt-4 mx-1'>
-                                    <Button type="submit" size='sm' className="btn-block" >Login</Button>
+                                    <Button size='sm' className="btn-block" >Login</Button>
                                 </Row>
                                 <Row className='mt-4 mx-1 justify-content-center'>
                                     <p className="resend pt-1">Didn’t receive the code?</p>
-                                    <button type="button" className="btn btn-link btn-sm pb-5">Resend</button>
+                                    <button type="button" className="btn btn-link btn-sm "
+                                        onClick={() => {
+                                            dispatch(handleGetOtp(phoneNumber))
+                                            toastr.info('Otp resent')
+                                        }}
+                                    >Resend</button>
                                 </Row>
                             </Form>
                         </Col>

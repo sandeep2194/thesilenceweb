@@ -67,7 +67,7 @@ const AddPost = (props) => {
     return (
         <Fragment>
             {!isLoggedIn && <Redirect to="/send-otp" />}
-            <LogoHeader />
+            <LogoHeader pageName='Add Post' />
             <Container>
                 <Row className='justify-content-center mt-5'>
                     <Col>

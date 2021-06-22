@@ -22,6 +22,7 @@ import Settings from './settings'
 import Account from './settings/account';
 import Stats from './settings/statsAndReward'
 import SupportForm from './settings/support';
+import VideoCard1 from './videos/videoCard1'
 
 const AllRoutes = () => {
     const token = localStorage.getItem('token')
@@ -43,8 +44,8 @@ const AllRoutes = () => {
                 path='/videos'
                 render={() => (
                     <Fragment>
-                        <LogoHeader />
-                        <VideoList />
+                        <LogoHeader pageName='Videos' />
+                        <VideoCard1 />
                     </Fragment>
                 )}
             />

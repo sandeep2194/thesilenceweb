@@ -11,7 +11,7 @@ class Bookmarks extends Component {
         return (
             <Fragment>
                 {!isLoggedIn && <Redirect to="/send-otp" />}
-                <LogoHeader />
+                <LogoHeader pageName='Bookmarks' />
                 <Container className='bg-light'>
                     <Row className='justify-content-center'>
                         <Col lg={6} className='mt-3'>

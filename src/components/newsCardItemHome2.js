@@ -22,7 +22,7 @@ class NewsCardHome2 extends Component {
                         <Col className='mt-2'>
                             <h5 className='font-weight-bold'>{title}</h5>
                         </Col>
-                        <Col xs={2} className='mr-2'>
+                        <Col xs={3} lg={2} className='mr-2'>
                             <Row className='justify-content-end' >
                                 <Image src={imageUrl} height={75} width={75} className='rounded' />
                             </Row>

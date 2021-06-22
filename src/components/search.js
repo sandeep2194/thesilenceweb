@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import BackHeader from './backheader'
 import { Container, Row, Col, Form, InputGroup } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
+import LogoHeader from './logoheader';
 
 class Search extends Component {
     state = {
@@ -14,7 +14,7 @@ class Search extends Component {
     render() {
         return (
             <Fragment>
-                <BackHeader pageName='Search' />
+                <LogoHeader pageName='Search' />
                 <Container className='pt-5'>
                     <Row className='justify-content-center'>
                         <Col lg={6} className='mx-3'>

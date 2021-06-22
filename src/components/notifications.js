@@ -13,7 +13,7 @@ class Notification extends Component {
 
             <Fragment>
                 {!isLoggedIn && <Redirect to="/send-otp" />}
-                <LogoHeader />
+                <LogoHeader pageName='Notifications' />
                 <Container>
                     <Row className='justify-content-center mt-4'>
                         <Col lg={6}>

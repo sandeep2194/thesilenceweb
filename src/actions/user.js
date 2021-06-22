@@ -26,7 +26,9 @@ export function handleReceiveNews(authorId, pageNo, pageSize) {
         dispatch(showLoading())
         fetchNewsByAuthor(authorId, pageNo, pageSize)
             .then((res) => {
-                dispatch(receiveNews(authorId, res.data.result))
+                if (res.result.length !== 0) {
+                    dispatch(receiveNews(authorId, res.data.result))
+                }
                 dispatch(hideLoading())
             }).catch((err) => {
                 console.error(err)

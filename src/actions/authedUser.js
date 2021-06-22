@@ -102,7 +102,7 @@ export function handleVerifyOtp(phoneNumber, OTP) {
                     history.push('/')
                 }
                 dispatch(hideLoading())
-
+                dispatch(handleReceiveBookmarksData())
                 toastr.info(`Login Success`)
             }).catch((err) => {
                 toastr.error('Error verifying OTP', 'please try again later.')

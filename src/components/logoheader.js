@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import logo from '../assets/images/logo.svg';
+import slogo from '../assets/images/slogo.svg';
+
 import { NavLink, Link } from 'react-router-dom';
-import { Navbar, Image, NavItem, Nav } from 'react-bootstrap';
+import { Navbar, Image, NavItem, Nav, Row } from 'react-bootstrap';
 import FeatherIcon from 'feather-icons-react';
 import { Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
@@ -15,15 +17,25 @@ function LogoHeader(props) {
     } else if (isLoggedIn && !firstTimeUser) {
         to = `/profile/${userId}`
     }
+    const { pageName } = props
     return (
         <Fragment>
             <div className="border-bottom border-light sticky-top bg-white shadow-sm">
                 <Container>
                     <Navbar bg="none pl-0" >
                         <Navbar.Brand>
-                            <Link to="/">
-                                <Image src={logo} alt="Logo" />
-                            </Link>
+                            {pageName ?
+                                <Row>
+                                    <Link to="/">
+                                        <Image src={slogo} alt="Logo" />
+                                    </Link>
+                                    <h6 className='pt-2'>{pageName}</h6>
+                                </Row>
+                                :
+                                <Link to="/">
+                                    <Image src={logo} alt="Logo" />
+                                </Link>
+                            }
                         </Navbar.Brand>
 
                         <Navbar.Collapse className="justify-content-end">

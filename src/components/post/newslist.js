@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { handleGetNews } from '../actions/news'
+import { handleGetNews } from '../../actions/news'
 import { Container, Col, } from 'react-bootstrap'
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import NewsCardHome2 from './newsCardItemHome2'

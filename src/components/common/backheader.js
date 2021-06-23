@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Container, Col } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons'
-import history from '../utils/history'
+import history from '../../utils/history'
 
 function BackHeader(props) {
     const back = () => {

@@ -1,9 +1,9 @@
 import React, { Fragment, Component } from 'react'
-import BackHeader from './backheader'
+import BackHeader from '../common/backheader'
 import { Container, Row, Col } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
 import { Link } from 'react-router-dom'
-import { handleLogout } from '../actions/authedUser'
+import { handleLogout } from '../../actions/authedUser'
 import { connect } from 'react-redux';
 
 class Settings extends Component {

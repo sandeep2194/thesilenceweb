@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import BackHeader from '../backheader'
+import BackHeader from '../common/backheader'
 import { Row, Col, Container, Button } from 'react-bootstrap'
 
 class Stats extends Component {

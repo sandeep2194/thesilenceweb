@@ -2,10 +2,10 @@ import React, { Fragment, useEffect } from 'react';
 import { Formik, useField, Form, useFormikContext } from 'formik';
 import { Row, Col, Button, Form as FormB, Container } from 'react-bootstrap'
 import * as Yup from 'yup';
-import { handleVerifyOtp } from '../actions/authedUser'
+import { handleVerifyOtp } from '../../actions/authedUser'
 import { connect } from 'react-redux'
-import CloseHeader from './closeBtnHeader'
-import { handleGetOtp } from '../actions/authedUser'
+import CloseHeader from '../common/closeBtnHeader'
+import { handleGetOtp } from '../../actions/authedUser'
 import { toastr } from 'react-redux-toastr'
 const VerifyOtp = (props) => {
 

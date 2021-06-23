@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import logo from '../assets/images/logo.svg';
-import slogo from '../assets/images/slogo.svg';
+import logo from '../../assets/images/logo.svg';
+import slogo from '../../assets/images/slogo.svg';
 
 import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Image, NavItem, Nav, Row } from 'react-bootstrap';

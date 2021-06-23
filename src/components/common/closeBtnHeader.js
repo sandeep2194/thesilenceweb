@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Container } from 'react-bootstrap';
-import history from '../utils/history'
+import history from '../../utils/history'
 import FeatherIcon from 'feather-icons-react';
 
 function CloseHeader(props) {

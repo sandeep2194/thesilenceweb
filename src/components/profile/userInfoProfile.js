@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Row, Col, Image, Button } from 'react-bootstrap'
 import moment from 'moment';
-import defaultUserPic from '../assets/images/user.svg';
+import defaultUserPic from '../../assets/images/user.svg';
 import FeatherIcon from 'feather-icons-react';
 
 

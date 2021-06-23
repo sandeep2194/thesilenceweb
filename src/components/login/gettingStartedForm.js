@@ -2,8 +2,8 @@ import React from 'react';
 import { Formik, useField, Form } from 'formik';
 import { Row, Col, Button, Form as FormB } from 'react-bootstrap'
 import * as Yup from 'yup';
-import { userNameValidation } from '../utils/api'
-import { handleUpdateUser } from '../actions/authedUser'
+import { userNameValidation } from '../../utils/api'
+import { handleUpdateUser } from '../../actions/authedUser'
 import { connect } from 'react-redux'
 
 const GettingStartedForm = (props) => {

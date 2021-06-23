@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import LogoHeader from './logoheader'
+import LogoHeader from '../common/logoheader'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
-import BookmarksCard from './bookmarksCard'
+import BookmarksCard from '../common/bookmarksCard'
 class Bookmarks extends Component {
 
     render() {

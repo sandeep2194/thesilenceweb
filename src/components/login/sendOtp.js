@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import CloseHeader from './closeBtnHeader'
+import CloseHeader from '../common/closeBtnHeader'
 import { Form, Container, Button, Row, Col } from 'react-bootstrap'
-import { handleGetOtp } from '../actions/authedUser'
+import { handleGetOtp } from '../../actions/authedUser'
 import { connect } from 'react-redux'
 
 class SendOtp extends Component {

@@ -1,8 +1,8 @@
 import React, { Fragment, Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import CloseHeader from './closeBtnHeader'
 import FeatherIcon from 'feather-icons-react';
 import ChooseLocation from './chooseLocation'
+import CloseHeader from '../common/closeBtnHeader'
 
 class ChooseLangLoc extends Component {
     state = {

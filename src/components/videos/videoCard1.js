@@ -1,9 +1,9 @@
 import React, { Fragment, useRef } from 'react';
-import { Row, Col, Container } from 'react-bootstrap'
+import { Row, Col, } from 'react-bootstrap'
 import ReactPlayer from 'react-player/youtube'
 import { Link } from 'react-router-dom'
 import TimeAgo from 'timeago-react';
-import ReactionBar from '../reactionbar'
+import ReactionBar from '../common/reactionbar'
 
 const VideoCard1 = (props) => {
 
@@ -57,7 +57,7 @@ const VideoCard1 = (props) => {
     }
     const player = useRef(null);
 
-    const { title, imageUrl, authorName, shares, comments, publishedAt, synopsis, authorId, _id } = testItem
+    const { title, authorName, shares, comments, publishedAt, authorId, _id } = testItem
     let url = "https://www.youtube.com/watch?v=P6dvVp3Wwso"
     return (
         <Fragment>

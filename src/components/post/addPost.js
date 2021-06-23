@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useMemo, useCallback } from 'react'
-import LogoHeader from './logoheader'
+import LogoHeader from '../common/logoheader'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Container, Col, Row } from 'react-bootstrap'

@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
-import CloseHeader from './closeBtnHeader'
+import CloseHeader from '../common/closeBtnHeader'
 
 class ChooseTopic extends Component {
     state = {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleToggleLike, handleToggleBookmark, handleToggleRetweet, handleToggleShare } from '../actions/news'
+import { handleToggleLike, handleToggleBookmark, handleToggleRetweet, handleToggleShare } from '../../actions/news'
 import { Container, Row, Col } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
-import history from '../utils/history';
+import history from '../../utils/history';
 
 class ReactionBar extends Component {
     handleLike = (e) => {

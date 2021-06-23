@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Avatar from 'react-avatar-edit'
 import { toastr } from 'react-redux-toastr'
 import { connect } from 'react-redux'
-import BackHeader from './backheader'
+import BackHeader from '../common/backheader'
 import { Container, Row, Button, Col } from 'react-bootstrap'
 import { PersonBoundingBox } from 'react-bootstrap-icons'
 class UploadProfilePic extends Component {

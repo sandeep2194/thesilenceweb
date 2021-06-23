@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { handleAddComment } from '../actions/news';
-import BackHeader from './backheader'
+import { handleAddComment } from '../../actions/news';
+import BackHeader from '../common/backheader'
 import { Container, Row, Button, Form, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import CommentTile from './commentListTile'
+import CommentTile from '../common/commentListTile'
 import { string } from 'yup';
 import { toastr } from 'react-redux-toastr'
 
@@ -52,7 +52,7 @@ class Comment extends Component {
                                 />
                                 <Button type='submit' size='sm' className='btn-block mt-3' >
                                     Comment
-                            </Button>
+                                </Button>
                             </Form>
                             <Row className='mt-3'>
                                 <Col>

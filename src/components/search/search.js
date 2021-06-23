@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Container, Row, Col, Form, InputGroup } from 'react-bootstrap'
 import { Search as SearchIcon } from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
-import LogoHeader from './logoheader';
+import LogoHeader from '../common/logoheader';
 
 class Search extends Component {
     state = {

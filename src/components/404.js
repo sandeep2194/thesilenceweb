@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import BackHeader from './backheader'
+import BackHeader from './common/backheader'
 
 class FourZeroFour extends Component {
     state = {}

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import NotificationItem from './notificationItem'
-import LogoHeader from './logoheader'
+import LogoHeader from '../common/logoheader'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'

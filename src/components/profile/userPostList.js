@@ -1,5 +1,5 @@
 import React from 'react'
-import SmallNewsListCard from './smallNewsListCard'
+import SmallNewsListCard from '../common/smallNewsListCard'
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import { Col, Nav, Tab } from 'react-bootstrap'
 

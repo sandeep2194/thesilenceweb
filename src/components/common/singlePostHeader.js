@@ -1,9 +1,10 @@
 import React from 'react';
-import { Navbar, Container, Col } from 'react-bootstrap';
-import history from '../utils/history'
+import { Navbar, Container, Row } from 'react-bootstrap';
+import history from '../../utils/history'
 import FeatherIcon from 'feather-icons-react';
+import ReactionBar from './reactionbar'
 
-function BackHeader(props) {
+function SinglePostHeader(props) {
     const back = () => {
         history.goBack()
     }
@@ -12,13 +13,12 @@ function BackHeader(props) {
             <Container>
                 <Navbar bg="none">
                     <Navbar.Brand>
-                        <FeatherIcon icon='chevron-down' size={16} />
+                        <FeatherIcon icon='chevron-left' size={22} onClick={back} />
                     </Navbar.Brand>
-                    <Col>
-                        <h6 className='pt-2'>{props.pageName}</h6>
-                    </Col>
                     <Navbar.Collapse className="justify-content-end">
-                        {props.children}
+                        <Row className="justify-content-end mt-3">
+                            <ReactionBar id={props.id} />
+                        </Row>
                     </Navbar.Collapse>
                 </Navbar>
             </Container>
@@ -28,6 +28,6 @@ function BackHeader(props) {
 
 
 
-export default BackHeader
+export default SinglePostHeader
 
 

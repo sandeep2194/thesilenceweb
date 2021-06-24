@@ -128,8 +128,14 @@ a {
     text-decoration: none !important;
     background-color: transparent;
 }
-.ytp-gradient-top{
-    display: none,
+.hide{
+    display: none
+}
+.show{
+    display: block
+}
+.pointer{
+ cursor:pointer
 }
 @include media-breakpoint-up(xs) {
     p{

@@ -4,10 +4,11 @@ import { Image, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import TimeAgo from 'timeago-react'
+import ScrollMemory from '../common/scrollMemory'
 
 const SingleNews = (props) => {
     const { newsId } = props.match.params
-    const { imageUrl, authorName, shares, comments, publishedAt, authorId, title, content } = props.item
+    const { imageUrl, authorName, shares, comments, publishedAt, authorId, title, content, _id } = props.item
     return (
         <Fragment>
             <SinglePostHeader id={newsId} />
@@ -48,6 +49,7 @@ const SingleNews = (props) => {
                                     </li>
                                 ))
                             }
+                            <ScrollMemory name={_id} />
                         </ul>
                     </Row>
                     <Row>

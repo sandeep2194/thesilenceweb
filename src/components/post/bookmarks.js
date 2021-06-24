@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 import BookmarksCard from '../common/bookmarksCard'
+import ScrollMemory from '../common/scrollMemory'
 
 class Bookmarks extends Component {
     render() {
@@ -21,6 +22,7 @@ class Bookmarks extends Component {
                                         <BookmarksCard item={bookmark} />
                                     </li>
                                 ))}
+                                <ScrollMemory name='bookmarksList' />
                             </ul>
                         </Col>
                     </Row>

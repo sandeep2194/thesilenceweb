@@ -5,7 +5,7 @@ import { CheckError } from '../utils/helper'
 
 import { receiveNews } from './news'
 export const ADD_USER = 'ADD_USER'
-
+export const TOGGLE_USER_BOOKMARK = 'TOGGLE_USER_BOOKMARK'
 
 export function addUser(user) {
     return {
@@ -14,6 +14,12 @@ export function addUser(user) {
     }
 }
 
+export function toggleUserBookmark(postId) {
+    return {
+        type: TOGGLE_USER_BOOKMARK,
+        postId,
+    }
+}
 
 export function handleReceiveNews(authorId, pageNo, pageSize) {
     return (dispatch) => {

@@ -6,6 +6,7 @@ import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import NewsCardHome2 from './newsCardItemHome2'
 import { handleReceiveBookmarksData } from '../../actions/authedUser';
 import { addListData } from '../../actions/listsData'
+import ScrollMemory from '../common/scrollMemory'
 
 class NewsList extends Component {
     componentDidMount() {
@@ -22,10 +23,9 @@ class NewsList extends Component {
     }
     handleBottomScroll = () => {
         const { dispatch, page, pageSize } = this.props
-        console.log(page)
         if (page > 1) {
             let pageUp = page
-            dispatch(handleGetNews(pageUp++, pageSize))
+            dispatch(handleGetNews(page, pageSize))
             dispatch(addListData('newsList', {
                 page: pageUp + 1,
                 pageSize: 10
@@ -37,6 +37,7 @@ class NewsList extends Component {
             <Container className='mt-2'>
                 <Col lg={6} className='px-0'>
                     <ul>
+                        <ScrollMemory name='newsList' />
                         <BottomScrollListener onBottom={this.handleBottomScroll} />
                         {Object.values(this.props.news).map((item, index) =>
                         (<li
@@ -57,7 +58,7 @@ function mapStateToProps({ news, listsData }) {
     return {
         news,
         page: newsListData ? newsListData.page : 1,
-        pageSize: newsListData ? newsListData.pageSize : 10
+        pageSize: newsListData ? newsListData.pageSize : 10,
     }
 }
 

@@ -6,7 +6,6 @@ import { Container, Row, Col } from 'react-bootstrap'
 import BookmarksCard from '../common/bookmarksCard'
 
 class Bookmarks extends Component {
-
     render() {
         const { isLoggedIn, bookmarksData } = this.props
         return (
@@ -15,8 +14,8 @@ class Bookmarks extends Component {
                 <LogoHeader pageName='Bookmarks' />
                 <Container className='bg-light'>
                     <Row className='justify-content-center'>
-                        <Col lg={6} className='mt-3'>
-                            <ul>
+                        <Col lg={6} className='mt-1 mx-2'>
+                            <ul className='m-0'>
                                 {bookmarksData.map((bookmark, index) => (
                                     <li key={index}>
                                         <BookmarksCard item={bookmark} />

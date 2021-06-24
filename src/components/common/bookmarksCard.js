@@ -5,7 +5,7 @@ import ReactionBar from './reactionbar'
 
 class BookmarksCard extends Component {
     render() {
-        const { title, imageUrl, authorName, shares, comments, publishedAt } = this.props.item
+        const { title, imageUrl, authorName, shares, comments, publishedAt, _id } = this.props.item
         return (
             <Row className='justify-content-center shadow-sm rounded border-light bg-white p-2 mb-2'>
                 <Col className='mr-2'>
@@ -35,7 +35,7 @@ class BookmarksCard extends Component {
                     </Row>
 
                 </Col>
-                <ReactionBar newsItem={this.props.item} isBookmarkPage={true} />
+                <ReactionBar newsItem={this.props.item} isBookmarkPage={true} id={_id} />
             </Row>
         )
     }

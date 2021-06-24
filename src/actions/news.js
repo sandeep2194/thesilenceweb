@@ -1,7 +1,7 @@
 import { fetchNews, interaction } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
-import { handleReceiveBookmarksData } from './authedUser'
 import { CheckError } from '../utils/helper'
+import { toggleUserBookmark } from './user'
 
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
@@ -9,14 +9,7 @@ export const TOGGLE_BOOKMARK = 'TOGGLE_BOOKMARK'
 export const TOGGLE_RETWEET = 'TOGGLE_RETWEET'
 export const TOGGLE_SHARE = 'TOGGLE_SHARE'
 export const ADD_COMMENT = 'ADD_COMMENT'
-export const UPDATE_SCROLL_POSITION = 'UPDATE_SCROLL_POSITION'
 
-export function updateScrollPosition(pageYOffset) {
-    return {
-        type: UPDATE_SCROLL_POSITION,
-        pageYOffset,
-    }
-}
 
 export function receiveNews(news) {
     return {
@@ -119,12 +112,13 @@ export function handleToggleBookmark(id) {
         dispatch(showLoading())
         const userId = localStorage.getItem('userId')
         dispatch(toggleBookmark(id, userId))
+        dispatch(toggleUserBookmark(id))
         interaction(id, 'bookmark', {}).then(() => {
             dispatch(hideLoading())
-            dispatch(handleReceiveBookmarksData())
         }).catch((e) => {
             dispatch(hideLoading())
             dispatch(toggleBookmark(id, userId))
+            dispatch(toggleUserBookmark(id))
             console.warn(e)
 
             CheckError(e)

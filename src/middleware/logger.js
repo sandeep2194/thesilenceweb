@@ -1,9 +1,13 @@
+import { ADD_SCROLL_POSITION } from "../actions/listsData"
+
 const logger = (store) => (next) => (action) => {
-    console.group(action.type)
-    console.log('The Action: ', action)
     const returnValue = next(action)
-    console.log("The new state is: ", returnValue)
-    console.groupEnd()
+    if (action.type !== ADD_SCROLL_POSITION) {
+        console.group(action.type)
+        console.log('The Action: ', action)
+        console.log("The new state is: ", returnValue)
+        console.groupEnd()
+    }
     return returnValue
 }
 

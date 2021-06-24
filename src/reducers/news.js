@@ -1,4 +1,4 @@
-import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK, TOGGLE_RETWEET, TOGGLE_SHARE, ADD_COMMENT, UPDATE_SCROLL_POSITION } from '../actions/news'
+import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK, TOGGLE_RETWEET, TOGGLE_SHARE, ADD_COMMENT, } from '../actions/news'
 
 export default function news(state = {}, action) {
     let item = { ...state[action.itemId] }
@@ -13,7 +13,7 @@ export default function news(state = {}, action) {
                 ...oldNews, ...newNews
             }
         case TOGGLE_LIKE:
-            let newLikesArr = [...item.likesArr]
+            let newLikesArr = item.likesArr ? [...item.likesArr] : []
             if (newLikesArr.includes(action.userId)) {
                 newLikesArr = newLikesArr.filter((id) => id !== action.userId)
             } else {
@@ -23,7 +23,7 @@ export default function news(state = {}, action) {
             oldNews[action.itemId] = item
             return { ...oldNews }
         case TOGGLE_BOOKMARK:
-            let newBookmarksArr = [...item.bookmarksArr]
+            let newBookmarksArr = item.bookmarksArr ? [...item.bookmarksArr] : []
             if (newBookmarksArr.includes(action.userId)) {
                 newBookmarksArr = newBookmarksArr.filter((id) => id !== action.userId)
             } else {
@@ -52,9 +52,6 @@ export default function news(state = {}, action) {
             })
             item.commentsArr = [...newCommentArr]
             oldNews[action.itemId] = item
-            return { ...oldNews }
-        case UPDATE_SCROLL_POSITION:
-            oldNews.scrollPosition = action.pageYOffset
             return { ...oldNews }
         default:
             return state

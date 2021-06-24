@@ -2,9 +2,10 @@ import React from 'react'
 import SmallNewsListCard from '../common/smallNewsListCard'
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import { Col, Nav, Tab } from 'react-bootstrap'
+import ScrollMemory from '../common/scrollMemory'
 
 function userPostList(props) {
-    const { user, isCurrentUser, scrollCb } = props
+    const { isCurrentUser, scrollCb, news, userId } = props
     return (
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
             <Col className="p-0 m-0">
@@ -22,12 +23,14 @@ function userPostList(props) {
                     <Tab.Content>
                         <Tab.Pane eventKey="first">
                             <ul>
-                                <BottomScrollListener onBottom={scrollCb} />
-                                {(user.news) ? user.news.map((n, i) => (
+                                {(news) ? news.map((n, i) => (
                                     <li key={i}>
                                         <SmallNewsListCard item={n} isCurrentUser={isCurrentUser} />
                                     </li>
                                 )) : null}
+
+                                <ScrollMemory name={userId} />
+                                <BottomScrollListener onBottom={() => scrollCb()} />
                             </ul>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">

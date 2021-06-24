@@ -23,7 +23,9 @@ class Profile extends Component {
     handleBottomScrollNewsPost = () => {
         const { dispatch, page, pageSize, userId } = this.props
         let pageUp = page
+        console.log('sb me gaya')
         if (page > 1) {
+            console.log('if me gaya')
             dispatch(handleReceiveNews(userId, page, pageSize))
             dispatch(addListData(userId, {
                 page: pageUp + 1,
@@ -32,7 +34,7 @@ class Profile extends Component {
         }
     }
     render() {
-        const { isCurrentUser, user } = this.props
+        const { isCurrentUser, user, userNews, userId } = this.props
         return (
             <Fragment>
                 <BackHeader pageName='PROFILE'>
@@ -49,7 +51,7 @@ class Profile extends Component {
                         <Col lg={6} >
                             <Row>
                                 <Col className='mt-3'>
-                                    <UserPostList user={user} isCurrentUser={isCurrentUser} scrollCb={this.handleBottomScrollNewsPost} />
+                                    <UserPostList news={userNews} userId={userId} isCurrentUser={isCurrentUser} scrollCb={this.handleBottomScrollNewsPost} />
                                 </Col>
                             </Row>
                         </Col>
@@ -62,19 +64,21 @@ class Profile extends Component {
 
 
 
-function mapStateToProps({ users, listsData }, props) {
+function mapStateToProps({ users, listsData, news }, props) {
     const loggedInUserId = localStorage.getItem('userId')
     const currentUser = loggedInUserId
     const { userId } = props.match.params
     const isCurrentUser = (currentUser === userId) ? true : false
     const user = users[userId]
-    const profileNewsListData = listsData[user]
+    const profileNewsListData = listsData[userId]
+    const userNews = Object.values(news).filter(item => item.authorId === userId)
     return {
         isCurrentUser,
         userId,
         user: isCurrentUser ? users[loggedInUserId] : user,
         page: profileNewsListData ? profileNewsListData.page : 1,
         pageSize: profileNewsListData ? profileNewsListData.pageSize : 10,
+        userNews,
     }
 }
 export default connect(mapStateToProps)(Profile)

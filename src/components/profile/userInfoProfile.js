@@ -37,7 +37,7 @@ function userInfoProfile(props) {
                             <p style={{ fontSize: '14px' }} className='mt-1 pl-1 pb-2 m-0 '>{user.bio ? user.bio : 'Hi, I am a here to read some news'}</p>
                             <p className='font-weight-bold mt-1 m-0 pb-1 pl-1' style={{ fontSize: '12px', color: '#2F80ED' }}><span>
                                 <FeatherIcon icon='map-pin' color='#2F80ED' size='14' />
-                            </span> {user.city ? user.city + ' ' + user.country : 'New Delhi, India'}</p>
+                            </span> {user.locations ? user.locations[0] : 'New Delhi, India'}</p>
                             <p className='font-weight-bold mt-1 m-0 pl-1' style={{ fontSize: '12px', color: '#828282' }}>
                                 <span>
                                     <FeatherIcon icon='calendar' color='#828282' size='14'
@@ -56,7 +56,7 @@ function userInfoProfile(props) {
                             <Row className=''>
                                 <Col className='p-0'>
                                     <Row className='justify-content-center'>
-                                        <h4>{user.news && user.news.length ? user.news.length : "0"}</h4>
+                                        <h4>{user.posts ? user.posts : 0}</h4>
 
                                     </Row>
                                     <Row className='justify-content-center'>
@@ -66,7 +66,7 @@ function userInfoProfile(props) {
                                 </Col>
                                 <Col>
                                     <Row className='justify-content-center'>
-                                        <h4>{user.followers ? user.followers : "0"}</h4>
+                                        <h4>{user.followers}</h4>
 
                                     </Row>
                                     <Row className='justify-content-center'>
@@ -87,7 +87,7 @@ function userInfoProfile(props) {
 
                                 <Col>
                                     <Row className='justify-content-center'>
-                                        <h4>{user.causesCount ? user.causesCount : "0"}</h4>
+                                        <h4>{user.causes ? user.causes : "0"}</h4>
 
                                     </Row>
                                     <Row className='justify-content-center'>

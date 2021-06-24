@@ -6,17 +6,30 @@ import { handleReceiveNews } from '../../actions/user'
 import UserPostList from './userPostList'
 import UserInfoProfile from './userInfoProfile'
 import { Link } from 'react-router-dom'
+import { addListData } from '../../actions/listsData'
 
 class Profile extends Component {
     componentDidMount() {
-        const { dispatch, pageNo, pageSize, userId } = this.props
-        if (pageNo === 1) {
-            dispatch(handleReceiveNews(userId, pageNo, pageSize))
+        const { dispatch, page, pageSize, userId } = this.props
+        if (page === 1) {
+            let pageUp = page
+            dispatch(handleReceiveNews(userId, page, pageSize))
+            dispatch(addListData(userId, {
+                page: pageUp + 1,
+                pageSize: 10
+            }))
         }
     }
     handleBottomScrollNewsPost = () => {
-        const { dispatch, pageNo, pageSize, userId } = this.props
-        dispatch(handleReceiveNews(userId, pageNo, pageSize))
+        const { dispatch, page, pageSize, userId } = this.props
+        let pageUp = page
+        if (page > 1) {
+            dispatch(handleReceiveNews(userId, page, pageSize))
+            dispatch(addListData(userId, {
+                page: pageUp + 1,
+                pageSize: 10
+            }))
+        }
     }
     render() {
         const { isCurrentUser, user } = this.props
@@ -49,19 +62,19 @@ class Profile extends Component {
 
 
 
-function mapStateToProps({ authedUser, users }, props) {
-    const currentUser = authedUser._id
+function mapStateToProps({ users, listsData }, props) {
+    const loggedInUserId = localStorage.getItem('userId')
+    const currentUser = loggedInUserId
     const { userId } = props.match.params
     const isCurrentUser = (currentUser === userId) ? true : false
     const user = users[userId]
-
-    const pageNo = ((user.news) ? user.news.length / 10 : 0) + 1
+    const profileNewsListData = listsData[user]
     return {
         isCurrentUser,
         userId,
-        user: isCurrentUser ? authedUser : user,
-        pageSize: 10,
-        pageNo: pageNo
+        user: isCurrentUser ? users[loggedInUserId] : user,
+        page: profileNewsListData ? profileNewsListData.page : 1,
+        pageSize: profileNewsListData ? profileNewsListData.pageSize : 10,
     }
 }
 export default connect(mapStateToProps)(Profile)

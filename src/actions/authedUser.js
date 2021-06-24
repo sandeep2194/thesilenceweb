@@ -4,43 +4,17 @@ import history from '../utils/history'
 import { toastr } from 'react-redux-toastr'
 import { addUser } from './user'
 import { CheckError } from '../utils/helper'
+import { receiveNews } from './news'
 
-export const LOGIN = 'LOGIN'
-export const LOGOUT = 'LOGOUT'
-export const UPDATE_USER = 'UPDATE_USER'
-export const RECEIVE_BOOKMARKS_DATA = 'RECEIVE_BOOKMARKS_DATA'
 
-function login(user) {
-    return {
-        type: LOGIN,
-        user,
-    }
-}
-function logout() {
-    return {
-        type: LOGOUT,
-    }
-}
-function updateUser(user) {
-    return {
-        type: UPDATE_USER,
-        user,
-    }
-}
 
-function receiveBookmarksData(data) {
-    return {
-        type: RECEIVE_BOOKMARKS_DATA,
-        data,
-    }
-}
 
 export function handleReceiveBookmarksData() {
     return (dispatch) => {
         dispatch(showLoading())
         fetchBookmarks()
             .then((res) => {
-                dispatch(receiveBookmarksData(res.data.result))
+                dispatch(receiveNews(res.data.result))
                 dispatch(hideLoading())
             }).catch((err) => {
                 console.error(err)
@@ -54,7 +28,7 @@ export function handleUpdateUser(userObj) {
     return (dispatch) => {
         dispatch(showLoading())
         postUser(userObj).then(() => {
-            dispatch(updateUser(userObj))
+            dispatch(addUser(userObj))
             dispatch(hideLoading)
             history.push('/choose-language-location')
         }).catch((e) => {
@@ -72,6 +46,7 @@ export function handleGetOtp(phoneNumber) {
         dispatch(showLoading())
         getOtp(phoneNumber)
             .then(() => {
+
                 history.push({
                     pathname: '/verify',
                     state: phoneNumber.toString(),
@@ -90,11 +65,12 @@ export function handleGetOtp(phoneNumber) {
 export function handleVerifyOtp(phoneNumber, OTP) {
     return (dispatch) => {
         dispatch(showLoading())
+        localStorage.clear('persist:persistedStore', 'userId', 'token');
         verifyOtp(phoneNumber, OTP)
             .then((res) => {
                 const username = res.userInfo.username;
                 localStorage.setItem('token', res.token);
-                dispatch(login(res.userInfo))
+                localStorage.setItem('userId', res.userInfo._id)
                 dispatch(addUser(res.userInfo))
                 if (!username) {
                     history.push('/getting-started')
@@ -114,8 +90,7 @@ export function handleVerifyOtp(phoneNumber, OTP) {
 export function handleLogout() {
     return (dispatch) => {
         dispatch(showLoading())
-        dispatch(logout())
-        localStorage.removeItem('token');
+        localStorage.clear('persist:persistedStore', 'userId', 'token');
         history.push('/')
         dispatch(hideLoading())
         toastr.info(`you have logged out successfully`)

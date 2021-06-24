@@ -65,10 +65,11 @@ class ReactionBar extends Component {
     }
 }
 
-function mapStateToProps({ news, authedUser }, props) {
+function mapStateToProps({ news, users }, props) {
+    const userId = localStorage.getItem('userId')
     return {
         newsItem: props.newsItem ? props.newsItem : news[props.id],
-        authedUser,
+        authedUser: users[userId] ? users[userId] : {}
     }
 }
 

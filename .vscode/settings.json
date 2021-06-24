@@ -1,10 +1,7 @@
 {
     "cSpell.words": [
+        "reactionbar",
         "toastr"
     ],
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#0E3427",
-        "titleBar.activeBackground": "#144936",
-        "titleBar.activeForeground": "#F5FCFA"
-    }
+
 }

@@ -12,15 +12,15 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import LogRocket from 'logrocket';
-LogRocket.init('an21p3/thesilence');
+
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
+
 const persistConfig = {
   key: 'root',
+  version: 0,
   storage,
-  blacklist: ['news, users']
 }
 const persistedReducer = persistReducer(persistConfig, reducer)
 const store = createStore(persistedReducer, composeEnhancers(

@@ -3,8 +3,9 @@ import { fetchUser, fetchNewsByAuthor } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { CheckError } from '../utils/helper'
 
+import { receiveNews } from './news'
 export const ADD_USER = 'ADD_USER'
-export const RECEIVE_USER_NEWS = 'RECEIVE_USER_NEWS'
+
 
 export function addUser(user) {
     return {
@@ -13,21 +14,14 @@ export function addUser(user) {
     }
 }
 
-function receiveNews(userId, news) {
-    return {
-        type: RECEIVE_USER_NEWS,
-        news,
-        userId,
-    }
-}
 
 export function handleReceiveNews(authorId, pageNo, pageSize) {
     return (dispatch) => {
         dispatch(showLoading())
         fetchNewsByAuthor(authorId, pageNo, pageSize)
             .then((res) => {
-                if (res.result.length !== 0) {
-                    dispatch(receiveNews(authorId, res.data.result))
+                if (res.data.result.length !== 0) {
+                    dispatch(receiveNews(res.data.result))
                 }
                 dispatch(hideLoading())
             }).catch((err) => {

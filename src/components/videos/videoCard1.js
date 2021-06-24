@@ -1,5 +1,5 @@
 import React, { Fragment, useRef } from 'react';
-import { Row, Col, } from 'react-bootstrap'
+import { Row, Col, Container } from 'react-bootstrap'
 import ReactPlayer from 'react-player/youtube'
 import { Link } from 'react-router-dom'
 import TimeAgo from 'timeago-react';
@@ -60,7 +60,7 @@ const VideoCard1 = (props) => {
     const { title, authorName, shares, comments, publishedAt, authorId, _id } = testItem
     let url = "https://www.youtube.com/watch?v=P6dvVp3Wwso"
     return (
-        <Fragment>
+        <Col>
             <Row className='justify-content-center bg-white pb-2 border-bottom border-light shadow-sm'>
                 <Col >
                     <Row className='px-3'>
@@ -112,7 +112,7 @@ const VideoCard1 = (props) => {
 
                 </Col>
             </Row>
-        </Fragment>
+        </Col>
     )
 }
 

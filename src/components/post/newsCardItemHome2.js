@@ -37,7 +37,7 @@ class NewsCardHome2 extends Component {
                     <Row>
                         <Col xs={4}>
                             <Link to={`/profile/${authorId}`}>
-                                <p className='text-primary'>{authorName.toUpperCase()}</p>
+                                <p className='text-primary'>{authorName}</p>
                             </Link>
                         </Col>
                         <Col>
@@ -52,7 +52,7 @@ class NewsCardHome2 extends Component {
                     </Row>
 
                 </Col>
-                <ReactionBar newsItem={this.props.item} id={_id} />
+                <ReactionBar id={_id} />
             </Row>
         )
     }

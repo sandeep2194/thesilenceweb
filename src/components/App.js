@@ -2,32 +2,12 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Router, } from 'react-router-dom';
 import history from '../utils/history'
-import { handleGetNews } from '../actions/news'
-import LogRocket from 'logrocket';
-import { handleReceiveBookmarksData } from '../actions/authedUser'
-
 import LoadingBar from 'react-redux-loading'
 import ReduxToastr from 'react-redux-toastr'
 
 import AllRoutes from './routes'
 
 class App extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props
-
-    dispatch(handleGetNews(1, 10))
-    dispatch(handleReceiveBookmarksData())
-
-    const token = localStorage.getItem('token')
-    const { authedUser } = this.props
-    if (token) {
-      LogRocket.identify(authedUser._id, {
-        name: authedUser.name,
-        email: authedUser.email,
-        // Add your own custom user variables here, ie:
-      });
-    }
-  }
   render() {
     return (
       <Router history={history}>
@@ -49,9 +29,4 @@ class App extends Component {
     )
   }
 }
-function mapStateToProps({ authedUser }) {
-  return {
-    authedUser,
-  }
-}
-export default connect(mapStateToProps)(App);
+export default App;

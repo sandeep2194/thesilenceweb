@@ -26,7 +26,7 @@ export async function fetchNewsByAuthor(id, pageNo, pageSize) {
             'Authorization': 'Bearer ' + token,
         }
     })
-    return res.data
+    return res
 }
 
 export async function fetchBookmarks() {

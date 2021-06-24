@@ -89,14 +89,22 @@ function LogoHeader(props) {
     )
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ users }) {
     const token = localStorage.getItem('token')
-    const userId = authedUser._id
-    return {
-        isLoggedIn: (token && userId) ? true : false,
-        firstTimeUser: authedUser.username ? false : true,
-        profile: authedUser.profilePic,
-        userId,
+    const userId = localStorage.getItem('userId')
+    const authedUser = users[userId]
+    const isLoggedIn = (token && userId) ? true : false
+    if (isLoggedIn) {
+        return {
+            isLoggedIn: isLoggedIn,
+            firstTimeUser: authedUser.username ? false : true,
+            profile: authedUser.profilePic,
+            userId,
+        }
+    } else {
+        return {
+            isLoggedIn: false
+        }
     }
 }
 

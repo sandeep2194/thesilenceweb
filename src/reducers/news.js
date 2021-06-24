@@ -1,4 +1,4 @@
-import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK, TOGGLE_RETWEET, TOGGLE_SHARE, ADD_COMMENT } from '../actions/news'
+import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK, TOGGLE_RETWEET, TOGGLE_SHARE, ADD_COMMENT, UPDATE_SCROLL_POSITION } from '../actions/news'
 
 export default function news(state = {}, action) {
     let item = { ...state[action.itemId] }
@@ -10,7 +10,7 @@ export default function news(state = {}, action) {
                 newNews[n._id] = n
             })
             return {
-                ...state, ...newNews
+                ...oldNews, ...newNews
             }
         case TOGGLE_LIKE:
             let newLikesArr = [...item.likesArr]
@@ -52,6 +52,9 @@ export default function news(state = {}, action) {
             })
             item.commentsArr = [...newCommentArr]
             oldNews[action.itemId] = item
+            return { ...oldNews }
+        case UPDATE_SCROLL_POSITION:
+            oldNews.scrollPosition = action.pageYOffset
             return { ...oldNews }
         default:
             return state

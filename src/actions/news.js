@@ -9,8 +9,16 @@ export const TOGGLE_BOOKMARK = 'TOGGLE_BOOKMARK'
 export const TOGGLE_RETWEET = 'TOGGLE_RETWEET'
 export const TOGGLE_SHARE = 'TOGGLE_SHARE'
 export const ADD_COMMENT = 'ADD_COMMENT'
+export const UPDATE_SCROLL_POSITION = 'UPDATE_SCROLL_POSITION'
 
-function receiveNews(news) {
+export function updateScrollPosition(pageYOffset) {
+    return {
+        type: UPDATE_SCROLL_POSITION,
+        pageYOffset,
+    }
+}
+
+export function receiveNews(news) {
     return {
         type: RECEIVE_NEWS,
         news,
@@ -55,17 +63,17 @@ function addComment(itemId, userId, content) {
 }
 
 export function handleAddComment(id, content) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
+        const userId = localStorage.getItem('userId')
         dispatch(showLoading())
-        const { authedUser } = getState()
-        dispatch(addComment(id, authedUser._id, content))
+        dispatch(addComment(id, userId, content))
         interaction(id, 'comment', {
             content: content
         }).then(() => {
             dispatch(hideLoading())
         }).catch((e) => {
             dispatch(hideLoading())
-            dispatch(addComment(id, authedUser._id, content))
+            dispatch(addComment(id, userId, content))
             console.warn(e)
             CheckError(e)
         })
@@ -73,15 +81,15 @@ export function handleAddComment(id, content) {
 }
 
 export function handleToggleShare(id) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         dispatch(showLoading())
-        const { authedUser } = getState()
-        dispatch(toggleShare(id, authedUser._id))
+        const userId = localStorage.getItem('userId')
+        dispatch(toggleShare(id, userId))
         interaction(id, 'share', {}).then(() => {
             dispatch(hideLoading())
         }).catch((e) => {
             dispatch(hideLoading())
-            dispatch(toggleShare(id, authedUser._id))
+            dispatch(toggleShare(id, userId))
             console.warn(e)
 
             CheckError(e)
@@ -90,15 +98,15 @@ export function handleToggleShare(id) {
 }
 
 export function handleToggleRetweet(id) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         dispatch(showLoading())
-        const { authedUser } = getState()
-        dispatch(toggleRetweet(id, authedUser._id))
+        const userId = localStorage.getItem('userId')
+        dispatch(toggleRetweet(id, userId))
         interaction(id, 'retweet', {}).then(() => {
             dispatch(hideLoading())
         }).catch((e) => {
             dispatch(hideLoading())
-            dispatch(toggleRetweet(id, authedUser._id))
+            dispatch(toggleRetweet(id, userId))
             console.warn(e)
 
             CheckError(e)
@@ -107,16 +115,16 @@ export function handleToggleRetweet(id) {
 }
 
 export function handleToggleBookmark(id) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         dispatch(showLoading())
-        const { authedUser } = getState()
-        dispatch(toggleBookmark(id, authedUser._id))
+        const userId = localStorage.getItem('userId')
+        dispatch(toggleBookmark(id, userId))
         interaction(id, 'bookmark', {}).then(() => {
             dispatch(hideLoading())
             dispatch(handleReceiveBookmarksData())
         }).catch((e) => {
             dispatch(hideLoading())
-            dispatch(toggleBookmark(id, authedUser._id))
+            dispatch(toggleBookmark(id, userId))
             console.warn(e)
 
             CheckError(e)
@@ -126,15 +134,15 @@ export function handleToggleBookmark(id) {
 }
 
 export function handleToggleLike(id) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         dispatch(showLoading())
-        const { authedUser } = getState()
-        dispatch(toggleLike(id, authedUser._id))
+        const userId = localStorage.getItem('userId')
+        dispatch(toggleLike(id, userId))
         interaction(id, 'like', {}).then(() => {
             dispatch(hideLoading())
         }).catch((e) => {
             dispatch(hideLoading())
-            dispatch(toggleLike(id, authedUser._id))
+            dispatch(toggleLike(id, userId))
 
             CheckError(e)
         })

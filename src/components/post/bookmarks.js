@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 import BookmarksCard from '../common/bookmarksCard'
+
 class Bookmarks extends Component {
 
     render() {
@@ -30,9 +31,11 @@ class Bookmarks extends Component {
     }
 }
 
-function mapStateToProps({ authedUser }, props) {
+function mapStateToProps({ news, users }) {
     const token = localStorage.getItem('token')
-    const bookmarksData = authedUser.bookmarksData
+    const userId = localStorage.getItem('userId')
+    const bookmarksArr = users[userId].bookmarks
+    const bookmarksData = Object.values(news).filter((item) => bookmarksArr.includes(item._id))
     return {
         isLoggedIn: (token) ? true : false,
         bookmarksData,

@@ -22,7 +22,7 @@ import Account from './settings/account';
 import Stats from './settings/statsAndReward'
 import SupportForm from './settings/support';
 import VideoCard1 from './videos/videoCard1'
-
+import OnBoarding from './onBoarding/onBoard';
 const AllRoutes = () => {
     return (
         <Switch>
@@ -124,6 +124,7 @@ const AllRoutes = () => {
             </Route>
             <Route path='/stats' component={Stats} />
             <Route path='/support' component={SupportForm} />
+            <Route path='/onBoard' component={OnBoarding} />
             <Route component={FourZeroFour} />
         </Switch>
     )

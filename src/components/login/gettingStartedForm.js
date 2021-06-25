@@ -23,7 +23,7 @@ const GettingStartedForm = (props) => {
     const { dispatch } = props
     return (
         <Formik
-            initialValues={{ firstName: '', lastName: '', email: '', username: '', }}
+            initialValues={{ firstName: '', lastName: '', email: '', username: '' }}
             validationSchema={Yup.object({
                 firstName: Yup.string()
                     .max(15, 'Must be 15 characters or less')

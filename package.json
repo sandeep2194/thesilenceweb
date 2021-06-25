@@ -33,6 +33,7 @@
     "react-redux-toastr": "^7.6.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-stepper-horizontal": "^1.0.11",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",

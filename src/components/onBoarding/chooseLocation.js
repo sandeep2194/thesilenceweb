@@ -1,6 +1,8 @@
 import React, { Fragment, Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
+import { handleUpdateUser } from '../../actions/authedUser'
+import { connect } from 'react-redux'
 
 class ChooseLocation extends Component {
     state = {
@@ -8,6 +10,10 @@ class ChooseLocation extends Component {
         ]
     }
 
+    componentDidMount() {
+        const { selectedLocations } = this.props
+        this.setState({ selectedLocations: selectedLocations })
+    }
     locations = [
         'Noida',
         'New Delhi',
@@ -62,6 +68,15 @@ class ChooseLocation extends Component {
             }
         })
     }
+
+    handleLocSubmit = () => {
+        const { selectedLocations } = this.state
+        const { dispatch, stepCb } = this.props
+        stepCb(2)
+        dispatch(handleUpdateUser({
+            locations: selectedLocations,
+        }))
+    }
     render() {
         return (
             <Fragment>
@@ -79,7 +94,7 @@ class ChooseLocation extends Component {
                     </Row>
 
                     <Row className='mt-5 mx-1'>
-                        <Button type="button" size='md' className='btn-block' onClick={() => this.props.stepCb(2)}>Continue</Button>
+                        <Button type="button" size='md' className='btn-block' onClick={this.handleLocSubmit}>Continue</Button>
                     </Row>
                 </Container>
             </Fragment>
@@ -87,4 +102,12 @@ class ChooseLocation extends Component {
     }
 }
 
-export default ChooseLocation
+function mapStateToProps({ users }) {
+    const userId = localStorage.getItem('userId')
+    const user = users[userId]
+    return {
+        selectedLocations: user && user.locations !== null ? user.locations : []
+    }
+}
+
+export default connect(mapStateToProps)(ChooseLocation)

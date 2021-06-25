@@ -1,12 +1,17 @@
 import React, { Fragment, Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
+import { handleUpdateUser } from '../../actions/authedUser'
+import { connect } from 'react-redux'
 
 class ChooseLang extends Component {
     state = {
         selectedLanguages: []
     }
-
+    componentDidMount() {
+        const { selectedLanguages } = this.props
+        this.setState({ selectedLanguages: selectedLanguages })
+    }
     languages = [
         {
             name: 'english',
@@ -19,7 +24,6 @@ class ChooseLang extends Component {
             code: 'hi',
         },
     ]
-
     langChip = (language, index) => {
         const selected = this.state.selectedLanguages.includes(language.code)
         return (
@@ -66,6 +70,14 @@ class ChooseLang extends Component {
             }
         })
     }
+    handleLangSubmit = () => {
+        const { selectedLanguages } = this.state
+        const { dispatch, stepCb } = this.props
+        stepCb(1)
+        dispatch(handleUpdateUser({
+            languages: selectedLanguages,
+        }))
+    }
     render() {
         return (
             <Fragment>
@@ -82,7 +94,7 @@ class ChooseLang extends Component {
                         </Col>
                     </Row>
                     <Row className='mt-5 mx-1'>
-                        <Button type="button" size='md' className='btn-block' onClick={() => this.props.stepCb(1)}>Continue</Button>
+                        <Button type="button" size='md' className='btn-block' onClick={this.handleLangSubmit}>Continue</Button>
                     </Row>
                 </Container>
             </Fragment>
@@ -90,4 +102,11 @@ class ChooseLang extends Component {
     }
 }
 
-export default ChooseLang
+function mapStateToProps({ users }) {
+    const userId = localStorage.getItem('userId')
+    const user = users[userId]
+    return {
+        selectedLanguages: user ? user.languages : [],
+    }
+}
+export default connect(mapStateToProps)(ChooseLang)

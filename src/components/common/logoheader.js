@@ -13,7 +13,7 @@ function LogoHeader(props) {
     const { isLoggedIn, userId, firstTimeUser, profilePic } = props
     let to = '/send-otp';
     if (isLoggedIn && firstTimeUser) {
-        to = '/getting-started'
+        to = '/onBoard'
     } else if (isLoggedIn && !firstTimeUser) {
         to = `/profile/${userId}`
     }

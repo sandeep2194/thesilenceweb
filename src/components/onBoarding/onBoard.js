@@ -4,13 +4,14 @@ import { Container, Row, Col } from 'react-bootstrap'
 import ProgressIndicator from './progressIndicator';
 import ChooseLang from './chooseLang';
 import ChooseLocation from './chooseLocation'
+import ChooseTopic from './chooseTopic';
 import UploadAvatar from './uploadAvatar';
 import PersonalDetails from './personalDetails';
 
 class OnBoarding extends Component {
     state = {
         step: 0,
-        steps: ['Choose Languages', 'Choose Locations', 'Upload Avatar', 'Add User Detail'],
+        steps: ['Choose Languages', 'Choose Locations', 'Choose Topics', 'Upload Avatar', 'Add User Detail'],
     }
     updateStep = (newStep) => {
         this.setState({ step: newStep })
@@ -34,10 +35,13 @@ class OnBoarding extends Component {
                                     (step === 1) && <ChooseLocation stepCb={this.updateStep} />
                                 }
                                 {
-                                    (step === 2) && <UploadAvatar stepCb={this.updateStep} />
+                                    (step === 2) && <ChooseTopic stepCb={this.updateStep} />
                                 }
                                 {
-                                    (step === 3) && <PersonalDetails stepCb={this.updateStep} />
+                                    (step === 3) && <UploadAvatar stepCb={this.updateStep} />
+                                }
+                                {
+                                    (step === 4) && <PersonalDetails stepCb={this.updateStep} />
                                 }
                             </Row>
                         </Col>

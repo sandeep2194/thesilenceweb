@@ -2,13 +2,16 @@ import React, { Component, Fragment } from 'react';
 import Avatar from 'react-avatar-edit'
 import { toastr } from 'react-redux-toastr'
 import { connect } from 'react-redux'
-import { Container, Row, Button, Col } from 'react-bootstrap'
+import { Container, Row, Button, Col, Image } from 'react-bootstrap'
 import { PersonBoundingBox } from 'react-bootstrap-icons'
+import { uploadFile } from '../../utils/api'
+import { handleUpdateUser } from '../../actions/authedUser'
 
 class UploadAvatar extends Component {
     state = {
         preview: null,
-        src: null
+        src: null,
+        file: null
     }
     onClose = () => {
         this.setState({ preview: null })
@@ -23,8 +26,17 @@ class UploadAvatar extends Component {
         }
     }
     onFileLoad = (file) => {
-        this.props.stepCb(3)
-        //todo dispatch api call to users API to upload pic
+        this.setState({ file: file })
+    }
+    handlePicSubmit = async () => {
+        const { stepCb, dispatch } = this.props
+        const { file } = this.state
+        const uploadedFile = await uploadFile(file)
+        const fileUrl = uploadedFile.result[0]
+        dispatch(handleUpdateUser({
+            profilePic: fileUrl
+        }))
+        stepCb(4)
     }
     render() {
         return (
@@ -42,16 +54,16 @@ class UploadAvatar extends Component {
                         />
 
                     </Row>
-                    <Row className='mt-5 justify-content-center'>
-                        {(this.state.preview) ? <img src={this.state.preview} alt="Preview" /> :
+                    <Row className='mt-3 justify-content-center'>
+                        {(this.state.preview) ? <Image src={this.state.preview} alt="Preview" height={100} /> :
                             <PersonBoundingBox size={76} className='control-icons' />
                         }
                     </Row>
-                    <Row className='p-5 justify-content-center'>
+                    <Row className='mt-5 justify-content-center'>
                         <Col className='px-5'>
                             <Button type='button' size='md'
                                 className='btn-block'
-                                onClick={this.onFileLoad}
+                                onClick={this.handlePicSubmit}
                             >Continue</Button>
                         </Col>
                     </Row>

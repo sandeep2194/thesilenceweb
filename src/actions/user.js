@@ -4,8 +4,17 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 import { CheckError } from '../utils/helper'
 
 import { receiveNews } from './news'
+
 export const ADD_USER = 'ADD_USER'
 export const TOGGLE_USER_BOOKMARK = 'TOGGLE_USER_BOOKMARK'
+export const UPDATE_USER = 'UPDATE_USER'
+
+export function updateUser(user) {
+    return {
+        type: UPDATE_USER,
+        user,
+    }
+}
 
 export function addUser(user) {
     return {

@@ -2,12 +2,22 @@ import { getOtp, verifyOtp, postUser, fetchBookmarks } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import history from '../utils/history'
 import { toastr } from 'react-redux-toastr'
-import { addUser } from './user'
+import { addUser, updateUser } from './user'
 import { CheckError } from '../utils/helper'
 import { receiveNews } from './news'
 
-
-
+export function handleUpdateUser(body) {
+    return (dispatch) => {
+        dispatch(showLoading())
+        postUser(body).then(() => {
+            dispatch(updateUser(body))
+            dispatch(hideLoading())
+        }).catch((err) => {
+            dispatch(hideLoading())
+            toastr.error('User Update Error', 'We cannot update your info right now. Please try again later')
+        })
+    }
+}
 
 export function handleReceiveBookmarksData() {
     return (dispatch) => {
@@ -24,13 +34,12 @@ export function handleReceiveBookmarksData() {
             })
     }
 }
-export function handleUpdateUser(userObj) {
+export function handleAddUser(userObj) {
     return (dispatch) => {
         dispatch(showLoading())
         postUser(userObj).then(() => {
             dispatch(addUser(userObj))
             dispatch(hideLoading)
-            history.push('/choose-language-location')
         }).catch((e) => {
             console.error(e)
             dispatch(hideLoading())
@@ -73,7 +82,7 @@ export function handleVerifyOtp(phoneNumber, OTP) {
                 localStorage.setItem('userId', res.userInfo._id)
                 dispatch(addUser(res.userInfo))
                 if (!username) {
-                    history.push('/getting-started')
+                    history.push('/onBoard')
                 } else {
                     history.push('/')
                 }

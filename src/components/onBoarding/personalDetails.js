@@ -7,7 +7,8 @@ import { handleUpdateUser } from '../../actions/authedUser'
 import { connect } from 'react-redux'
 import { TextInput, DatePicker } from '../common/formFields';
 import moment from 'moment';
-
+import history from '../../utils/history'
+import { toastr } from 'react-redux-toastr'
 
 const PersonalDetails = (props) => {
     const { dispatch } = props
@@ -23,7 +24,7 @@ const PersonalDetails = (props) => {
                             initialValues={{ username: '', dob: maxDate, bio: '' }}
                             validationSchema={Yup.object({
                                 bio: Yup.string()
-                                    .min(200, 'Must be 200 characters or more')
+                                    .min(50, 'Must be 50 characters or more')
                                     .required('Required'),
                                 dob: Yup.date()
                                     .max(maxDate, ''),
@@ -46,11 +47,13 @@ const PersonalDetails = (props) => {
                             })}
                             onSubmit={(values, { setSubmitting }) => {
                                 dispatch(handleUpdateUser({
-                                    name: `${values.firstName} ${values.lastName}`,
                                     username: values.username,
-                                    email: values.email,
+                                    dob: values.dob.toString(),
+                                    bio: values.bio,
                                 }))
                                 setSubmitting(false)
+                                toastr.info('You have successfully completed OnBoarding')
+                                history.push('/')
                             }}
                         >
 

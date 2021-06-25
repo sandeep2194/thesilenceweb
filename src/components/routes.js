@@ -4,8 +4,6 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import NewsList from './post/newslist';
 import LogoHeader from './common/logoheader';
 import FourZeroFour from './404';
-import GettingStarted from './login/gettingStarted'
-import UploadProfilePic from './profile/uploadProfilePic'
 import Search from './search/search'
 import SingleNews from './post/singleNews';
 import SendOtp from './login/sendOtp';
@@ -23,6 +21,7 @@ import Stats from './settings/statsAndReward'
 import SupportForm from './settings/support';
 import VideoCard1 from './videos/videoCard1'
 import OnBoarding from './onBoarding/onBoard';
+
 const AllRoutes = () => {
     return (
         <Switch>
@@ -72,14 +71,6 @@ const AllRoutes = () => {
             <Route
                 path='/verify'
                 component={VerifyOtp}
-            />
-            <Route
-                path='/getting-started'
-                component={GettingStarted}
-            />
-            <Route
-                path='/upload-profile-pic'
-                component={UploadProfilePic}
             />
             <Route
                 path='/search'

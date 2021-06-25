@@ -106,6 +106,24 @@ export async function postUser(userObj) {
     return res.data
 }
 
+export async function uploadFile(file) {
+    let formData = new FormData();
+    formData.append("files", file);
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/upload`
+    const res = await axios({
+        method: 'post',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'multipart/form-data'
+        },
+        data: formData
+    })
+
+    return res.data
+}
+
 export const userNameValidation = async (username) => {
     // Res from backend will be flag at res.data.success, true for 
     // username good, false otherwise

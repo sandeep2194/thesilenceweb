@@ -21,11 +21,9 @@ class Profile extends Component {
         }
     }
     handleBottomScrollNewsPost = () => {
-        const { dispatch, page, pageSize, userId } = this.props
+        const { dispatch, page, pageSize, userId, totalPages } = this.props
         let pageUp = page
-        console.log('sb me gaya')
-        if (page > 1) {
-            console.log('if me gaya')
+        if (page > 1 && page <= totalPages) {
             dispatch(handleReceiveNews(userId, page, pageSize))
             dispatch(addListData(userId, {
                 page: pageUp + 1,
@@ -79,6 +77,7 @@ function mapStateToProps({ users, listsData, news }, props) {
         page: profileNewsListData ? profileNewsListData.page : 1,
         pageSize: profileNewsListData ? profileNewsListData.pageSize : 10,
         userNews,
+        totalPage: 5
     }
 }
 export default connect(mapStateToProps)(Profile)

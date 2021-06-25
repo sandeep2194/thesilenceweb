@@ -22,8 +22,8 @@ class NewsList extends Component {
         }
     }
     handleBottomScroll = () => {
-        const { dispatch, page, pageSize } = this.props
-        if (page > 1) {
+        const { dispatch, page, pageSize, totalPages } = this.props
+        if (page > 1 && page <= totalPages) {
             let pageUp = page
             dispatch(handleGetNews(page, pageSize))
             dispatch(addListData('newsList', {
@@ -59,6 +59,7 @@ function mapStateToProps({ news, listsData }) {
         news,
         page: newsListData ? newsListData.page : 1,
         pageSize: newsListData ? newsListData.pageSize : 10,
+        totalPages: 10
     }
 }
 

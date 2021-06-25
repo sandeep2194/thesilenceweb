@@ -14,7 +14,7 @@ function BackHeader(props) {
                 <Container>
                     <Navbar bg="none">
                         <Navbar.Brand>
-                            <ArrowLeft className='control-icons' onClick={back} />
+                            <ArrowLeft className='control-icons ml-2' onClick={back} />
                         </Navbar.Brand>
                         <Col>
                             <h6 className='pt-2'>{props.pageName}</h6>

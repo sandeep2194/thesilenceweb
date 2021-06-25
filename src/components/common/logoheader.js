@@ -27,7 +27,7 @@ function LogoHeader(props) {
                             {pageName ?
                                 <Row>
                                     <Link to="/">
-                                        <Image src={slogo} alt="Logo" />
+                                        <Image src={slogo} alt="Logo" className="ml-3" />
                                     </Link>
                                     <h6 className='pt-2'>{pageName}</h6>
                                 </Row>

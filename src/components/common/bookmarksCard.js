@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Row, Col, Image } from 'react-bootstrap'
 import TimeAgo from 'timeago-react';
 import ReactionBar from './reactionbar'
+import { Link } from 'react-router-dom'
 
 class BookmarksCard extends Component {
     render() {
@@ -11,11 +12,15 @@ class BookmarksCard extends Component {
                 <Col className='mr-2'>
                     <Row className='justify-content-center my-3'>
                         <Col className='mt-2'>
-                            <h6 className='font-weight-bold'>{title}</h6>
+                            <Link to={`/news/${_id}`}>
+                                <h6 className='font-weight-bold'>{title}</h6>
+                            </Link>
                         </Col>
                         <Col xs={4} className='mr-2'>
                             <Row className='justify-content-end' >
-                                <Image src={imageUrl} height={75} width={75} className='rounded' />
+                                <Link to={`/news/${_id}`}>
+                                    <Image src={imageUrl} height={75} width={75} className='rounded' />
+                                </Link>
                             </Row>
                         </Col>
                     </Row>

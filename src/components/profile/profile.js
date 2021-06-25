@@ -7,6 +7,7 @@ import UserPostList from './userPostList'
 import UserInfoProfile from './userInfoProfile'
 import { Link } from 'react-router-dom'
 import { addListData } from '../../actions/listsData'
+import FeatherIcon from 'feather-icons-react';
 
 class Profile extends Component {
     componentDidMount() {
@@ -39,7 +40,7 @@ class Profile extends Component {
                     {
                         isCurrentUser &&
                         <Link to='/settings'>
-                            <Button variant='outline-primary' size='sm' className=' border-0 back-header-btn'>Edit</Button>
+                            <FeatherIcon icon='settings' size='18' />
                         </Link>
                     }
                 </BackHeader>

@@ -24,7 +24,6 @@ import SupportForm from './settings/support';
 import VideoCard1 from './videos/videoCard1'
 
 const AllRoutes = () => {
-    const token = localStorage.getItem('token')
     return (
         <Switch>
             <Route exact path="/">
@@ -101,10 +100,14 @@ const AllRoutes = () => {
             <Route path='/choose-topics'
                 component={ChooseTopic} />
             <Route exact path='/settings'
-                render={() => (
-                    token ? <Settings /> :
-                        <Redirect to="/send-otp" />
-                )}
+                render={() => {
+                    const token = localStorage.getItem('token')
+                    if (token) {
+                        return <Settings />
+                    } else {
+                        return <Redirect to="/send-otp" />
+                    }
+                }}
             />
             <Route exact path='/settings/Account' component={Account} />
             <Route path='/settings/ChooseLanguage'>

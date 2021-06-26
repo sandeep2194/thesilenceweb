@@ -1,18 +1,28 @@
-import React, { Fragment, } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Row, Col, Image, Button } from 'react-bootstrap'
 import moment from 'moment';
 import defaultUserPic from '../../assets/images/user.svg';
 import FeatherIcon from 'feather-icons-react';
 import { connect } from 'react-redux';
 import { handleFollow } from '../../actions/user'
+import RevivoModal from './modals';
+import SmallUserCard from './smallUserCard'
 
-const userInfoProfile = (props) => {
+const UserInfoProfile = (props) => {
+    const [showM1, setShowM1] = useState(false);
+    const [showM2, setShowM2] = useState(false);
+    const handleClose1 = () => setShowM1(false);
+    const handleClose2 = () => setShowM2(false);
+    const handleShow1 = () => setShowM1(true);
+    const handleShow2 = () => setShowM2(true);
+
     const handleFollowHere = () => {
         const { dispatch, user } = props
         const { _id } = user
         dispatch(handleFollow(_id))
     }
     const { user, isCurrentUser, followedByCurrentUser } = props
+    const { followingData, followersData } = user
     return (
         <Fragment>
             <Row className='justify-content-center align-items-center'>
@@ -72,17 +82,16 @@ const userInfoProfile = (props) => {
 
                                     </Row>
                                 </Col>
-                                <Col>
+                                <Col onClick={handleShow1} className='pointer'>
                                     <Row className='justify-content-center'>
                                         <h4>{user.followers}</h4>
-
                                     </Row>
                                     <Row className='justify-content-center'>
                                         <p className='profile-meta'> Followers</p>
 
                                     </Row>
                                 </Col>
-                                <Col>
+                                <Col onClick={handleShow2} className='pointer'>
                                     <Row className='justify-content-center'>
                                         <h4>{user.following ? user.following : '0'}</h4>
 
@@ -108,8 +117,22 @@ const userInfoProfile = (props) => {
                     </Row>
                 </Col>
             </Row>
+            <RevivoModal show={showM1} heading='Followers' handleClose={handleClose1}>
+                {
+                    followersData.map((u, i) => (
+                        <SmallUserCard currentCardUserId={u} key={i} />
+                    ))
+                }
+            </RevivoModal>
+            <RevivoModal show={showM2} heading='Following' handleClose={handleClose2}>
+                {
+                    followingData.map((u, i) => (
+                        <SmallUserCard currentCardUserId={u} key={i} />
+                    ))
+                }
+            </RevivoModal>
         </Fragment >
     )
 }
 
-export default connect()(userInfoProfile)
+export default connect()(UserInfoProfile)

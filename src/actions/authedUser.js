@@ -2,7 +2,7 @@ import { getOtp, verifyOtp, postUser, fetchBookmarks } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import history from '../utils/history'
 import { toastr } from 'react-redux-toastr'
-import { addUser, updateUser } from './user'
+import { addUser, updateUser, handleAddFollowingData, handleAddFollowersData } from './user'
 import { CheckError } from '../utils/helper'
 import { receiveNews } from './news'
 
@@ -29,7 +29,6 @@ export function handleReceiveBookmarksData() {
             }).catch((err) => {
                 console.error(err)
                 dispatch(hideLoading())
-                console.log(err)
                 CheckError(err)
             })
     }
@@ -89,6 +88,8 @@ export function handleVerifyOtp(phoneNumber, OTP) {
                 dispatch(hideLoading())
                 dispatch(handleReceiveBookmarksData())
                 toastr.info(`Login Success`)
+                dispatch(handleAddFollowersData(res.userInfo._id))
+                dispatch(handleAddFollowingData(res.userInfo._id))
             }).catch((err) => {
                 toastr.error('Error verifying OTP', 'please try again later.')
                 console.error(err)

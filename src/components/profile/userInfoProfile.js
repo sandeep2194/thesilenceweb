@@ -29,7 +29,7 @@ const UserInfoProfile = (props) => {
         dispatch(handleFollow(_id))
     }
     const { isCurrentUser, followedByCurrentUser } = props
-    const { followingData, followersData } = user
+    const { followingData, followersData, followers, following } = user
     return (
         <Fragment>
             <Row className='justify-content-center align-items-center'>
@@ -126,7 +126,7 @@ const UserInfoProfile = (props) => {
             </Row>
             <RevivoModal show={showM1} heading='Followers' handleClose={handleClose1}>
                 {
-                    followersData.length > 0 ?
+                    followers > 0 ?
                         followersData.map((u, i) => (
                             <SmallUserCard currentCardUserId={u} key={i} />
                         ))
@@ -135,7 +135,7 @@ const UserInfoProfile = (props) => {
             </RevivoModal>
             <RevivoModal show={showM2} heading='Following' handleClose={handleClose2}>
                 {
-                    followingData.length > 0 ?
+                    following > 0 ?
                         followingData.map((u, i) => (
                             <SmallUserCard currentCardUserId={u} key={i} />
                         ))

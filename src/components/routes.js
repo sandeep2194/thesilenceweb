@@ -22,6 +22,7 @@ import ChooseLang from './onBoarding/chooseLang';
 import ChooseLocation from './onBoarding/chooseLocation'
 import BackHeader from './common/backheader'
 import ChooseTopic from './onBoarding/chooseTopic';
+import VideoList from './videos/videoList'
 
 const AllRoutes = () => {
     return (
@@ -43,6 +44,7 @@ const AllRoutes = () => {
                 render={() => (
                     <Fragment>
                         <LogoHeader pageName='Videos' />
+                        <VideoList />
                     </Fragment>
                 )}
             />

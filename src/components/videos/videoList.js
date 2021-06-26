@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import VideoListItem from './videoListItem'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import VideoCard1 from './videoCard1'
 
 class VideoList extends Component {
     render() {
@@ -13,9 +13,9 @@ class VideoList extends Component {
                 <Row className='justify-content-center mt-3'>
                     <Col lg={6}>
                         <ul>
-                            {videoList.map((id, index) => (
+                            {videoList.map((item, index) => (
                                 <li key={index}>
-                                    <VideoListItem id={id} />
+                                    <VideoCard1 item={item} />
                                 </li>
                             ))}
                         </ul>
@@ -30,7 +30,7 @@ function mapStateToProps({ news }) {
     const token = localStorage.getItem('token')
     return {
         isLoggedIn: token ? true : false,
-        videoList: Object.keys(news).filter(item => item.isVideo === true)
+        videoList: Object.values(news).filter(item => item.isVideo === true)
     }
 }
 export default connect(mapStateToProps)(VideoList)

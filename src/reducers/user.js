@@ -56,14 +56,16 @@ export default function users(state = {}, action) {
             if (!user2.followersData) {
                 user2.followersData = []
             }
-            user2.followersData.concat(action.followersData)
+            const newFollowersData = [...action.followersData]
+            user2.followersData = newFollowersData
             oldState[action.userId] = user2
             return { ...oldState }
         case ADD_FOLLOWING_DATA:
             if (!user2.followingData) {
                 user2.followingData = []
             }
-            user2.followingData.concat(action.followingData)
+            const newFollowingData = [...action.followingData]
+            user2.followingData = newFollowingData
             oldState[action.userId] = user2
             return { ...oldState }
         default:

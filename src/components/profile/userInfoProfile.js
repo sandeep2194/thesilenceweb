@@ -126,7 +126,7 @@ const UserInfoProfile = (props) => {
             </Row>
             <RevivoModal show={showM1} heading='Followers' handleClose={handleClose1}>
                 {
-                    followers > 0 ?
+                    followers > 0 && followersData ?
                         followersData.map((u, i) => (
                             <SmallUserCard currentCardUserId={u} key={i} />
                         ))
@@ -135,7 +135,7 @@ const UserInfoProfile = (props) => {
             </RevivoModal>
             <RevivoModal show={showM2} heading='Following' handleClose={handleClose2}>
                 {
-                    following > 0 ?
+                    following > 0 && followingData ?
                         followingData.map((u, i) => (
                             <SmallUserCard currentCardUserId={u} key={i} />
                         ))

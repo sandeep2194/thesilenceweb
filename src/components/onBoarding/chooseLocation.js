@@ -3,6 +3,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
 import { handleUpdateUser } from '../../actions/authedUser'
 import { connect } from 'react-redux'
+import history from '../../utils/history'
+import { toastr } from 'react-redux-toastr'
 
 class ChooseLocation extends Component {
     state = {
@@ -58,7 +60,6 @@ class ChooseLocation extends Component {
             const selected = locations.includes(location)
 
             if (selected) {
-                console.log('in selected')
                 locations.splice(index, 1)
             } else {
                 locations.push(location)
@@ -72,12 +73,19 @@ class ChooseLocation extends Component {
     handleLocSubmit = () => {
         const { selectedLocations } = this.state
         const { dispatch, stepCb } = this.props
-        stepCb(2)
+        stepCb &&
+            stepCb(2)
         dispatch(handleUpdateUser({
             locations: selectedLocations,
         }))
+
+        if (!stepCb) {
+            history.goBack()
+            toastr.success('Locations Saved')
+        }
     }
     render() {
+        const { btnText } = this.props
         return (
             <Fragment>
                 <Container className='my-5'>
@@ -94,7 +102,7 @@ class ChooseLocation extends Component {
                     </Row>
 
                     <Row className='mt-5 mx-1'>
-                        <Button type="button" size='md' className='btn-block' onClick={this.handleLocSubmit}>Continue</Button>
+                        <Button type="button" size='md' className='btn-block' onClick={this.handleLocSubmit}>{btnText}</Button>
                     </Row>
                 </Container>
             </Fragment>

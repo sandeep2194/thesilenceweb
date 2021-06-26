@@ -45,7 +45,7 @@ class Settings extends Component {
                                     <h6>Stats & Payments</h6>
                                 </Col>
                                 <Col xs={1}>
-                                    <Link to={`/stats`}>
+                                    <Link to={`/settings/stats`}>
                                         <FeatherIcon icon='chevron-right' size='18' color='#7B8794' />
                                     </Link>
                                 </Col>
@@ -55,7 +55,7 @@ class Settings extends Component {
                                     <h6 className='text-primary'>Support</h6>
                                 </Col>
                                 <Col xs={1}>
-                                    <Link to={`/support`}>
+                                    <Link to={`/settings/support`}>
                                         <FeatherIcon icon='chevron-right' size='18' color='#7B8794' />
                                     </Link>
 

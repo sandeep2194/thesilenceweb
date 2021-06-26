@@ -42,7 +42,7 @@ function userInfoProfile(props) {
                                 <span>
                                     <FeatherIcon icon='calendar' color='#828282' size='14'
                                         className='mr-1 mb-1' />
-                                </span>Born
+                                </span>{'Born  '}
                                 {
                                     user.dob
                                         ? moment(user.dob).format('MMM/YYYY')

@@ -3,7 +3,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
 import { handleUpdateUser } from '../../actions/authedUser'
 import { connect } from 'react-redux'
-
+import history from '../../utils/history';
+import { toastr } from 'react-redux-toastr'
 class ChooseLang extends Component {
     state = {
         selectedLanguages: []
@@ -60,7 +61,6 @@ class ChooseLang extends Component {
             const selected = langs.includes(code)
 
             if (selected) {
-                console.log('in selected')
                 langs.splice(index, 1)
             } else {
                 langs.push(code)
@@ -73,12 +73,19 @@ class ChooseLang extends Component {
     handleLangSubmit = () => {
         const { selectedLanguages } = this.state
         const { dispatch, stepCb } = this.props
-        stepCb(1)
+        stepCb &&
+            stepCb(1)
         dispatch(handleUpdateUser({
             languages: selectedLanguages,
         }))
+
+        if (!stepCb) {
+            history.goBack()
+            toastr.success('Languages Saved')
+        }
     }
     render() {
+        const { btnText } = this.props
         return (
             <Fragment>
                 <Container className='my-5'>
@@ -94,7 +101,7 @@ class ChooseLang extends Component {
                         </Col>
                     </Row>
                     <Row className='mt-5 mx-1'>
-                        <Button type="button" size='md' className='btn-block' onClick={this.handleLangSubmit}>Continue</Button>
+                        <Button type="button" size='md' className='btn-block' onClick={this.handleLangSubmit}>{btnText}</Button>
                     </Row>
                 </Container>
             </Fragment>

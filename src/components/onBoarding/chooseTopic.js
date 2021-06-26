@@ -3,6 +3,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
 import { connect } from 'react-redux'
 import { handleUpdateUser } from '../../actions/authedUser'
+import history from '../../utils/history'
+import { toastr } from 'react-redux-toastr'
 
 class ChooseTopic extends Component {
     state = {
@@ -57,7 +59,6 @@ class ChooseTopic extends Component {
             const selected = topics.includes(topic)
 
             if (selected) {
-                console.log('in selected')
                 topics.splice(index, 1)
             } else {
                 topics.push(topic)
@@ -71,12 +72,18 @@ class ChooseTopic extends Component {
     handleTopicSubmit = () => {
         const { selectedTopics } = this.state
         const { dispatch, stepCb } = this.props
-        stepCb(3)
+        stepCb &&
+            stepCb(3)
         dispatch(handleUpdateUser({
             topics: selectedTopics,
         }))
+        if (!stepCb) {
+            history.goBack()
+            toastr.success('Topics Saved')
+        }
     }
     render() {
+        const { btnText } = this.props
         return (
             <Fragment>
                 <Container className='my-5'>
@@ -89,7 +96,7 @@ class ChooseTopic extends Component {
                         </Col>
                     </Row>
                     <Row className='mt-5 mx-1'>
-                        <Button type="button" size='md' className='btn-block' onClick={this.handleTopicSubmit}>Continue</Button>
+                        <Button type="button" size='md' className='btn-block' onClick={this.handleTopicSubmit}>{btnText}</Button>
                     </Row>
                 </Container>
 

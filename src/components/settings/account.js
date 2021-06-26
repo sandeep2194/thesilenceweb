@@ -1,31 +1,58 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useRef } from 'react';
 import BackHeader from '../common/backheader'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import { Formik, Form } from 'formik';
+import { Formik, Form, } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux'
 import moment from 'moment';
 import { DatePicker, TextInput, Select } from '../common/formFields'
+import { handleUpdateUser } from '../../actions/authedUser'
+import history from '../../utils/history'
+import { toastr } from 'react-redux-toastr';
 
 const Account = (props) => {
 
     const today = new Date()
     const maxDate = moment(today).subtract(13, 'years').format('YYYY-MM-DD');
 
-    const { user } = props;
-    const { email, phone, bio, accountNumber, ifscCode, gender } = user
+    const { user, dispatch } = props;
+    const { name, email, bio, gender } = user
     const userDob = moment(user.dob).format('YYYY-MM-DD')
+    const formRef = useRef()
+    const formikRef = useRef()
+    const handleSave = () => {
+        if (formikRef.current) {
+            const { values } = formikRef.current
+            dispatch(handleUpdateUser({
+                email: values.email,
+                name: values.name,
+                gender: values.gender,
+                dob: values.dob,
+                bio: values.bio,
+                accountNumber: values.bankAccount,
+                ifscCode: values.ifscCode,
+            }))
 
+            toastr.info('Account Details Saved')
+            history.goBack()
+        }
+    };
+    const handleSubmitThroughRef = () => {
+        formRef.current.dispatchEvent(
+            new Event("submit", { cancelable: true, bubbles: true })
+        );
+    };
     return (
         <Fragment  >
             <BackHeader pageName='Account'>
-                <Button type="submit" size='sm' form='account-settings'>Save</Button>
+                <Button type="submit" size='sm' onClick={handleSubmitThroughRef}>Save</Button>
             </BackHeader>
             <Container>
                 <Row>
                     <Col lg={6} className='mt-4'>
                         <Formik
-                            initialValues={{ email: email, mobileNumber: phone, bio: bio ? bio : '', bankAccount: accountNumber, ifscCode: ifscCode, gender: gender, dob: user.dob ? userDob : maxDate }}
+                            innerRef={formikRef}
+                            initialValues={{ name: name, email: email, bio: bio ? bio : '', bankAccount: '', ifscCode: '', gender: gender, dob: user.dob ? userDob : maxDate }}
                             validationSchema={Yup.object({
                                 mobileNumber: Yup.string()
                                     .max(10, 'Must be 10 digits or less')
@@ -38,8 +65,11 @@ const Account = (props) => {
                                     .email('Invalid email address')
                                     .required('Required'),
                                 bankAccount: Yup.string()
-                                    .matches(/^[0-9]+$/, "Must be only digits"),
-                                ifscCode: Yup.string(),
+                                    .matches(/^[0-9]+$/, "Must be only digits")
+                                    .required('Required'),
+                                ifscCode: Yup.string()
+                                    .required('Required')
+                                ,
                                 gender: Yup.string()
                                     .oneOf(
                                         ['male', 'female', 'other'],
@@ -50,11 +80,12 @@ const Account = (props) => {
                                     .max(maxDate, '')
                             })}
                             onSubmit={(values, { setSubmitting }) => {
-                                alert('submit hua')
-                                setSubmitting(false)
+
                             }}
                         >
-                            <Form id='account-settings'>
+                            <Form id='account-settings' ref={formRef}
+                                onSubmit={handleSave}
+                            >
                                 <Row className='mt-4'>
                                     <TextInput
                                         name="email"
@@ -64,9 +95,9 @@ const Account = (props) => {
                                 </Row>
                                 <Row className='mt-4'>
                                     <TextInput
-                                        name="mobileNumber"
+                                        name="name"
                                         type="text"
-                                        placeholder="mobile number"
+                                        placeholder="first and last name"
                                     />
                                 </Row>
                                 <Row className='mt-4'>
@@ -106,6 +137,7 @@ const Account = (props) => {
                     </Col>
                 </Row>
             </Container>
+
         </Fragment>
 
     )

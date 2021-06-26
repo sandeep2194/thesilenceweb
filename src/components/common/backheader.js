@@ -3,7 +3,6 @@ import { Navbar, Container, Col } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons'
 import history from '../../utils/history'
 import BottomNav from './bottomNav'
-
 function BackHeader(props) {
     const back = () => {
         history.goBack()

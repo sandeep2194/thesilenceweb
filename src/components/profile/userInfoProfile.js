@@ -1,12 +1,18 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, } from 'react'
 import { Row, Col, Image, Button } from 'react-bootstrap'
 import moment from 'moment';
 import defaultUserPic from '../../assets/images/user.svg';
 import FeatherIcon from 'feather-icons-react';
+import { connect } from 'react-redux';
+import { handleFollow } from '../../actions/user'
 
-
-function userInfoProfile(props) {
-    const { user, isCurrentUser } = props
+const userInfoProfile = (props) => {
+    const handleFollowHere = () => {
+        const { dispatch, user } = props
+        const { _id } = user
+        dispatch(handleFollow(_id))
+    }
+    const { user, isCurrentUser, followedByCurrentUser } = props
     return (
         <Fragment>
             <Row className='justify-content-center align-items-center'>
@@ -24,8 +30,10 @@ function userInfoProfile(props) {
                                 </Col>
                                 <Col xs={4} lg={2}>
                                     {!isCurrentUser &&
-                                        <Button size='sm' variant="outline-primary" className='mt-1'>
-                                            Follow
+                                        <Button size='sm' variant="outline-primary" className='mt-1'
+                                            onClick={handleFollowHere}
+                                        >
+                                            {followedByCurrentUser ? 'Unfollow' : 'Follow'}
                                         </Button>
                                     }
                                 </Col>
@@ -104,4 +112,4 @@ function userInfoProfile(props) {
     )
 }
 
-export default userInfoProfile
+export default connect()(userInfoProfile)

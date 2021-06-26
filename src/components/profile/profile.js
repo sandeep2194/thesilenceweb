@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Container, Row, Col, } from 'react-bootstrap'
 import BackHeader from '../common/backheader'
-import { handleReceiveNews } from '../../actions/user'
+import { handleReceiveNews, handleAddFollowersData, handleAddFollowingData } from '../../actions/user'
 import UserPostList from './userPostList'
 import UserInfoProfile from './userInfoProfile'
 import { Link } from 'react-router-dom'
@@ -20,6 +20,8 @@ class Profile extends Component {
                 pageSize: 10
             }))
         }
+        dispatch(handleAddFollowersData(userId))
+        dispatch(handleAddFollowingData(userId))
     }
     handleBottomScrollNewsPost = () => {
         const { dispatch, page, pageSize, userId, totalPages } = this.props
@@ -33,7 +35,7 @@ class Profile extends Component {
         }
     }
     render() {
-        const { isCurrentUser, user, userNews, userId } = this.props
+        const { isCurrentUser, user, userNews, userId, followedByCurrentUser } = this.props
         return (
             <Fragment>
                 <BackHeader pageName='PROFILE'>
@@ -45,7 +47,7 @@ class Profile extends Component {
                     }
                 </BackHeader>
                 <Container>
-                    <UserInfoProfile user={user} isCurrentUser={isCurrentUser} />
+                    <UserInfoProfile user={user} isCurrentUser={isCurrentUser} followedByCurrentUser={followedByCurrentUser} />
                     <Row className="justify-content-center" >
                         <Col lg={6} >
                             <Row>
@@ -71,6 +73,8 @@ function mapStateToProps({ users, listsData, news }, props) {
     const user = users[userId]
     const profileNewsListData = listsData[userId]
     const userNews = Object.values(news).filter(item => item.authorId === userId)
+    const followingData = users[currentUser].followingData
+    const followedByCurrentUser = followingData ? followingData.includes(userId) : false
     return {
         isCurrentUser,
         userId,
@@ -78,7 +82,9 @@ function mapStateToProps({ users, listsData, news }, props) {
         page: profileNewsListData ? profileNewsListData.page : 1,
         pageSize: profileNewsListData ? profileNewsListData.pageSize : 10,
         userNews,
-        totalPage: 5
+        totalPage: 5,
+        followingData,
+        followedByCurrentUser
     }
 }
 export default connect(mapStateToProps)(Profile)

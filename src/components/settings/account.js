@@ -45,7 +45,7 @@ const Account = (props) => {
     return (
         <Fragment  >
             <BackHeader pageName='Account'>
-                <Button type="submit" size='sm' onClick={handleSubmitThroughRef}>Save</Button>
+                <Button type="submit" size='sm' onClick={handleSubmitThroughRef} >Save</Button>
             </BackHeader>
             <Container>
                 <Row>

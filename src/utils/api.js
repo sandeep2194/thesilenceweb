@@ -139,3 +139,42 @@ export const userNameValidation = async (username) => {
 
     return res.data
 }
+
+export const followUser = async (userId) => {
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/follow?followingUserId=${userId}`
+    const res = await axios({
+        method: 'post',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    })
+    return res.data
+}
+
+export const getFollowers = async (userId) => {
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/followers?followingUserId=${userId}`
+    const res = await axios({
+        method: 'get',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    })
+    return res.data
+}
+
+export const getFollowings = async (userId) => {
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/followings?userId=${userId}`
+    const res = await axios({
+        method: 'get',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    return res.data
+}

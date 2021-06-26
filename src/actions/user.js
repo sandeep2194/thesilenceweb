@@ -1,5 +1,5 @@
 
-import { fetchUser, fetchNewsByAuthor } from '../utils/api'
+import { fetchUser, fetchNewsByAuthor, followUser, getFollowers, getFollowings } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { CheckError } from '../utils/helper'
 
@@ -8,6 +8,33 @@ import { receiveNews } from './news'
 export const ADD_USER = 'ADD_USER'
 export const TOGGLE_USER_BOOKMARK = 'TOGGLE_USER_BOOKMARK'
 export const UPDATE_USER = 'UPDATE_USER'
+export const TOGGLE_FOLLOW = 'FOLLOW'
+export const ADD_FOLLOWERS_DATA = 'ADD_FOLLOWERS_DATA'
+export const ADD_FOLLOWING_DATA = 'ADD_FOLLOWING_DATA'
+
+function addFollowingData(followingData, userId) {
+    return {
+        type: ADD_FOLLOWING_DATA,
+        followingData,
+        userId
+    }
+}
+
+function addFollowersData(followersData, userId) {
+    return {
+        type: ADD_FOLLOWERS_DATA,
+        followersData,
+        userId,
+    }
+}
+
+function toggleFollow(followingId) {
+    return {
+        type: TOGGLE_FOLLOW,
+        followingId,
+    }
+}
+
 
 export function updateUser(user) {
     return {
@@ -27,6 +54,39 @@ export function toggleUserBookmark(postId) {
     return {
         type: TOGGLE_USER_BOOKMARK,
         postId,
+    }
+}
+export function handleAddFollowingData(userId) {
+    return (dispatch) => {
+        getFollowings(userId).then((data) => {
+            const followings = data.result
+            const followingIds = followings.map((u) => u._id)
+            dispatch(addFollowingData(followingIds, userId))
+        }).catch((error) => { console.error(error) })
+    }
+}
+
+export function handleAddFollowersData(followingId) {
+    return (dispatch) => {
+        getFollowers(followingId).then((data) => {
+            const followers = data.result
+            const followerIds = followers.map((u) => u._id)
+            dispatch(addFollowersData(followerIds, followingId))
+        }).catch(err => console.error(err))
+    }
+}
+
+export function handleFollow(followingId) {
+    return (dispatch) => {
+        dispatch(showLoading())
+        dispatch(toggleFollow(followingId))
+        followUser(followingId).then(() => {
+            dispatch(hideLoading())
+        }).catch((error) => {
+            dispatch(toggleFollow(followingId))
+            dispatch(hideLoading())
+            console.error(error)
+        })
     }
 }
 

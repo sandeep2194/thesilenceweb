@@ -7,21 +7,28 @@ import { connect } from 'react-redux';
 import { handleFollow } from '../../actions/user'
 import RevivoModal from './modals';
 import SmallUserCard from './smallUserCard'
+import { handleAddFollowersData, handleAddFollowingData } from '../../actions/user'
 
 const UserInfoProfile = (props) => {
     const [showM1, setShowM1] = useState(false);
     const [showM2, setShowM2] = useState(false);
     const handleClose1 = () => setShowM1(false);
     const handleClose2 = () => setShowM2(false);
-    const handleShow1 = () => setShowM1(true);
-    const handleShow2 = () => setShowM2(true);
+    const { dispatch, user } = props
+    const { _id } = user
+    const handleShow1 = () => {
+        dispatch(handleAddFollowersData(_id))
+        setShowM1(true)
+    }
+    const handleShow2 = () => {
+        dispatch(handleAddFollowingData(_id))
+        setShowM2(true)
+    }
 
     const handleFollowHere = () => {
-        const { dispatch, user } = props
-        const { _id } = user
         dispatch(handleFollow(_id))
     }
-    const { user, isCurrentUser, followedByCurrentUser } = props
+    const { isCurrentUser, followedByCurrentUser } = props
     const { followingData, followersData } = user
     return (
         <Fragment>
@@ -119,16 +126,20 @@ const UserInfoProfile = (props) => {
             </Row>
             <RevivoModal show={showM1} heading='Followers' handleClose={handleClose1}>
                 {
-                    followersData.map((u, i) => (
-                        <SmallUserCard currentCardUserId={u} key={i} />
-                    ))
+                    followersData.length > 0 ?
+                        followersData.map((u, i) => (
+                            <SmallUserCard currentCardUserId={u} key={i} />
+                        ))
+                        : <h6>No followers</h6>
                 }
             </RevivoModal>
             <RevivoModal show={showM2} heading='Following' handleClose={handleClose2}>
                 {
-                    followingData.map((u, i) => (
-                        <SmallUserCard currentCardUserId={u} key={i} />
-                    ))
+                    followingData.length > 0 ?
+                        followingData.map((u, i) => (
+                            <SmallUserCard currentCardUserId={u} key={i} />
+                        ))
+                        : <h6>No one following</h6>
                 }
             </RevivoModal>
         </Fragment >

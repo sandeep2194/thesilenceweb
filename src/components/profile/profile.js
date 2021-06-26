@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Container, Row, Col, } from 'react-bootstrap'
 import BackHeader from '../common/backheader'
-import { handleReceiveNews, handleAddFollowersData, handleAddFollowingData } from '../../actions/user'
+import { handleReceiveNews } from '../../actions/user'
 import UserPostList from './userPostList'
 import UserInfoProfile from './userInfoProfile'
 import { Link } from 'react-router-dom'
@@ -20,8 +20,6 @@ class Profile extends Component {
                 pageSize: 10
             }))
         }
-        dispatch(handleAddFollowersData(userId))
-        dispatch(handleAddFollowingData(userId))
     }
     handleBottomScrollNewsPost = () => {
         const { dispatch, page, pageSize, userId, totalPages } = this.props

@@ -193,3 +193,16 @@ export const sendUsageTime = async (usage) => {
 
     return res.data
 }
+export const getAccountInfo = async () => {
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/accountInfo`
+    const res = await axios({
+        method: 'get',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
+
+    return res.data
+}

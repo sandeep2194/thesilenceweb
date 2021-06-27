@@ -54,6 +54,17 @@ function addComment(itemId, userId, content) {
         content,
     }
 }
+export const handleSendClick = (newsId) => {
+    return (dispatch) => {
+        dispatch(showLoading())
+        interaction(newsId, 'click', {}).then(() => {
+            dispatch(hideLoading())
+        }).catch((error) => {
+            dispatch(hideLoading())
+            console.error(error)
+        })
+    }
+}
 
 export function handleAddComment(id, content) {
     return (dispatch) => {

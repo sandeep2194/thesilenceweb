@@ -1,14 +1,19 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import SinglePostHeader from '../common/singlePostHeader'
 import { Image, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import TimeAgo from 'timeago-react'
 import ScrollMemory from '../common/scrollMemory'
+import { handleSendClick } from '../../actions/news'
 
 const SingleNews = (props) => {
     const { newsId } = props.match.params
     const { imageUrl, authorName, shares, comments, publishedAt, authorId, title, content, _id } = props.item
+    const { dispatch } = props
+    useEffect(() => {
+        dispatch(handleSendClick(newsId))
+    }, [newsId, dispatch])
     return (
         <Fragment>
             <SinglePostHeader id={newsId} />

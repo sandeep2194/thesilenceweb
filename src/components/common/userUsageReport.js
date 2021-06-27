@@ -8,15 +8,15 @@ const UserUsageReport = (props) => {
     const debounced = useDebouncedCallback(
         () => { dispatch(addScroll()) }, 1000
     );
-    const handleSendingUsage = () => {
-        const hidden = document.hidden
-        hidden &&
-            dispatch(handleSendData())
-    }
     useEffect(() => {
+        const handleSendingUsage = () => {
+            const hidden = document.hidden
+            hidden &&
+                dispatch(handleSendData())
+        }
         window.addEventListener('scroll', debounced)
         document.addEventListener('visibilitychange', handleSendingUsage)
-    }, [debounced, handleSendingUsage])
+    }, [debounced, dispatch])
     return null
 }
 

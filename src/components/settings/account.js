@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useRef, useState, useEffect } from 'react';
 import BackHeader from '../common/backheader'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { Formik, Form, } from 'formik';
@@ -9,12 +9,20 @@ import { DatePicker, TextInput, Select } from '../common/formFields'
 import { handleUpdateUser } from '../../actions/authedUser'
 import history from '../../utils/history'
 import { toastr } from 'react-redux-toastr';
+import { getAccountInfo } from '../../utils/api'
 
 const Account = (props) => {
-
+    const [bankAccount, setBankAccount] = useState('')
+    const [ifsc, setIfsc] = useState('')
+    useEffect(() => {
+        getAccountInfo().then((data) => {
+            const accountInfo = data.result
+            setBankAccount(accountInfo.bankAccount)
+            setIfsc(accountInfo.ifsc)
+        }).catch((err) => { console.error(err) })
+    }, [])
     const today = new Date()
     const maxDate = moment(today).subtract(13, 'years').format('YYYY-MM-DD');
-
     const { user, dispatch } = props;
     const { name, email, bio, gender } = user
     const userDob = moment(user.dob).format('YYYY-MM-DD')
@@ -29,8 +37,8 @@ const Account = (props) => {
                 gender: values.gender,
                 dob: values.dob,
                 bio: values.bio,
-                accountNumber: values.bankAccount,
-                ifscCode: values.ifscCode,
+                bankAccount: values.bankAccount,
+                ifsc: values.ifscCode,
             }))
 
             toastr.info('Account Details Saved')
@@ -51,8 +59,9 @@ const Account = (props) => {
                 <Row>
                     <Col lg={6} className='mt-4'>
                         <Formik
+                            enableReinitialize
                             innerRef={formikRef}
-                            initialValues={{ name: name, email: email, bio: bio ? bio : '', bankAccount: '', ifscCode: '', gender: gender, dob: user.dob ? userDob : maxDate }}
+                            initialValues={{ name: name, email: email, bio: bio ? bio : '', bankAccount: bankAccount, ifscCode: ifsc, gender: gender, dob: user.dob ? userDob : maxDate }}
                             validationSchema={Yup.object({
                                 mobileNumber: Yup.string()
                                     .max(10, 'Must be 10 digits or less')
@@ -102,7 +111,7 @@ const Account = (props) => {
                                 </Row>
                                 <Row className='mt-4'>
                                     <Select name="gender">
-                                        <option value="" default>Select a Gender</option>
+                                        <option value="" default >Select a Gender</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                         <option value="other">Other</option>

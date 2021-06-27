@@ -4,7 +4,7 @@ import history from '../utils/history'
 import LoadingBar from 'react-redux-loading'
 import ReduxToastr from 'react-redux-toastr'
 import AllRoutes from './routes'
-
+import UserUsageReport from './common/userUsageReport';
 class App extends Component {
   render() {
     return (
@@ -21,6 +21,7 @@ class App extends Component {
             transitionOut="fadeOut"
             progressBar
             closeOnToastrClick />
+          <UserUsageReport />
         </Fragment>
       </Router>
 

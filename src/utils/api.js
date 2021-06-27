@@ -178,3 +178,18 @@ export const getFollowings = async (userId) => {
     })
     return res.data
 }
+
+export const sendUsageTime = async (usage) => {
+    const token = localStorage.getItem('token')
+    const url = `${baseUrl}/usage/time`
+    const res = await axios({
+        method: 'post',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
+        data: { ...usage }
+    })
+
+    return res.data
+}

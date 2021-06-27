@@ -4,11 +4,13 @@ import { loadingBarReducer } from 'react-redux-loading'
 import users from './user'
 import listsData from './listsData'
 import { reducer as toastrReducer } from 'react-redux-toastr'
+import usage from './usageTracking'
 
 export default combineReducers({
     news,
     users,
     listsData,
+    usage,
     toastr: toastrReducer,
     loadingBar: loadingBarReducer,
 })

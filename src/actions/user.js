@@ -1,8 +1,6 @@
-
 import { fetchUser, fetchNewsByAuthor, followUser, getFollowers, getFollowings } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { CheckError } from '../utils/helper'
-
 import { receiveNews } from './news'
 
 export const ADD_USER = 'ADD_USER'
@@ -11,6 +9,14 @@ export const UPDATE_USER = 'UPDATE_USER'
 export const TOGGLE_FOLLOW = 'FOLLOW'
 export const ADD_FOLLOWERS_DATA = 'ADD_FOLLOWERS_DATA'
 export const ADD_FOLLOWING_DATA = 'ADD_FOLLOWING_DATA'
+export const TOGGLE_FOLLOWED_BY_THIS_USER = 'TOGGLE_FOLLOWED_BY_THIS_USER'
+
+const toggleFollowedByThisUser = (userId) => {
+    return {
+        type: TOGGLE_FOLLOWED_BY_THIS_USER,
+        userId,
+    }
+}
 
 function addFollowingData(followingData, userId) {
     return {
@@ -80,10 +86,12 @@ export function handleFollow(followingId) {
     return (dispatch) => {
         dispatch(showLoading())
         dispatch(toggleFollow(followingId))
+        dispatch(toggleFollowedByThisUser(followingId))
         followUser(followingId).then(() => {
             dispatch(hideLoading())
         }).catch((error) => {
             dispatch(toggleFollow(followingId))
+            dispatch(toggleFollowedByThisUser(followingId))
             dispatch(hideLoading())
             console.error(error)
         })

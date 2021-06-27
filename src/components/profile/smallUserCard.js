@@ -9,7 +9,7 @@ const SmallUserCard = (props) => {
         const { _id } = user
         dispatch(handleFollow(_id))
     }
-    const { user, followedByThisCardUser, isLoggedInUser } = props
+    const { user, followedByThisUser, isLoggedInUser } = props
     return (
         <Container className='my-2 border-bottom border-light py-3'>
             <Row>
@@ -30,7 +30,7 @@ const SmallUserCard = (props) => {
                             <Button size='sm' variant="outline-primary" className='mt-1'
                                 onClick={handleFollowHere}
                             >
-                                {followedByThisCardUser ? 'Unfollow' : 'Follow'}
+                                {followedByThisUser ? 'Unfollow' : 'Follow'}
                             </Button>
                         </Row>
                     </Col>
@@ -41,14 +41,11 @@ const SmallUserCard = (props) => {
 }
 function mapStateToProps({ users }, props) {
     const userId = localStorage.getItem('userId')
-    const currentUser = users[userId]
-    const followingData = currentUser.followingData
     const { currentCardUserId } = props
-    const followedByThisCardUser = followingData ? followingData.includes(currentCardUserId) : false
     const isLoggedInUser = userId === currentCardUserId
     return {
         user: users[currentCardUserId],
-        followedByThisCardUser,
+        followedByThisUser: users[currentCardUserId].loggedInUserFollowsThisUser,
         isLoggedInUser,
     }
 }

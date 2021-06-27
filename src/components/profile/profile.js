@@ -65,14 +65,11 @@ class Profile extends Component {
 
 function mapStateToProps({ users, listsData, news }, props) {
     const loggedInUserId = localStorage.getItem('userId')
-    const currentUser = loggedInUserId
     const { userId } = props.match.params
-    const isCurrentUser = (currentUser === userId) ? true : false
+    const isCurrentUser = (loggedInUserId === userId) ? true : false
     const user = users[userId]
     const profileNewsListData = listsData[userId]
     const userNews = Object.values(news).filter(item => item.authorId === userId)
-    const followingData = users[currentUser].followingData
-    const followedByCurrentUser = followingData ? followingData.includes(userId) : false
     return {
         isCurrentUser,
         userId,
@@ -81,8 +78,7 @@ function mapStateToProps({ users, listsData, news }, props) {
         pageSize: profileNewsListData ? profileNewsListData.pageSize : 10,
         userNews,
         totalPage: 5,
-        followingData,
-        followedByCurrentUser
+        followedByCurrentUser: user.loggedInUserFollowsThisUser
     }
 }
 export default connect(mapStateToProps)(Profile)

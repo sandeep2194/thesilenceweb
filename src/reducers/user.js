@@ -1,4 +1,4 @@
-import { ADD_USER, TOGGLE_USER_BOOKMARK, UPDATE_USER, TOGGLE_FOLLOW, ADD_FOLLOWERS_DATA, ADD_FOLLOWING_DATA } from '../actions/user'
+import { ADD_USER, TOGGLE_USER_BOOKMARK, UPDATE_USER, TOGGLE_FOLLOW, ADD_FOLLOWERS_DATA, ADD_FOLLOWING_DATA, TOGGLE_FOLLOWED_BY_THIS_USER } from '../actions/user'
 
 export default function users(state = {}, action) {
     let oldState = { ...state }
@@ -66,6 +66,10 @@ export default function users(state = {}, action) {
             }
             const newFollowingData = [...action.followingData]
             user2.followingData = newFollowingData
+            oldState[action.userId] = user2
+            return { ...oldState }
+        case TOGGLE_FOLLOWED_BY_THIS_USER:
+            user2.loggedInUserFollowsThisUser = !user2.loggedInUserFollowsThisUser
             oldState[action.userId] = user2
             return { ...oldState }
         default:

@@ -11,7 +11,6 @@ import VerifyOtp from './login/verifyOtp';
 import Comment from './post/comment'
 import Profile from './profile/profile'
 import Bookmarks from './post/bookmarks'
-import AddPost from './post/addPost'
 import Notification from './notifications/notifications.js'
 import Settings from './settings/settings'
 import Account from './settings/account';
@@ -23,6 +22,7 @@ import ChooseLocation from './onBoarding/chooseLocation'
 import BackHeader from './common/backheader'
 import ChooseTopic from './onBoarding/chooseTopic';
 import VideoList from './videos/videoList'
+import AddPostV2 from './post/addPostV2'
 
 const AllRoutes = () => {
     return (
@@ -55,7 +55,7 @@ const AllRoutes = () => {
             <Route
                 path='/post'
                 render={() => (
-                    <AddPost />
+                    <AddPostV2 />
                 )}
             />
             <Route

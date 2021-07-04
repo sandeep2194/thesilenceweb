@@ -15,6 +15,19 @@ export const TextInput = ({ label, ...props }) => {
         </Col>
     );
 };
+export const TextArea = ({ label, ...props }) => {
+    const [field, meta] = useField(props);
+    return (
+        <Col>
+            <FormB.Control name="firstName" as='textarea' placeholder='First Name' {...field} {...props} className={meta.touched && meta.error ? 'is-invalid' : ''} />
+            {meta.touched && meta.error ? (
+                <div className="invalid-feedback">
+                    {meta.error}
+                </div>
+            ) : null}
+        </Col>
+    );
+};
 
 export const DatePicker = ({ label, ...props }) => {
     const [field, meta] = useField(props);

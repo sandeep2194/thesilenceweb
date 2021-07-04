@@ -1,10 +1,10 @@
 import React, { Fragment, useState, useMemo, useCallback } from 'react'
-import LogoHeader from '../common/logoheader'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { Container, Col, Row } from 'react-bootstrap'
+import { Container, Col, Row, Button } from 'react-bootstrap'
 import { createEditor, Transforms, Editor, Text } from 'slate'
 import { Slate, Editable, withReact, } from 'slate-react'
+import BackHeader from '../common/backheader'
 
 const CustomEditor = {
     isBoldMarkActive(editor) {
@@ -67,7 +67,9 @@ const AddPost = (props) => {
     return (
         <Fragment>
             {!isLoggedIn && <Redirect to="/send-otp" />}
-            <LogoHeader pageName='Add Post' />
+            <BackHeader pageName='Add Post' >
+                <Button size='sm'>Next</Button>
+            </BackHeader>
             <Container>
                 <Row className='justify-content-center mt-5'>
                     <Col>

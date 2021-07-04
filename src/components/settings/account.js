@@ -152,10 +152,10 @@ const Account = (props) => {
     )
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, drafts }) {
     const userId = localStorage.getItem('userId')
     return {
-        user: users[userId]
+        user: users[userId],
     }
 }
 

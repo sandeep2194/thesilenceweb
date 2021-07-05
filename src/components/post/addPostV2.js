@@ -7,15 +7,18 @@ import * as Yup from 'yup';
 import { TextInput, TextArea } from '../common/formFields'
 import FeatherIcon from 'feather-icons-react';
 import { save } from '../../actions/drafts'
+import { handlePostImageUploads } from '../../actions/news'
+import { getThumbnails } from 'video-metadata-thumbnails';
 
 class AddPostV2 extends Component {
     state = {
         modal: false,
         files: {},
-        fileUrls: []
+        fileUrls: [],
     }
     formRef = React.createRef()
     formikRef = React.createRef()
+
 
     componentWillUnmount() {
         const { fileUrls } = this.state
@@ -24,7 +27,12 @@ class AddPostV2 extends Component {
     handleNext = () => {
         if (this.formikRef.current) {
             const { values } = this.formikRef.current
-            alert(values)
+            const { dispatch, draft, history } = this.props
+            const { files } = this.state
+            const filesArr = Object.values(files)
+            if (values) {
+                dispatch(handlePostImageUploads(filesArr, draft, history))
+            }
         }
     }
     handleSubmitThroughRef = () => {
@@ -41,9 +49,22 @@ class AddPostV2 extends Component {
         const { dispatch } = this.props
         const files = e.target.files
         let fileUrls = []
-        Object.values(files).forEach(file => fileUrls.push(window.URL.createObjectURL(file)))
+        Object.values(files).forEach(file => {
+            if (file.type === "video/mp4") {
+                getThumbnails(file, {
+                    quality: 0.6,
+                    start: 0,
+                    end: 1,
+                }).then((thumbnails) => {
+                    fileUrls.push(window.URL.createObjectURL(thumbnails[1].blob))
+                    this.forceUpdate()
+                })
+            } else {
+                fileUrls.push(window.URL.createObjectURL(file))
+            }
+        })
         this.setState({ files: files, modal: false, fileUrls, })
-        dispatch(save({ ...values, files }))
+        dispatch(save({ ...values, files, topics: [], langs: [], locations: [], }))
     }
     removeImage = (i) => {
         this.setState((prevState) => {
@@ -95,23 +116,21 @@ class AddPostV2 extends Component {
                                         <TextArea name='body' placeholder='your story' rows={12} />
                                     </Col>
                                 </Row>
-                                <Row className='mt-4'>
-                                    <Col className='ml-2'>
-                                        {
-                                            fileUrls.map((file, i) => (
-                                                <Col key={i} className='mx-2' style={{
+                                <Row className='mt-4 ml-2'>
+                                    {
+                                        fileUrls.map((file, i) => (
+                                            <Col xs={2} sm={2} key={i} className='mx-2' >
+                                                <Row className='justify-content-end my-1' style={{
                                                     backgroundImage: `url(${file})`,
                                                     height: '50px',
                                                     width: '50px',
-                                                    backgroundRepeat: 'contain'
+                                                    backgroundSize: 'contain'
                                                 }}>
-                                                    <Row className='justify-content-end'>
-                                                        <FeatherIcon icon='x' size='18' color='#7B8794' onClick={() => this.removeImage(i)} className='m-1' />
-                                                    </Row>
-                                                </Col>
-                                            ))
-                                        }
-                                    </Col>
+                                                    <FeatherIcon icon='x' size='18' color='#fff' onClick={() => this.removeImage(i)} className='m-1' />
+                                                </Row>
+                                            </Col>
+                                        ))
+                                    }
                                 </Row>
                                 <Row className='mt-4'>
                                     <Col className='ml-3'>
@@ -121,12 +140,12 @@ class AddPostV2 extends Component {
                                 </Row>
                                 <Modal show={modal} onHide={this.handleModal} centered>
                                     <Modal.Header closeButton>
-                                        <Modal.Title>Media Uploader</Modal.Title>
+                                        <Modal.Title>Upload</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <Form.Control name='files' type='file' multiple
                                             onChange={this.handleFilesChange}
-                                            accept="image/png, image/jpeg"
+                                            accept="image/jpeg, video/mp4"
                                         />
                                     </Modal.Body>
                                 </Modal>
@@ -134,7 +153,6 @@ class AddPostV2 extends Component {
                         </Formik>
                     </Col>
                 </Container>
-
             </Fragment >
         )
     }

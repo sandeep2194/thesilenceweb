@@ -23,6 +23,7 @@ import BackHeader from './common/backheader'
 import ChooseTopic from './onBoarding/chooseTopic';
 import VideoList from './videos/videoList'
 import AddPostV2 from './post/addPostV2'
+import AddPostPageTwo from './post/addPostPage2'
 
 const AllRoutes = () => {
     return (
@@ -54,9 +55,11 @@ const AllRoutes = () => {
             />
             <Route
                 path='/post'
-                render={() => (
-                    <AddPostV2 />
-                )}
+                component={AddPostV2}
+            />
+            <Route
+                path='/post-meta'
+                component={AddPostPageTwo}
             />
             <Route
                 path='/notifications'

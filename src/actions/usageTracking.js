@@ -36,20 +36,19 @@ export const handleSendData = () => {
             usage.scrolls = usage.scrolls + usage.copy.scrolls
             usage.playtime = usage.playtime + usage.copy.playtime
         }
-        if (usage.scrolls || usage.playtime)
-            sendUsageTime(
-                {
-                    playTime: usage.playtime,
-                    scrolls: usage.scrolls
-                })
-                .then(() => {
-                    dispatch(clearUsage())
-                    dispatch(hideLoading())
-                })
-                .catch((e) => {
-                    console.error(e)
-                    dispatch(copyUsage())
-                    dispatch(hideLoading())
-                })
+        sendUsageTime(
+            {
+                playTime: usage.playtime,
+                scrolls: usage.scrolls
+            })
+            .then(() => {
+                dispatch(clearUsage())
+                dispatch(hideLoading())
+            })
+            .catch((e) => {
+                console.error(e)
+                dispatch(copyUsage())
+                dispatch(hideLoading())
+            })
     }
 }

@@ -1,7 +1,9 @@
-import { fetchNews, interaction } from '../utils/api'
+import { fetchNews, interaction, uploadFile, postNews } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { CheckError } from '../utils/helper'
 import { toggleUserBookmark } from './user'
+import { save } from './drafts'
+import { toastr } from 'react-redux-toastr'
 
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
@@ -9,8 +11,15 @@ export const TOGGLE_BOOKMARK = 'TOGGLE_BOOKMARK'
 export const TOGGLE_RETWEET = 'TOGGLE_RETWEET'
 export const TOGGLE_SHARE = 'TOGGLE_SHARE'
 export const ADD_COMMENT = 'ADD_COMMENT'
+export const ADD_POST = 'ADD_POST'
 
-
+function addPost(article, id) {
+    return {
+        type: ADD_POST,
+        article,
+        id,
+    }
+}
 export function receiveNews(news) {
     return {
         type: RECEIVE_NEWS,
@@ -166,6 +175,30 @@ export function handleGetNews(pageNo, pageSize) {
                 console.error(e)
             })
 
+    }
+}
+
+export function handlePostImageUploads(files, draft, history) {
+    return (dispatch) => {
+        dispatch(showLoading())
+        uploadFile(files).then((data) => {
+            dispatch(hideLoading())
+            dispatch(save({ ...draft, s3Urls: data.result }))
+            history.push('/post-meta')
+        }).catch((e) => {
+            toastr.error('Error Uploading Files', 'Unable to upload requested files to server. please try again later')
+        })
+    }
+}
+
+export function handleAddPost(article, history) {
+    return (dispatch) => {
+        const userId = localStorage.getItem('userId')
+        postNews(article).then((data) => {
+            dispatch(addPost(data.result, data.result._id))
+            dispatch(save({}))
+            history.push('/profile/' + userId)
+        }).catch((e) => (console.error(e)))
     }
 }
 

@@ -2,6 +2,43 @@ import axios from 'axios';
 
 const baseUrl = 'http://13.232.209.83:8080/api'
 // const mockApi = 'https://6a630fbc-dff3-41ea-9491-5b59538be693.mock.pstmn.io'
+const parseUrl = 'http://13.233.129.14/classes'
+
+export async function postNews(article) {
+    try {
+        const token = localStorage.getItem('token')
+        const url = `${baseUrl}/news`
+        const res = await axios({
+            method: 'POST',
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + token
+            },
+            data: { ...article }
+        })
+        return res.data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export async function getCommonData(name) {
+    try {
+        const token = localStorage.getItem('token')
+        const url = `${parseUrl}/CommonData?where={"name":${name}}`
+        const res = await axios({
+            method: 'GET',
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        console.log(res.data)
+        return res.data
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 export async function fetchNews(pageNo, pageSize) {
     try {
@@ -106,9 +143,9 @@ export async function postUser(userObj) {
     return res.data
 }
 
-export async function uploadFile(file) {
+export async function uploadFile(files) {
     let formData = new FormData();
-    formData.append("files", file);
+    files.forEach(file => formData.append('files', file))
     const token = localStorage.getItem('token')
     const url = `${baseUrl}/upload`
     const res = await axios({

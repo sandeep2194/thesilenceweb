@@ -20,7 +20,7 @@ const persistConfig = {
   key: 'root',
   version: 0,
   storage,
-  blacklist: [],
+  blacklist: ['news', 'users'],
 }
 const persistedReducer = persistReducer(persistConfig, reducer)
 const store = createStore(persistedReducer, composeEnhancers(

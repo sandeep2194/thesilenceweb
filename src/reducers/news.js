@@ -1,4 +1,4 @@
-import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK, TOGGLE_RETWEET, TOGGLE_SHARE, ADD_COMMENT, } from '../actions/news'
+import { RECEIVE_NEWS, TOGGLE_LIKE, TOGGLE_BOOKMARK, TOGGLE_RETWEET, TOGGLE_SHARE, ADD_COMMENT, ADD_POST } from '../actions/news'
 
 export default function news(state = {}, action) {
     let item = { ...state[action.itemId] }
@@ -53,6 +53,8 @@ export default function news(state = {}, action) {
             item.commentsArr = [...newCommentArr]
             oldNews[action.itemId] = item
             return { ...oldNews }
+        case ADD_POST:
+            return { ...oldNews, [action.id]: action.article }
         default:
             return state
     }

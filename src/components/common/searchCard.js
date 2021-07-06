@@ -4,11 +4,11 @@ import TimeAgo from 'timeago-react';
 import ReactionBar from './reactionbar'
 import { Link } from 'react-router-dom'
 
-class BookmarksCard extends Component {
+class SearchCard extends Component {
     render() {
         const { title, imageUrl, authorName, shares, comments, pubDate, _id } = this.props.item
         return (
-            <Row className='justify-content-center shadow-sm rounded border-light bg-white p-2 mb-2'>
+            <Row className='justify-content-center shadow-sm rounded border-light bg-white p-2 m-2'>
                 <Col className='mr-2'>
                     <Row className='justify-content-center my-3'>
                         <Col className='mt-2'>
@@ -38,12 +38,10 @@ class BookmarksCard extends Component {
                             </Row>
                         </Col>
                     </Row>
-
                 </Col>
-                <ReactionBar newsItem={this.props.item} isBookmarkPage={true} id={_id} />
             </Row>
         )
     }
 }
 
-export default BookmarksCard
+export default SearchCard

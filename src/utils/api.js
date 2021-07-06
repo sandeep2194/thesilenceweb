@@ -40,9 +40,11 @@ export async function getCommonData(name) {
     }
 }
 
-export async function fetchNews(pageNo, pageSize) {
+export async function fetchNews({ pageNo, pageSize, postType, query }) {
     try {
-        const url = `${baseUrl}/news?pageNo=${pageNo}&pageSize=${pageSize}`
+        const search = query ? `&searchText=${query}` : ''
+        const postT = postType ? `&postType=${postType}` : ''
+        const url = `${baseUrl}/news?pageNo=${pageNo}&pageSize=${pageSize}${postT}${search}`
         const headers = {
             'Content-Type': 'application/json',
             // 'Access-Control-Allow-Origin': '*',
@@ -53,6 +55,7 @@ export async function fetchNews(pageNo, pageSize) {
         console.error(error)
     }
 }
+
 export async function fetchNewsByAuthor(id, pageNo, pageSize) {
     const token = localStorage.getItem('token')
     const url = `${baseUrl}/news/author/${id}?pageNo=${pageNo}&pageSize=${pageSize}`

@@ -1,19 +1,15 @@
 import React, { Component, Fragment } from 'react'
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 class NotificationItem extends Component {
     render() {
+        const { message, pubDate, authorImage, authorName } = this.props.item
         return (
             <Fragment>
                 <Container>
                     <Row>
                         <Col lg={6}>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>Test</Card.Title>
-                                </Card.Body>
 
-                            </Card>
                         </Col>
                     </Row>
                 </Container>

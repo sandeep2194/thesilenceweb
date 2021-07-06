@@ -22,6 +22,10 @@ class Bookmarks extends Component {
                                         <BookmarksCard item={bookmark} />
                                     </li>
                                 ))}
+                                {
+                                    bookmarksData.length === 0 &&
+                                    <h4 className='text-center m-5'>No Bookmarks</h4>
+                                }
                                 <ScrollMemory name='bookmarksList' />
                             </ul>
                         </Col>

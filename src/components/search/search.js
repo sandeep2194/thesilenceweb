@@ -1,53 +1,56 @@
 import React, { Component, Fragment } from 'react';
-import { Container, Row, Col, Form, InputGroup } from 'react-bootstrap'
-import { Search as SearchIcon } from 'react-bootstrap-icons'
+import { Row, Col, Form, } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import LogoHeader from '../common/logoheader';
-
+import { fetchNews } from '../../utils/api'
+import SearchCard from '../common/searchCard';
 class Search extends Component {
     state = {
-        query: ''
+        query: '',
+        results: [],
     }
     onChange = (e) => {
-        this.setState({ query: e.target.value })
+        const q = e.target.value
+        this.setState({ query: q })
+        fetchNews({ pageNo: 1, pageSize: 30, query: q })
+            .then((d) => {
+                d.result && q &&
+                    this.setState({
+                        results: d.result
+                    })
+            })
+            .catch((err) => console.log(err))
     }
     render() {
+        const { query, results } = this.state
         return (
             <Fragment>
                 <LogoHeader pageName='Search' />
-                <Container className='pt-5'>
+                <Fragment>
                     <Row className='justify-content-center'>
-                        <Col lg={6} className='mx-3'>
+                        <Col lg={6} className='mb-3'>
                             <Form>
-                                <InputGroup className="mb-3">
-                                    <InputGroup.Text className='rounded-left'>
-                                        <SearchIcon className="control-icons " />
-                                    </InputGroup.Text>
-                                    <Form.Control type='search' placeholder='search authors and news articles ' onChange={this.onChange}
-                                        value={this.state.query}
-                                    />
-                                </InputGroup>
-
+                                <Form.Control type='search' placeholder='search authors and news articles ' onChange={this.onChange}
+                                    value={query}
+                                />
                             </Form>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
+                    <Row className='justify-content-center'>
+                        <Col lg={6}>
                             <ul>
-                                {/* todo map over search results to show newList Item */}
+                                {
+                                    results.map((r) => <SearchCard item={r} />)
+                                }
                             </ul>
                         </Col>
                     </Row>
-                </Container>
+                </Fragment>
             </Fragment>
 
         )
     }
 }
 
-function mapStateToProps({ searchResults }) {
-    return {
-        results: searchResults,
-    }
-}
-export default connect(mapStateToProps)(Search)
+
+export default connect()(Search)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { handleGetNews } from '../../actions/news'
+import { handleGetNews, handleGetNewestNews } from '../../actions/news'
 import { Container, Col, } from 'react-bootstrap'
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import NewsCardHome2 from './newsCardItemHome2'
@@ -10,26 +10,18 @@ import ScrollMemory from '../common/scrollMemory'
 
 class NewsList extends Component {
     componentDidMount() {
-        const { dispatch, page, pageSize } = this.props
+        const { dispatch, page, pageSize, latestPostTime } = this.props
         if (page === 1) {
-            let pageUp = page
-            dispatch(handleGetNews(page, pageSize))
+            dispatch(handleGetNews(page, pageSize, latestPostTime, 'news'))
             dispatch(handleReceiveBookmarksData())
-            dispatch(addListData('newsList', {
-                page: pageUp + 1,
-                pageSize: 10
-            }))
+        } else if (page > 1) {
+            dispatch(handleGetNewestNews(latestPostTime, 'news'))
         }
     }
     handleBottomScroll = () => {
-        const { dispatch, page, pageSize, totalPages } = this.props
+        const { dispatch, page, pageSize, totalPages, latestPostTime } = this.props
         if (page > 1 && page <= totalPages) {
-            let pageUp = page
-            dispatch(handleGetNews(page, pageSize))
-            dispatch(addListData('newsList', {
-                page: pageUp + 1,
-                pageSize: 10
-            }))
+            dispatch(handleGetNews(page, pageSize, latestPostTime, 'news'))
         }
     }
     render() {
@@ -46,6 +38,10 @@ class NewsList extends Component {
                             <NewsCardHome2 item={item} />
                         </li>)
                         )}
+                        {
+                            Object.values(this.props.news).length === 0 &&
+                            <h4 className='text-center m-5'>No News Found</h4>
+                        }
                     </ul>
                 </Col>
             </Container>
@@ -59,6 +55,7 @@ function mapStateToProps({ news, listsData }) {
         news,
         page: newsListData ? newsListData.page : 1,
         pageSize: newsListData ? newsListData.pageSize : 10,
+        latestPostTime: newsListData ? newsListData.latestPostTime : Date.now(),
         totalPages: 10
     }
 }

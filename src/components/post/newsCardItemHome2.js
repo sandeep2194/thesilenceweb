@@ -23,7 +23,7 @@ class NewsCardHome2 extends Component {
                 }))
     }
     render() {
-        const { title, imageUrl, authorName, shares, comments, publishedAt, synopsis, authorId, _id, content } = this.props.item
+        const { title, imageUrl, authorName, shares, comments, pubDate, synopsis, authorId, _id, content } = this.props.item
         const { showContent } = this.state
         return (
             <Row className='justify-content-center shadow-sm rounded border-light bg-white p-2 my-3 mx-1'>
@@ -69,7 +69,7 @@ class NewsCardHome2 extends Component {
                         <Col>
                             <Row className='justify-content-end'>
                                 <p className='p-0 m-0 meta'>
-                                    <TimeAgo time={publishedAt} className='mx-1' />
+                                    <TimeAgo datetime={pubDate.toString()} className='mx-1' />
                                 </p>
                                 <p className='p-0 m-0 mx-1 meta' >{shares ? shares : 0} Shares</p>
                                 <p className='p-0 m-0 mx-1 meta'>{comments ? comments : 0} Comments</p>

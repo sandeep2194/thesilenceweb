@@ -4,6 +4,7 @@ import { CheckError } from '../utils/helper'
 import { toggleUserBookmark } from './user'
 import { save } from './drafts'
 import { toastr } from 'react-redux-toastr'
+import { addListData } from './listsData'
 
 export const RECEIVE_NEWS = 'RECEIVE_NEWS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
@@ -12,6 +13,13 @@ export const TOGGLE_RETWEET = 'TOGGLE_RETWEET'
 export const TOGGLE_SHARE = 'TOGGLE_SHARE'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const ADD_POST = 'ADD_POST'
+export const CLEAR_NEWS = 'CLEAR_NEWS'
+
+function clearNews() {
+    return {
+        type: CLEAR_NEWS,
+    }
+}
 
 function addPost(article, id) {
     return {
@@ -164,12 +172,44 @@ export function handleToggleLike(id) {
     }
 }
 
-export function handleGetNews(pageNo, pageSize) {
+export function handleGetNews(pageNo, pageSize, latestPostTime, postType) {
     return (dispatch) => {
         dispatch(showLoading())
-        fetchNews(pageNo, pageSize)
+        fetchNews(pageNo, pageSize, postType)
             .then((res) => {
                 dispatch(receiveNews(res.result))
+                pageNo === 1
+                    ? dispatch(addListData('newsList', {
+                        page: pageNo + 1,
+                        pageSize: 10,
+                        latestPostTime: res.result[0].pubDate
+                    }))
+                    : dispatch(addListData('newsList', {
+                        page: pageNo + 1,
+                        pageSize: 10,
+                        latestPostTime,
+                    }))
+                dispatch(hideLoading())
+            }).catch((e) => {
+                console.error(e)
+            })
+
+    }
+}
+export function handleGetNewestNews(latestPostTime, postType) {
+    return (dispatch) => {
+        dispatch(showLoading())
+        fetchNews(1, 10, postType)
+            .then((res) => {
+                if (res.result[0].pubDate > latestPostTime) {
+                    dispatch(clearNews())
+                    dispatch(receiveNews(res.result))
+                    dispatch(addListData('newsList', {
+                        page: 1,
+                        pageSize: 10,
+                        latestPostTime: res.result[0].pubDate
+                    }))
+                }
                 dispatch(hideLoading())
             }).catch((e) => {
                 console.error(e)

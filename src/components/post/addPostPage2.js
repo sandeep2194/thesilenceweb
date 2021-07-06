@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import React, { Fragment, Component } from 'react'
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'
+import { Container, Row, Col, Button, } from 'react-bootstrap'
 import BackHeader from '../common/backheader'
 import { save } from '../../actions/drafts'
 import { LocationSelect, LangSelect, TopicSelect } from './customSelect'

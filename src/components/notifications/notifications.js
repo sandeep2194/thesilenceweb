@@ -6,9 +6,15 @@ import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 
 class Notification extends Component {
+    state = {
+        results: [],
+    }
+    componentDidMount() {
+        //fetch notifications from api and show
+    }
     render() {
         const { isLoggedIn } = this.props
-
+        const { results } = this.state
         return (
 
             <Fragment>
@@ -17,7 +23,13 @@ class Notification extends Component {
                 <Container>
                     <Row className='justify-content-center mt-4'>
                         <Col lg={6}>
-                            <NotificationItem />
+                            {
+                                results.map((r) => <NotificationItem item={r} />)
+                            }
+                            {
+                                results.length === 0 &&
+                                <h4 className='text-center m-5'>No Notifications</h4>
+                            }
                         </Col>
                     </Row>
                 </Container>
@@ -25,7 +37,7 @@ class Notification extends Component {
         )
     }
 }
-function mapStateToProps({ users }) {
+function mapStateToProps({ }) {
     const token = localStorage.getItem('token')
     return {
         isLoggedIn: (token) ? true : false,

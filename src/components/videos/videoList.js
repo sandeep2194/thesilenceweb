@@ -18,6 +18,10 @@ class VideoList extends Component {
                                     <VideoCard1 item={item} />
                                 </li>
                             ))}
+                            {
+                                videoList.length === 0 &&
+                                <h4 className='text-center m-5'>No Videos Found</h4>
+                            }
                         </ul>
                     </Col>
                 </Row>

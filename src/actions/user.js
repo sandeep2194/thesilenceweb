@@ -67,6 +67,7 @@ export function handleAddFollowingData(userId) {
         getFollowings(userId).then((data) => {
             const followings = data.result
             const followingIds = followings.map((u) => u._id)
+            followings.forEach((item) => dispatch(addUser(item)))
             dispatch(addFollowingData(followingIds, userId))
         }).catch((error) => { console.error(error) })
     }
@@ -77,6 +78,7 @@ export function handleAddFollowersData(followingId) {
         getFollowers(followingId).then((data) => {
             const followers = data.result
             const followerIds = followers.map((u) => u._id)
+            followers.forEach((item) => dispatch(addUser(item)))
             dispatch(addFollowersData(followerIds, followingId))
         }).catch(err => console.error(err))
     }

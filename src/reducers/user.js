@@ -12,7 +12,10 @@ export default function users(state = {}, action) {
                 ...oldState
             }
         case TOGGLE_USER_BOOKMARK:
-            let newBookmarksArr = [...user.bookmarks]
+            let newBookmarksArr = []
+            if (user.bookmarks) {
+                newBookmarksArr = [...user.bookmarks]
+            }
             if (newBookmarksArr.includes(action.postId)) {
                 newBookmarksArr = newBookmarksArr.filter(b => b !== action.postId)
             } else {

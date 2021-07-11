@@ -23,13 +23,13 @@ class VideoPlayer extends React.Component {
         window.clearInterval(timer)
     }
     componentWillUnmount() {
-        const { playedTime, played } = this.state
-
+        const { dispatch } = this.props
+        const { timer, played, playedTime } = this.state
         if (played)
-            this.props.dispatch(addPlayTime(playedTime))
+            dispatch(addPlayTime(playedTime))
+        window.clearInterval(timer)
     }
     componentDidMount() {
-        console.log(this.player.current)
         window.setTimeout(this.setObserver, 1000)
     }
     setObserver = () => {
@@ -60,7 +60,6 @@ class VideoPlayer extends React.Component {
                 light controls
                 ref={this.player}
                 playing={this.state.playing}
-                muted={true}
                 config={{
                     youtube: {
                         playerVars: {

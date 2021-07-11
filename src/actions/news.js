@@ -15,6 +15,7 @@ export const ADD_COMMENT = 'ADD_COMMENT'
 export const ADD_POST = 'ADD_POST'
 export const CLEAR_NEWS = 'CLEAR_NEWS'
 
+
 function clearNews() {
     return {
         type: CLEAR_NEWS,
@@ -172,19 +173,19 @@ export function handleToggleLike(id) {
     }
 }
 
-export function handleGetNews(pageNo, pageSize, latestPostTime, postType) {
+export function handleGetNews(pageNo, pageSize, latestPostTime, postType, listName) {
     return (dispatch) => {
         dispatch(showLoading())
-        fetchNews(pageNo, pageSize, postType)
+        fetchNews({ pageNo, pageSize, postType })
             .then((res) => {
                 dispatch(receiveNews(res.result))
-                pageNo === 1
-                    ? dispatch(addListData('newsList', {
+                pageNo === 0
+                    ? dispatch(addListData(listName, {
                         page: pageNo + 1,
                         pageSize: 10,
                         latestPostTime: res.result[0].pubDate
                     }))
-                    : dispatch(addListData('newsList', {
+                    : dispatch(addListData(listName, {
                         page: pageNo + 1,
                         pageSize: 10,
                         latestPostTime,
@@ -196,16 +197,16 @@ export function handleGetNews(pageNo, pageSize, latestPostTime, postType) {
 
     }
 }
-export function handleGetNewestNews(latestPostTime, postType) {
+export function handleGetNewestNews(latestPostTime, postType, listName) {
     return (dispatch) => {
         dispatch(showLoading())
-        fetchNews(1, 10, postType)
+        fetchNews({ pageNo: 0, pageSize: 10, postType, })
             .then((res) => {
                 if (res.result[0].pubDate > latestPostTime) {
                     dispatch(clearNews())
                     dispatch(receiveNews(res.result))
-                    dispatch(addListData('newsList', {
-                        page: 1,
+                    dispatch(addListData(listName, {
+                        page: 0,
                         pageSize: 10,
                         latestPostTime: res.result[0].pubDate
                     }))

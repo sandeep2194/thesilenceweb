@@ -19,7 +19,7 @@ function SinglePostHeader(props) {
                         </Navbar.Brand>
                         <Navbar.Collapse className="justify-content-end">
                             <Row className="justify-content-end mt-3">
-                                <ReactionBar id={props.id} />
+                                <ReactionBar id={props.id} path={props.path} />
                             </Row>
                         </Navbar.Collapse>
                     </Navbar>

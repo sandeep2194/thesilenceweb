@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Image } from 'react-bootstrap'
 import TimeAgo from 'timeago-react';
-import ReactionBar from './reactionbar'
 import { Link } from 'react-router-dom'
 
 class SearchCard extends Component {

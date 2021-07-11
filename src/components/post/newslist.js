@@ -5,33 +5,34 @@ import { Container, Col, } from 'react-bootstrap'
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import NewsCardHome2 from './newsCardItemHome2'
 import { handleReceiveBookmarksData } from '../../actions/authedUser';
-import { addListData } from '../../actions/listsData'
 import ScrollMemory from '../common/scrollMemory'
 
 class NewsList extends Component {
     componentDidMount() {
         const { dispatch, page, pageSize, latestPostTime } = this.props
-        if (page === 1) {
-            dispatch(handleGetNews(page, pageSize, latestPostTime, 'news'))
+        //    console.log(`pageNo: ${page}, pageSize: ${pageSize}, latestPostTime: ${latestPostTime}`)
+        if (page === 0) {
+            dispatch(handleGetNews(page, pageSize, latestPostTime, 'news', 'newsList'))
             dispatch(handleReceiveBookmarksData())
-        } else if (page > 1) {
-            dispatch(handleGetNewestNews(latestPostTime, 'news'))
+        } else if (page > 0) {
+            dispatch(handleGetNewestNews(latestPostTime, 'news', 'newsList'))
         }
     }
     handleBottomScroll = () => {
         const { dispatch, page, pageSize, totalPages, latestPostTime } = this.props
-        if (page > 1 && page <= totalPages) {
-            dispatch(handleGetNews(page, pageSize, latestPostTime, 'news'))
+        if (page > 0 && page <= totalPages) {
+            dispatch(handleGetNews(page, pageSize, latestPostTime, 'news', 'newsList'))
         }
     }
     render() {
+        const { news } = this.props
         return (
             <Container className='mt-2'>
                 <Col lg={6} className='px-0'>
                     <ul>
                         <ScrollMemory name='newsList' />
                         <BottomScrollListener onBottom={this.handleBottomScroll} />
-                        {Object.values(this.props.news).map((item, index) =>
+                        {news.map((item) =>
                         (<li
                             key={item._id}
                         >
@@ -51,9 +52,10 @@ class NewsList extends Component {
 }
 function mapStateToProps({ news, listsData }) {
     const newsListData = listsData['newsList']
+    let fNews = Object.values(news).filter((item) => item.postType === 'news')
     return {
-        news,
-        page: newsListData ? newsListData.page : 1,
+        news: fNews,
+        page: newsListData ? newsListData.page : 0,
         pageSize: newsListData ? newsListData.pageSize : 10,
         latestPostTime: newsListData ? newsListData.latestPostTime : Date.now(),
         totalPages: 10

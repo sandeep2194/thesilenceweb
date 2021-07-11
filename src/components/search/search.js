@@ -12,14 +12,19 @@ class Search extends Component {
     onChange = (e) => {
         const q = e.target.value
         this.setState({ query: q })
-        fetchNews({ pageNo: 1, pageSize: 30, query: q })
-            .then((d) => {
-                d.result && q &&
-                    this.setState({
-                        results: d.result
-                    })
-            })
-            .catch((err) => console.log(err))
+        if (q === '') {
+            this.setState({ results: [] })
+        }
+        if (q !== '') {
+            fetchNews({ pageNo: 1, pageSize: 30, query: q })
+                .then((d) => {
+                    d.result && q &&
+                        this.setState({
+                            results: d.result
+                        })
+                })
+                .catch((err) => console.log(err))
+        }
     }
     render() {
         const { query, results } = this.state

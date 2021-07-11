@@ -37,7 +37,7 @@ class Notification extends Component {
         )
     }
 }
-function mapStateToProps({ }) {
+function mapStateToProps() {
     const token = localStorage.getItem('token')
     return {
         isLoggedIn: (token) ? true : false,

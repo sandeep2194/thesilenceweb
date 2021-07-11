@@ -6,7 +6,6 @@ const usage = (state = {}, action) => {
         oldState.scrolls = 0;
     if (!oldState.playtime)
         oldState.playtime = 0
-
     switch (action.type) {
         case ADD_SCROLL:
             oldState.scrolls = oldState.scrolls + 1
@@ -25,6 +24,7 @@ const usage = (state = {}, action) => {
         case CLEAR_USAGE:
             oldState.scrolls = 0
             oldState.playtime = 0
+            oldState.playing = false
             oldState.copy = {}
             return { ...oldState }
         default:

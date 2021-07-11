@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleToggleLike, handleToggleBookmark, handleToggleRetweet, handleToggleShare } from '../../actions/news'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Modal } from 'react-bootstrap'
 import FeatherIcon from 'feather-icons-react';
 import history from '../../utils/history';
 
+import { FacebookShareButton, FacebookIcon, WhatsappIcon, WhatsappShareButton, TwitterIcon, TwitterShareButton } from 'react-share'
+
 class ReactionBar extends Component {
+    state = {
+        modal: false,
+    }
     handleLike = (e) => {
         e.preventDefault()
         const { dispatch, id } = this.props
@@ -25,11 +30,16 @@ class ReactionBar extends Component {
         e.preventDefault()
         const { dispatch, id } = this.props
         dispatch(handleToggleShare(id))
+        this.handleModal()
+    }
+    handleModal = () => {
+        this.setState((prevState) => ({ modal: !prevState.modal }))
     }
     render() {
         const { likesArr, bookmarksArr, _id } = this.props.newsItem;
         const { authedUser } = this.props
         const { isBookmarkPage } = this.props
+        const { modal } = this.state
         return (
             <Container className='ml-0 mb-3 pr-0'>
                 <Row>
@@ -55,6 +65,26 @@ class ReactionBar extends Component {
                         </Row>
                     </Col>
                 </Row>
+                <Modal show={modal} onHide={this.handleModal} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Share
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Row className='my-2 justify-content-around'>
+                            <TwitterShareButton url={`https://${window.location.hostname}/news/${_id}`}>
+                                <TwitterIcon size={32} round={true} />
+                            </TwitterShareButton>
+                            <FacebookShareButton url={`https://${window.location.hostname}/news/${_id}`}>
+                                <FacebookIcon size={32} round={true} />
+                            </FacebookShareButton>
+                            <WhatsappShareButton url={`https://${window.location.hostname}/news/${_id}`}>
+                                <WhatsappIcon size={32} round={true} />
+                            </WhatsappShareButton>
+                        </Row>
+                    </Modal.Body>
+                </Modal>
             </Container>
         );
     }

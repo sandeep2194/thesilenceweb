@@ -5,17 +5,19 @@ export const PLAY_TIME = 'PLAY_TIME'
 export const COPY_USAGE = 'COPY_USAGE'
 export const CLEAR_USAGE = 'CLEAR_USAGE'
 
-export const addScroll = () => {
-    return {
-        type: ADD_SCROLL
-    }
-}
-const addPlayTime = (time) => {
+export const addPlayTime = (time) => {
     return {
         type: PLAY_TIME,
         time,
     }
 }
+
+export const addScroll = () => {
+    return {
+        type: ADD_SCROLL
+    }
+}
+
 
 const copyUsage = () => {
     return {

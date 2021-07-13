@@ -31,7 +31,7 @@ class UploadAvatar extends Component {
     handlePicSubmit = async () => {
         const { stepCb, dispatch } = this.props
         const { file } = this.state
-        const uploadedFile = await uploadFile(file)
+        const uploadedFile = await uploadFile([file])
         const fileUrl = uploadedFile.result[0]
         dispatch(handleUpdateUser({
             profilePic: fileUrl

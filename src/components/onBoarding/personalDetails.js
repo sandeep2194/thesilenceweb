@@ -76,7 +76,9 @@ const PersonalDetails = (props) => {
                                     />
                                 </Row>
                                 <Row className='mt-4 mx-1'>
-                                    <Button type="submit" size='sm' className="btn-block" >Save</Button>
+                                    <Button type="submit" size='sm' className="btn-block"
+
+                                    >Save</Button>
                                 </Row>
                             </Form>
                         </Formik>

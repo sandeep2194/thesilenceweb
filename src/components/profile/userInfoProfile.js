@@ -45,7 +45,7 @@ const UserInfoProfile = (props) => {
                                     : <Image src={defaultUserPic} roundedCircle width={48} height={48} />
                                 }
                                 {
-                                    user.name && user.username &&
+                                    user.username &&
                                     <Col className='mt-1 m-0 p-0 ml-2'>
                                         <h6 className='font-weight-bold m-0'>{user.name}</h6>
                                         <p className='m-0' style={{ fontSize: '12px' }}>@{user.username}</p>

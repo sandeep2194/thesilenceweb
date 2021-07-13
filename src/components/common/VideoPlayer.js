@@ -30,7 +30,9 @@ class VideoPlayer extends React.Component {
         window.clearInterval(timer)
     }
     componentDidMount() {
-        window.setTimeout(this.setObserver, 1000)
+        const { videoUrl } = this.props
+        if (videoUrl)
+            window.setTimeout(this.setObserver, 1000)
     }
     setObserver = () => {
         const { id } = this.props
@@ -51,7 +53,8 @@ class VideoPlayer extends React.Component {
 
         let observer = new IntersectionObserver(handlePlay2, options);
         const el = document.getElementById(id)
-        observer.observe(el);
+        el &&
+            observer.observe(el);
     }
     render() {
         const { videoUrl } = this.props

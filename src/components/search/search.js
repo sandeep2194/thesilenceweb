@@ -13,15 +13,15 @@ class Search extends Component {
         const q = e.target.value
         this.setState({ query: q })
         if (q === '') {
-            this.setState({ results: [] })
+            this.setState(() => ({ results: [] }))
         }
         if (q !== '') {
-            fetchNews({ pageNo: 1, pageSize: 30, query: q })
+            fetchNews({ pageNo: 1, pageSize: 10, query: q })
                 .then((d) => {
                     d.result && q &&
-                        this.setState({
+                        this.setState(() => ({
                             results: d.result
-                        })
+                        }))
                 })
                 .catch((err) => console.log(err))
         }

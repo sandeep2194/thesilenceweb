@@ -111,7 +111,7 @@ const VerifyOtp = (props) => {
                                 </Row>
                                 <Row className='mt-4 mx-1 justify-content-center'>
                                     <p className="resend pt-1">Didn’t receive the code?</p>
-                                    <button type="button" className="btn btn-link btn-sm "
+                                    <button type="button" className="btn btn-link btn-sm mb-4"
                                         onClick={() => {
                                             dispatch(handleGetOtp(phoneNumber))
                                             toastr.info('Otp resent')

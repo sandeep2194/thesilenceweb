@@ -29,7 +29,7 @@ const UserInfoProfile = (props) => {
     useEffect(() => {
         dispatch(handleAddFollowersData(_id))
         dispatch(handleAddFollowingData(_id))
-    }, [])
+    }, [_id, dispatch])
 
     const { isCurrentUser, followedByCurrentUser } = props
     const { followingData, followersData, followers, following } = user

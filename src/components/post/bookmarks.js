@@ -39,7 +39,7 @@ class Bookmarks extends Component {
 function mapStateToProps({ news, users }) {
     const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
-    const bookmarksArr = users[userId].bookmarks
+    const bookmarksArr = users[userId].bookmarks ? users[userId].bookmarks : []
     const bookmarksData = Object.values(news).filter((item) => bookmarksArr.includes(item._id))
     return {
         isLoggedIn: (token) ? true : false,

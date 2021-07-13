@@ -56,7 +56,7 @@ class ChooseLang extends Component {
     }
     updateLang = (code) => {
         this.setState((prevState) => {
-            let langs = [...prevState.selectedLanguages]
+            let langs = prevState.selectedLanguages ? [...prevState.selectedLanguages] : []
             const index = langs.indexOf(code)
             const selected = langs.includes(code)
 

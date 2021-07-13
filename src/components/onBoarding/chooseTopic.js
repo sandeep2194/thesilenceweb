@@ -27,7 +27,7 @@ class ChooseTopic extends Component {
     ]
 
     topicChip = (topic, index) => {
-        const selected = this.state.selectedTopics.includes(topic)
+        const selected = this.state.selectedTopics && this.state.selectedTopics.includes(topic)
         return (
             <Button key={index} variant="outline-primary" size="md" className={selected ? 'm-2 lang-loc-topic-chipBtn active' : 'm-2 lang-loc-topic-chipBtn'}
                 onClick={() => this.updateTopic(topic)}
@@ -54,7 +54,7 @@ class ChooseTopic extends Component {
     }
     updateTopic = (topic) => {
         this.setState((prevState) => {
-            let topics = [...prevState.selectedTopics]
+            let topics = prevState.selectedTopics ? [...prevState.selectedTopics] : []
             const index = topics.indexOf(topic)
             const selected = topics.includes(topic)
 

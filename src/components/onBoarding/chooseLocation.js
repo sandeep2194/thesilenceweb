@@ -27,7 +27,7 @@ class ChooseLocation extends Component {
     ]
 
     locChip = (location, index) => {
-        const selected = this.state.selectedLocations.includes(location)
+        const selected = this.state.selectedLocations && this.state.selectedLocations.includes(location)
         return (
             <Button key={index} variant="outline-primary" size="md" className={selected ? 'm-2 lang-loc-topic-chipBtn active' : 'm-2 lang-loc-topic-chipBtn'}
                 onClick={() => this.updateLocation(location)}
@@ -55,7 +55,7 @@ class ChooseLocation extends Component {
     }
     updateLocation = (location) => {
         this.setState((prevState) => {
-            let locations = [...prevState.selectedLocations]
+            let locations = prevState.selectedLocations ? [...prevState.selectedLocations] : []
             const index = locations.indexOf(location)
             const selected = locations.includes(location)
 

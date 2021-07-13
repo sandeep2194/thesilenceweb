@@ -26,7 +26,7 @@ class ChooseLang extends Component {
         },
     ]
     langChip = (language, index) => {
-        const selected = this.state.selectedLanguages.includes(language.code)
+        const selected = this.state.selectedLanguages && this.state.selectedLanguages.includes(language.code)
         return (
             <Button key={index} variant="outline-primary" size="md" className={selected ? 'm-2 lang-loc-topic-chipBtn active' : 'm-2 lang-loc-topic-chipBtn'}
                 onClick={() => this.updateLang(language.code)}

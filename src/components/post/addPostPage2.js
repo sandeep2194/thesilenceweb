@@ -5,7 +5,7 @@ import BackHeader from '../common/backheader'
 import { save } from '../../actions/drafts'
 import { LocationSelect, LangSelect, TopicSelect } from './customSelect'
 import { handleAddPost } from '../../actions/news'
-
+import { v4 as uuidv4 } from 'uuid';
 class AddPostPageTwo extends Component {
     locations = [
         {
@@ -61,7 +61,9 @@ class AddPostPageTwo extends Component {
     handleSubmit = () => {
         const { dispatch, draft, history, user } = this.props
         const { _id, name, profilePic } = user
+        const postId = uuidv4();
         const article = {
+            _id: postId,
             title: draft.title,
             content: [draft.body],
             imageUrl: draft.s3Urls[0],
@@ -72,6 +74,7 @@ class AddPostPageTwo extends Component {
             authorId: _id,
             authorName: name,
             authorImage: profilePic,
+            pubDate: Date.now(),
         }
         dispatch(handleAddPost(article, history))
     }

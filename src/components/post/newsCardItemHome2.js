@@ -69,7 +69,7 @@ class NewsCardHome2 extends Component {
                         <Col>
                             <Row className='justify-content-end'>
                                 <p className='p-0 m-0 meta'>
-                                    <TimeAgo datetime={pubDate.toString()} className='mx-1' />
+                                    <TimeAgo datetime={pubDate ? pubDate.toString() : null} className='mx-1' />
                                 </p>
                                 <p className='p-0 m-0 mx-1 meta' >{shares ? shares : 0} Shares</p>
                                 <p className='p-0 m-0 mx-1 meta'>{comments ? comments : 0} Comments</p>

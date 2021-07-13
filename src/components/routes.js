@@ -31,6 +31,7 @@ const AllRoutes = () => {
             <Route exact path="/">
                 <Redirect to="/home" />
             </Route>
+
             <Route
                 path='/home'
                 render={() => (

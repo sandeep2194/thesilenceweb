@@ -6,6 +6,7 @@ import { save } from '../../actions/drafts'
 import { LocationSelect, LangSelect, TopicSelect } from './customSelect'
 import { handleAddPost } from '../../actions/news'
 import { v4 as uuidv4 } from 'uuid';
+import Spacer from '../common/Spacer';
 class AddPostPageTwo extends Component {
     locations = [
         {
@@ -122,6 +123,7 @@ class AddPostPageTwo extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <Spacer />
             </Fragment>
         )
     }

@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import CommentTile from '../common/commentListTile'
 import { string } from 'yup';
 import { toastr } from 'react-redux-toastr'
+import Spacer from '../common/Spacer';
 
 class Comment extends Component {
     state = {
@@ -70,6 +71,7 @@ class Comment extends Component {
 
                     </Row>
                 </Container>
+                <Spacer />
             </Fragment>
         )
     }

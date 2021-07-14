@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import BackHeader from '../common/backheader'
 import { Row, Col, Container, Button } from 'react-bootstrap'
+import Spacer from '../common/Spacer'
 
 class Stats extends Component {
     state = {
@@ -77,8 +78,8 @@ class Stats extends Component {
                             </Button>
                         </Col>
                     </Row>
-
                 </Container>
+                <Spacer />
             </Fragment>
         )
     }

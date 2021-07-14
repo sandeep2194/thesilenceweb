@@ -3,6 +3,7 @@ import CloseHeader from '../common/closeBtnHeader'
 import { Form, Container, Button, Row, Col } from 'react-bootstrap'
 import { handleGetOtp } from '../../actions/authedUser'
 import { connect } from 'react-redux'
+import Spacer from '../common/Spacer';
 
 class SendOtp extends Component {
     state = {
@@ -79,6 +80,7 @@ class SendOtp extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <Spacer />
             </Fragment>
         )
     }

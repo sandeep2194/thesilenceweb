@@ -9,7 +9,7 @@ import FeatherIcon from 'feather-icons-react';
 import { save } from '../../actions/drafts'
 import { handlePostImageUploads } from '../../actions/news'
 import { getThumbnails } from 'video-metadata-thumbnails';
-
+import Spacer from '../common/Spacer'
 class AddPostV2 extends Component {
     state = {
         modal: false,
@@ -113,7 +113,7 @@ class AddPostV2 extends Component {
                                 <Row className='mt-4'>
                                     <Col sm={1}></Col>
                                     <Col>
-                                        <TextArea name='body' placeholder='your story' rows={12} />
+                                        <TextArea name='body' placeholder='your story' rows={18} />
                                     </Col>
                                 </Row>
                                 <Row className='mt-4 ml-2'>
@@ -153,6 +153,7 @@ class AddPostV2 extends Component {
                         </Formik>
                     </Col>
                 </Container>
+                <Spacer />
             </Fragment >
         )
     }

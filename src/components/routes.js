@@ -24,6 +24,7 @@ import ChooseTopic from './onBoarding/chooseTopic';
 import VideoList from './videos/videoList'
 import AddPostV2 from './post/addPostV2'
 import AddPostPageTwo from './post/addPostPage2'
+import Spacer from './common/Spacer'
 
 const AllRoutes = () => {
     return (
@@ -38,6 +39,7 @@ const AllRoutes = () => {
                     <Fragment>
                         <LogoHeader />
                         <NewsList />
+                        <Spacer />
                     </Fragment>
                 )}
             />
@@ -47,6 +49,7 @@ const AllRoutes = () => {
                     <Fragment>
                         <LogoHeader pageName='Videos' />
                         <VideoList />
+                        <Spacer />
                     </Fragment>
                 )}
             />
@@ -113,6 +116,7 @@ const AllRoutes = () => {
                     <Fragment>
                         <BackHeader pageName='Choose Languages' />
                         <ChooseLang btnText='Save' />
+                        <Spacer />
                     </Fragment>
                 )}
             />
@@ -121,6 +125,7 @@ const AllRoutes = () => {
                     <Fragment>
                         <BackHeader pageName='Choose Locations' />
                         <ChooseLocation btnText='Save' />
+                        <Spacer />
                     </Fragment>
                 )}
             />
@@ -129,6 +134,7 @@ const AllRoutes = () => {
                     <Fragment>
                         <BackHeader pageName='Choose Topics' />
                         <ChooseTopic btnText='Save' />
+                        <Spacer />
                     </Fragment>
                 )}
             />

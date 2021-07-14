@@ -227,6 +227,7 @@ export function handlePostImageUploads(files, draft, history) {
             dispatch(save({ ...draft, s3Urls: data.result }))
             history.push('/post-meta')
         }).catch((e) => {
+            dispatch(hideLoading())
             toastr.error('Error Uploading Files', 'Unable to upload requested files to server. please try again later')
         })
     }
@@ -234,12 +235,17 @@ export function handlePostImageUploads(files, draft, history) {
 
 export function handleAddPost(article, history) {
     return (dispatch) => {
+        dispatch(showLoading())
         const userId = localStorage.getItem('userId')
         postNews(article).then((data) => {
             dispatch(addPost(data.result, data.result._id))
             dispatch(save({}))
             history.push('/profile/' + userId)
-        }).catch((e) => (console.error(e)))
+            dispatch(hideLoading())
+        }).catch((e) => {
+            console.error(e)
+            dispatch(hideLoading())
+        })
     }
 }
 

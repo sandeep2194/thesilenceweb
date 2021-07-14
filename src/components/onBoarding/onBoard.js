@@ -7,12 +7,12 @@ import ChooseLocation from './chooseLocation'
 import ChooseTopic from './chooseTopic';
 import UploadAvatar from './uploadAvatar';
 import PersonalDetails from './personalDetails';
-
+import Spacer from '../common/Spacer';
 class OnBoarding extends Component {
     state = {
         start: 0,
         step: -1,
-        steps: ['Choose Languages', 'Choose Locations', 'Choose Topics', 'Upload Avatar', 'Add User Detail'],
+        steps: ['Langs', 'Locations', 'Topics', 'Avatar', 'Other'],
     }
     updateStep = (newStep) => {
         this.setState({ step: newStep })
@@ -68,6 +68,7 @@ class OnBoarding extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <Spacer />
             </Fragment>
         )
     }

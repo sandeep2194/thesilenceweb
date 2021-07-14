@@ -5,6 +5,7 @@ import FeatherIcon from 'feather-icons-react';
 import { Link } from 'react-router-dom'
 import { handleLogout } from '../../actions/authedUser'
 import { connect } from 'react-redux';
+import Spacer from '../common/Spacer'
 
 class Settings extends Component {
     state = {
@@ -71,8 +72,8 @@ class Settings extends Component {
                             </Row>
                         </Col>
                     </Row>
-
                 </Container>
+                <Spacer />
             </Fragment >
 
         )

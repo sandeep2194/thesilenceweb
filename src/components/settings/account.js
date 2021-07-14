@@ -10,6 +10,7 @@ import { handleUpdateUser } from '../../actions/authedUser'
 import history from '../../utils/history'
 import { toastr } from 'react-redux-toastr';
 import { getAccountInfo } from '../../utils/api'
+import Spacer from '../common/Spacer'
 
 const Account = (props) => {
     const [bankAccount, setBankAccount] = useState('')
@@ -146,7 +147,7 @@ const Account = (props) => {
                     </Col>
                 </Row>
             </Container>
-
+            <Spacer />
         </Fragment>
 
     )

@@ -8,6 +8,7 @@ import UserInfoProfile from './userInfoProfile'
 import { Link } from 'react-router-dom'
 import { addListData } from '../../actions/listsData'
 import FeatherIcon from 'feather-icons-react';
+import Spacer from '../common/Spacer'
 
 class Profile extends Component {
     componentDidMount() {
@@ -56,6 +57,7 @@ class Profile extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <Spacer />
             </Fragment >
         )
     }

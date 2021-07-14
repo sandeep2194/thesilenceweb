@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 import BookmarksCard from '../common/bookmarksCard'
 import ScrollMemory from '../common/scrollMemory'
+import Spacer from '../common/Spacer'
 
 class Bookmarks extends Component {
     render() {
@@ -28,6 +29,7 @@ class Bookmarks extends Component {
                                 }
                                 <ScrollMemory name='bookmarksList' />
                             </ul>
+                            <Spacer />
                         </Col>
                     </Row>
                 </Container>

@@ -7,8 +7,9 @@ import { connect } from 'react-redux'
 import CloseHeader from '../common/closeBtnHeader'
 import { handleGetOtp } from '../../actions/authedUser'
 import { toastr } from 'react-redux-toastr'
-const VerifyOtp = (props) => {
+import Spacer from '../common/Spacer'
 
+const VerifyOtp = (props) => {
     useEffect(() => {
         // Update the document title using the browser API
         const el = document.getElementById('first')
@@ -122,8 +123,8 @@ const VerifyOtp = (props) => {
                         </Col>
                     </Row>
                 </Container>
-
             </Formik>
+            <Spacer />
         </Fragment >
     )
 }

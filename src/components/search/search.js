@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import LogoHeader from '../common/logoheader';
 import { fetchNews } from '../../utils/api'
 import SearchCard from '../common/searchCard';
+import Spacer from '../common/Spacer'
 class Search extends Component {
     state = {
         query: '',
@@ -51,6 +52,7 @@ class Search extends Component {
                         </Col>
                     </Row>
                 </Fragment>
+                <Spacer />
             </Fragment>
 
         )

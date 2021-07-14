@@ -3,6 +3,7 @@ import BackHeader from '../common/backheader'
 import { Formik, useField, Form } from 'formik';
 import { Container, Row, Col, Button, Form as FormB } from 'react-bootstrap'
 import * as Yup from 'yup';
+import Spacer from '../common/Spacer'
 
 const SupportForm = (props) => {
     const MyTextArea = ({ label, ...props }) => {
@@ -57,6 +58,7 @@ const SupportForm = (props) => {
 
                 </Row>
             </Container>
+            <Spacer />
         </Fragment >
     )
 }

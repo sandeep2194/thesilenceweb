@@ -4,6 +4,7 @@ import LogoHeader from '../common/logoheader'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
+import Spacer from '../common/Spacer';
 
 class Notification extends Component {
     state = {
@@ -33,6 +34,7 @@ class Notification extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <Spacer />
             </Fragment>
         )
     }

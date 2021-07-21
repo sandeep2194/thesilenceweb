@@ -25,6 +25,10 @@ const store = createStore(persistedReducer, composeEnhancers(
 ))
 const persister = persistStore(store);
 
+const env = process.env.NODE_ENV
+if (env === 'production') {
+  console.log = function () { };
+}
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persister}>

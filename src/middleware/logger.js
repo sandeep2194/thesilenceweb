@@ -2,7 +2,8 @@ import { ADD_SCROLL_POSITION } from "../actions/listsData"
 
 const logger = (store) => (next) => (action) => {
     const returnValue = next(action)
-    if (action.type !== ADD_SCROLL_POSITION) {
+    const env = process.env.NODE_ENV
+    if (action.type !== ADD_SCROLL_POSITION && env !== 'production') {
         console.group(action.type)
         console.log('The Action: ', action)
         console.log("The new state is: ", returnValue)

@@ -139,7 +139,7 @@ a {
 }
 @include media-breakpoint-up(xs) {
     p{
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
     .meta{
         font-size: 0.6rem;
@@ -151,7 +151,7 @@ a {
   }
   @include media-breakpoint-up(xxs) {
     p{
-        font-size: 0.6rem;
+        font-size: 0.8rem;
     }
     .meta{
         font-size: 0.5rem;

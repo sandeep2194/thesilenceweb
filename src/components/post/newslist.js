@@ -4,6 +4,7 @@ import { handleGetNews, handleGetNewestNews } from '../../actions/news'
 import { Container, Col, } from 'react-bootstrap'
 import { BottomScrollListener } from 'react-bottom-scroll-listener';
 import NewsCardHome2 from './newsCardItemHome2'
+import NewsStyleCard from './newsStyleCard'
 import { handleReceiveBookmarksData } from '../../actions/authedUser';
 import ScrollMemory from '../common/scrollMemory'
 
@@ -27,7 +28,7 @@ class NewsList extends Component {
     render() {
         const { news } = this.props
         return (
-            <Container className='mt-2'>
+            <Container className='m-0 p-0 bg-light'>
                 <Col lg={6} className='px-0'>
                     <ul>
                         <ScrollMemory name='newsList' />
@@ -36,7 +37,7 @@ class NewsList extends Component {
                         (<li
                             key={item._id}
                         >
-                            <NewsCardHome2 item={item} />
+                            <NewsStyleCard item={item} />
                         </li>)
                         )}
                         {

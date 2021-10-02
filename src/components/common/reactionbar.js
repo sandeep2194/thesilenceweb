@@ -41,27 +41,27 @@ class ReactionBar extends Component {
         const { isBookmarkPage } = this.props
         const { modal } = this.state
         return (
-            <Container className='ml-0 mb-3 pr-0'>
+            <Container className='ml-0 mb-4 pr-0'>
                 <Row>
                     <Col>
                         <Row className='justify-content-start '>
                             {(likesArr.includes(authedUser._id)) ? <FeatherIcon size='16' icon='thumbs-up' onClick={this.handleLike} className='reaction-icons-clicked ml-3 mr-3' /> : <FeatherIcon size='16' icon='thumbs-up' onClick={this.handleLike} className='reaction-icons-unClicked ml-3 mr-3' />}
-                            <FeatherIcon size='16' icon='repeat' className='reaction-icons-unClicked mr-3'
+                            <FeatherIcon size='18' icon='repeat' className='reaction-icons-unClicked mr-3'
                                 onClick={this.handleRetweet}
                             />
-                            <FeatherIcon size='16' icon='message-circle' className='reaction-icons-unClicked mr-3' onClick={() => history.push(`/comment/${_id}`)} />
+                            <FeatherIcon size='18' icon='message-circle' className='reaction-icons-unClicked mr-3' onClick={() => history.push(`/comment/${_id}`)} />
                         </Row>
                     </Col>
                     <Col>
                         <Row className='justify-content-end align-items-center'>
                             {isBookmarkPage ? (
-                                <FeatherIcon size='16' icon='trash-2' className='reaction-icons-unClicked ml-3' onClick={this.handleBookmark} />
+                                <FeatherIcon size='18' icon='trash-2' className='reaction-icons-unClicked ml-3' onClick={this.handleBookmark} />
                             ) :
                                 (bookmarksArr.includes(authedUser._id))
-                                    ? <FeatherIcon size='16' icon='bookmark' className='reaction-icons-clicked ml-3' onClick={this.handleBookmark} />
-                                    : <FeatherIcon size='16' icon='bookmark' className='reaction-icons-unClicked ml-3' onClick={this.handleBookmark} />
+                                    ? <FeatherIcon size='18' icon='bookmark' className='reaction-icons-clicked ml-3' onClick={this.handleBookmark} />
+                                    : <FeatherIcon size='18' icon='bookmark' className='reaction-icons-unClicked ml-3' onClick={this.handleBookmark} />
                             }
-                            <FeatherIcon size='16' icon='share-2' className='reaction-icons-unClicked  ml-3 mr-5' onClick={this.handleShare} />
+                            <FeatherIcon size='18' icon='share-2' className='reaction-icons-unClicked  ml-3 mr-5' onClick={this.handleShare} />
                         </Row>
                     </Col>
                 </Row>

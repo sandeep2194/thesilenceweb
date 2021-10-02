@@ -8,7 +8,21 @@ ul{
     list-style: none;
     padding:0;
 }
-
+img{
+max-width: 100%;
+}
+#hindiBold{
+    font-family: 'Karma-Bold';
+}
+#hindiRegular{
+    font-family: 'Karma-Regular';
+}
+#hindiMedium { 
+    font-family: 'Karma-Medium';
+}
+.bg-light{
+    background-color: #e1e1e1 !important;
+}
 @font-face {
 	font-family: "Montserrat-Regular";
 	src: url("./assets/fonts/Montserrat-Regular.ttf") format("truetype"),
@@ -20,6 +34,18 @@ ul{
 @font-face {
 	font-family: "Montserrat-SemiBold";
 	src: url("./assets/fonts/Montserrat-SemiBold.ttf") format("truetype"),
+}
+@font-face {
+	font-family: "Karma-Regular";
+	src: url("./assets/fonts/Karma-Regular.ttf") format("truetype"),
+}
+@font-face {
+	font-family: "Karma-Medium";
+	src: url("./assets/fonts/Karma-Medium.ttf") format("truetype"),
+}
+@font-face {
+	font-family: "Karma-Bold";
+	src: url("./assets/fonts/Karma-Bold.ttf") format("truetype"),
 }
 body{
     font-family: "Montserrat-Regular";
@@ -142,19 +168,19 @@ a {
         font-size: 1rem;
     }
     .meta{
-        font-size: 0.6rem;
+        font-size: 0.8rem;
     }
     h5{
-        font-size: 0.9rem; 
+        font-size: 1.1rem; 
     }
 
   }
   @include media-breakpoint-up(xxs) {
     p{
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
     .meta{
-        font-size: 0.5rem;
+        font-size: 0.9rem;
     }
     .profile-meta{
         font-size: 0.8rem; 

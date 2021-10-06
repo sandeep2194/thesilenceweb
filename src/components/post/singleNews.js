@@ -16,7 +16,6 @@ const SingleNews = (props) => {
     const { dispatch } = props
     const [related, setRelated] = useState([])
     const [relatedUrls, setRelatedUrls] = useState([])
-
     useEffect(() => {
         dispatch(handleSendClick(newsId))
         const { item } = props
@@ -115,8 +114,12 @@ const SingleNews = (props) => {
 
 function mapStateToProps({ news }, props) {
     const { newsId } = props.match.params
+    let item = news[newsId]
+    if (!item) {
+
+    }
     return {
-        item: news[newsId],
+        item,
     }
 }
 export default connect(mapStateToProps)(SingleNews)
